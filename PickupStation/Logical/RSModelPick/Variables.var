@@ -1,0 +1,29 @@
+(*Inputs*)
+VAR
+	diMagazineEmpty : BOOL := 0;
+	diCapAtPickup : BOOL := 0;
+	diCapPusherForward : BOOL := 0;
+	diCapPusherBack : BOOL := 0;
+	diPickupArmForward : BOOL := 0;
+	diPickupArmBack : BOOL := 0;
+	diCapGripperVacuum : BOOL := 0;
+	diCapOnLogoConveyor : BOOL := 0;
+	diLogoStamperForward : BOOL := 0;
+	diLogoStamperBack : BOOL := 0;
+	diCapExitLogoConveyor : BOOL := 0;
+	aiLogoAxisActPos : REAL := 0.0; (*[m]*)
+END_VAR
+(*Outputs*)
+VAR
+	doCapPusher : BOOL := 0;
+	doPickupArmForward : BOOL := 0;
+	doPickupArmBack : BOOL := 0;
+	doCapGripperPick : BOOL := 0;
+	doLogoStamper : BOOL := 0;
+	aoLogoConveyorSetSpeed : REAL := 0.0; (*[m/s]*)
+	aoLogoAxisSetPos : REAL := 0.0; (*[m]*)
+END_VAR
+(*Model Interaction*)
+VAR
+	doLogoConveyorClear : BOOL := 0;
+END_VAR

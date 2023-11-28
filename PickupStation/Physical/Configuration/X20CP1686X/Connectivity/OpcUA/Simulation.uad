@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<OpcUaSource FileVersion="9" ArVersion="H4.93">
+  <Aliases>
+    <ACLAliases />
+    <EURangeViolationAliases />
+    <EURangesAliases />
+    <EngineeringUnitAliases />
+  </Aliases>
+  <DefaultView>
+    <Module Name="&lt;Default&gt;">
+      <Task Name="RSModelPic">
+        <Variable Name="aiLogoAxisActPos" />
+        <Variable Name="aoLogoAxisSetPos" />
+        <Variable Name="aoLogoConveyorSetSpeed" />
+        <Variable Name="diCapAtPickup" />
+        <Variable Name="diCapExitLogoConveyor" />
+        <Variable Name="diCapGripperVacuum" />
+        <Variable Name="diCapOnLogoConveyor" />
+        <Variable Name="diCapPusherBack" />
+        <Variable Name="diCapPusherForward" />
+        <Variable Name="diLogoStamperBack" />
+        <Variable Name="diLogoStamperForward" />
+        <Variable Name="diMagazineEmpty" />
+        <Variable Name="diPickupArmBack" />
+        <Variable Name="diPickupArmForward" />
+        <Variable Name="doCapGripperPick" />
+        <Variable Name="doCapPusher" />
+        <Variable Name="doLogoConveyorClear" />
+        <Variable Name="doLogoStamper" />
+        <Variable Name="doPickupArmBack" />
+        <Variable Name="doPickupArmForward" />
+      </Task>
+    </Module>
+  </DefaultView>
+</OpcUaSource>
