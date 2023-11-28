@@ -1,0 +1,3 @@
+VAR
+    gPicker : PickerType;
+END_VAR

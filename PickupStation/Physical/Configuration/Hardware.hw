@@ -132,9 +132,11 @@
   </Module>
   <Module Name="8LVA13.B1030D000-0" Type="8LVA13.B1030D000-0" Version="2.2.0.3">
     <Connection Connector="MT" TargetModule="80VD100PD.C000-01" TargetConnector="MT2" />
+    <Parameter ID="MOTOR_AMB_TEMP_RATED" Location="M1/MotorParameters" Value="40" />
   </Module>
   <Module Name="8LVA13.B1030D000-0a" Type="8LVA13.B1030D000-0" Version="2.2.0.3">
     <Connection Connector="MT" TargetModule="80VD100PD.C000-01" TargetConnector="MT1" />
+    <Parameter ID="MOTOR_AMB_TEMP_RATED" Location="M1/MotorParameters" Value="40" />
   </Module>
   <Module Name="X20CP1686X" Type="X20CP1686X" Version="1.8.0.0">
     <Connector Name="IF2">
@@ -145,6 +147,7 @@
       <Parameter ID="ActivateSnmp" Value="2" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="PickupStation_Configuration" />
+    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="X20CP1686X.IF3" />
     <Group ID="FileDevice1" />
