@@ -1,0 +1,3 @@
+VAR
+	MachineState : MachineStateType;
+END_VAR
