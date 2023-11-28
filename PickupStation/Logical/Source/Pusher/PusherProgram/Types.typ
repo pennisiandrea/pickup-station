@@ -9,15 +9,11 @@ TYPE
 	END_STRUCT;
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
-		WAITING_ACTIVATE,
-		MOVE_BACKWARD, (*INIT state*)
-		PLACE_CAP, (*WAITING state*)
-		WAITING_PICK_COMMAND, (*ERROR state*)
+		WAITING_START, (*WAITING state*)
+		MOVE_BACKWARD,
+		WAITING_MAGAZINE, (*ERROR state*)
 		MOVE_FORWARD,
-		PICK_CAP,
+		WAITING_PICK,
 		ERROR
 		);
-	InternalType : 	STRUCT 
-		CapPicked : BOOL;
-	END_STRUCT;
 END_TYPE

@@ -22,16 +22,11 @@ TYPE
 		Outputs : PickerInterfaceOutputsType;
 	END_STRUCT;
 	PickerInterfaceOutputsType : 	STRUCT  (*Picker Interface Output type*)
-		CapPusherForward : BOOL;
 		ArmForward : BOOL;
 		ArmBackward : BOOL;
 		GripperPick : BOOL;
 	END_STRUCT;
 	PickerInterfaceInputsType : 	STRUCT  (*Picker Interface Input type*)
-		CapPusherBackward : BOOL;
-		CapPusherForward : BOOL;
-		CapAtPickPosition : BOOL;
-		MagazineEmpty : BOOL;
 		ArmBackward : BOOL;
 		ArmForward : BOOL;
 		GripperVacuum : BOOL;

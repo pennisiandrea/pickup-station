@@ -1,0 +1,3 @@
+VAR
+    gPusher : PusherType;
+END_VAR

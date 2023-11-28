@@ -28,9 +28,9 @@ PROGRAM _CYCLIC
         RETURN;
     END_IF
     
-	// Commands edges management
-	IF EDGEPOS(gPicker.Commands.Init) OR EDGENEG(gPicker.Commands.Activate) THEN
-		MachineState.NextState := WAITING_ACTIVATE;
+	// Init command management
+	IF EDGEPOS(gPicker.Commands.Init) THEN
+		MachineState.NextState := MOVE_BACKWARD;
 	END_IF
 	
 	SetAlarmsAction;
@@ -43,10 +43,10 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			gPicker.Feedbacks.Activated := FALSE;
 			IF gPicker.Commands.Activate THEN
-				MachineState.NextState := ARM_BACKWARD;
+				MachineState.NextState := MOVE_BACKWARD;
 			END_IF
-            
-		ARM_BACKWARD:
+        			
+		MOVE_BACKWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF gPicker.Interface.Inputs.ArmBackward THEN
 				MachineState.NextState := PLACE_CAP;
@@ -56,45 +56,20 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF NOT gPicker.Interface.Inputs.GripperVacuum THEN
 				Internal.CapPicked := FALSE;
-				MachineState.NextState := CAP_PUSHER_BACKWARD;
-			END_IF
-			
-		CAP_PUSHER_BACKWARD:
-			MachineState.TimeoutTimer.PT := T#3S;
-			IF gPicker.Interface.Inputs.CapPusherBackward THEN
-				MachineState.NextState := WAITING_MAGAZINE;
-			END_IF
-			
-		WAITING_MAGAZINE:
-			MachineState.TimeoutTimer.PT := T#3S;
-			IF NOT gPicker.Interface.Inputs.MagazineEmpty THEN
-				IF gPicker.Interface.Inputs.CapAtPickPosition THEN
-					MachineState.NextState := WAITING_PICK_COMMAND;
-				ELSE
-					MachineState.NextState := PUSH_CAP;
-				END_IF
-			END_IF
-			
-		PUSH_CAP:
-			MachineState.TimeoutTimer.PT := T#3S;
-			IF gPicker.Interface.Inputs.CapPusherForward THEN
-				IF gPicker.Interface.Inputs.CapAtPickPosition THEN
-					MachineState.NextState := WAITING_PICK_COMMAND;
-				ELSE
-					MpAlarmXSet(gAlarmXCoreMpLink,'CapPusherFailToPush');
-					MachineState.NextState := ERROR;
-				END_IF
+				MachineState.NextState := WAITING_PICK_COMMAND;
 			END_IF
 			
         WAITING_PICK_COMMAND:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			gPicker.Feedbacks.Activated := TRUE;
 			
-			IF gPicker.Commands.PickACap THEN
-                MachineState.NextState := ARM_FORWARD;
+			IF NOT gPicker.Commands.Activate THEN
+				MachineState.NextState := WAITING_ACTIVATE;
+			ELSIF gPicker.Commands.PickACap THEN
+                MachineState.NextState := MOVE_FORWARD;
             END_IF         
 		
-		ARM_FORWARD:
+		MOVE_FORWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF gPicker.Interface.Inputs.ArmForward THEN
 				MachineState.NextState := PICK_CAP;
@@ -104,7 +79,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF gPicker.Interface.Inputs.GripperVacuum THEN
 				Internal.CapPicked := TRUE;
-				MachineState.NextState := ARM_BACKWARD;
+				MachineState.NextState := MOVE_BACKWARD;
 			END_IF
 			
         ERROR:
@@ -112,15 +87,14 @@ PROGRAM _CYCLIC
             ResetOutputsAction;
         
         ELSE
-            MachineState.NextState := INIT;			
+            MachineState.NextState := WAITING_ACTIVATE;			
         
     END_CASE
     
-	gPicker.Interface.Outputs.ArmBackward := MachineState.ActualState = ARM_BACKWARD;
-	gPicker.Interface.Outputs.ArmForward := MachineState.ActualState = ARM_FORWARD;
-	gPicker.Interface.Outputs.GripperPick := MachineState.ActualState = PICK_CAP OR Internal.CapPicked;
-	gPicker.Interface.Outputs.CapPusherForward := MachineState.ActualState = PUSH_CAP;
-	
+	gPicker.Interface.Outputs.ArmBackward := MachineState.ActualState = MOVE_BACKWARD;
+	gPicker.Interface.Outputs.ArmForward := MachineState.ActualState = MOVE_FORWARD;
+	gPicker.Interface.Outputs.GripperPick := (MachineState.ActualState = PICK_CAP OR Internal.CapPicked) AND NOT (MachineState.ActualState = PLACE_CAP);
+			
     FeedbacksUpdateAction;
     
 END_PROGRAM

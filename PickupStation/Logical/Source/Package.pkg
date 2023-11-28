@@ -4,5 +4,6 @@
   <Objects>
     <Object Type="Package">Infrastructure</Object>
     <Object Type="Package">Picker</Object>
+    <Object Type="Package">Pusher</Object>
   </Objects>
 </Package>
