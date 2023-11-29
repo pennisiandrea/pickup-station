@@ -41,6 +41,11 @@ PROGRAM _CYCLIC
 	doPickupArmBack := gPicker.Interface.Outputs.ArmBackward;
 	doCapGripperPick := gPicker.Interface.Outputs.GripperPick;
 	 
+	// Conveyor
+	gConveyor.Interface.Inputs.CapInStartPosition := diCapOnLogoConveyor
+	gConveyor.Interface.Inputs.CapInExitPosition := diCapExitLogoConveyor;
+	
+	aoLogoConveyorSetSpeed := gConveyor.Interface.Outputs.SetSpeed / 1000;
 END_PROGRAM
 
 PROGRAM _EXIT
