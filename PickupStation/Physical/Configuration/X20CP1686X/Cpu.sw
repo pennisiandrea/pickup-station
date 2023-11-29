@@ -4,6 +4,7 @@
   <TaskClass Name="Cyclic#1">
     <Task Name="RSModelPic" Source="RSModelPick.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="ConveyorPr" Source="Source.Conveyor.ConveyorProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="StamperPro" Source="Source.Stamper.StamperProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#2">
     <Task Name="PusherProg" Source="Source.Pusher.PusherProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />

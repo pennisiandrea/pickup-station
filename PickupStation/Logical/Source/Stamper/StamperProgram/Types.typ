@@ -9,18 +9,23 @@ TYPE
 	END_STRUCT;
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
-		WAITING_START, (*WAITING state*)
-		ERROR, (*ERROR state*)
+		WAITING, (*WAITING state*)
+		POWER_ON, (*INIT state*)
+		SET_SHIFT,
 		HOMING,
-		POWER_ON,
-		WAITING_CAP,
-		MOTION,
-		POWER_OFF,
-		INIT
+		ACTIVATE_CAM,
+		WAITING_SYNC_MOTION,
+		STAMP_FORWARD,
+		STAMPING,
+		STAMP_BACKWARD,
+		RESET_SHIFT,
+		ERROR (*ERROR state*)
 		);
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;
 		Parameters : MpAxisBasicParType;
-		CapsCount : USINT;
+		Cam : MC_BR_CamAutomatCommand;
+		Offset : MC_BR_Offset;
+		LastOffset : LREAL;
 	END_STRUCT;
 END_TYPE

@@ -3,5 +3,6 @@
 <Package SubType="mappMotion" PackageType="mappMotion" xmlns="http://br-automation.co.at/AS/Package">
   <Objects>
     <Object Type="File">AxisConfig.axis</Object>
+    <Object Type="File">Cam.axisfeature</Object>
   </Objects>
 </Package>

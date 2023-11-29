@@ -3,17 +3,21 @@ PROGRAM _INIT
     ResetOutputsAction;
     ResetFeedbacksAction;
     
-	Internal.Parameters.Acceleration := 200;
-	Internal.Parameters.Deceleration := 200;
+	Internal.Parameters.Acceleration := 20;
+	Internal.Parameters.Deceleration := 20;
 	Internal.Parameters.Homing.Mode := mcHOMING_ABSOLUTE;
 	Internal.Parameters.Homing.Position := 0;	
 	 
     MachineState.NextState := WAITING_START;
     
+	// JUST FOR DEBUG
+	gConveyor.Commands.Enable := TRUE;
+	gConveyor.Commands.Start := TRUE;
+	gConveyor.Parameters.TargetSpeed := 0.05;
 END_PROGRAM
 
 PROGRAM _CYCLIC
-
+	
 	MotionAction;
 	
     // Enable module
@@ -69,13 +73,12 @@ PROGRAM _CYCLIC
 			END_IF 	
 		
 		MOTION:
-			MachineState.TimeoutTimer.PT := T#15S;	
+			MachineState.TimeoutTimer.PT := T#30S;	
+			IF MachineState.NewTriggerState THEN
+				Internal.CapsCount := 1;
+			END_IF
 			
-			IF EDGENEG(gConveyor.Interface.Inputs.CapInStartPosition) THEN
-				gConveyor.Feedbacks.CapOnMotion := TRUE;
-			END_IF 
-			
-			IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
+			IF Internal.CapsCount = 0 THEN
 				MachineState.NextState := WAITING_CAP;
 			END_IF 	
 			
@@ -95,11 +98,20 @@ PROGRAM _CYCLIC
         
     END_CASE
     
-	Internal.Axis.Home := (MachineState.ActualState = HOMING) AND NOT Internal.Axis.IsHomed;
+	Internal.Axis.Home := (MachineState.ActualState = HOMING) AND NOT Internal.Axis.IsHomed AND Internal.Axis.Active;
 	Internal.Axis.MoveVelocity := (MachineState.ActualState = MOTION);
 	Internal.Axis.MoveAbsolute := (MachineState.ActualState = INIT);
 	Internal.Axis.Stop := (MachineState.ActualState = ERROR);
-		
+			
+	gConveyor.Feedbacks.CapOnMotion := (MachineState.ActualState = MOTION);
+	
+	IF EDGEPOS(gConveyor.Interface.Inputs.CapInStartPosition) THEN
+		Internal.CapsCount := Internal.CapsCount + 1;				
+	END_IF 						
+	IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
+		Internal.CapsCount := MAX(0,Internal.CapsCount - 1);
+	END_IF 	
+	
     FeedbacksUpdateAction;
     
 END_PROGRAM

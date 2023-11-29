@@ -18,7 +18,7 @@ TYPE
 		CapOnMotion : BOOL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
-		TargetSpeed : REAL := 100;
+		TargetSpeed : REAL;
 	END_STRUCT;
 	ConveyorInterfaceType : 	STRUCT  (*Conveyor Interface type*)
 		Inputs : ConveyorInterfaceInputsType;

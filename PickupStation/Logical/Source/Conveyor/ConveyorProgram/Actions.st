@@ -3,9 +3,6 @@ ACTION FeedbacksUpdateAction:
     gConveyor.Feedbacks.Enabled := TRUE;
     gConveyor.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
     gConveyor.Feedbacks.Error := MachineState.ActualState = ERROR;
-	IF MachineState.ActualState <> MOTION THEN
-		gConveyor.Feedbacks.CapOnMotion := FALSE;
-	END_IF
 	
 END_ACTION
 

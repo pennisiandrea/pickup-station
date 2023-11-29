@@ -10,18 +10,6 @@ ACTION MotionAction:
 			<empty/>
 		</row>
 		<row>
-			<analog type="input" name="0"/>
-			<function position="bottom" type="MOVE"><input name="" extensible="true"/><output name="40"/></function>
-			<analog type="output" name="Internal.Parameters.Position"/>
-		</row>
-	</network>
-	<network label="" comment="" row="2" column="0" commented="0">
-		<row>
-			<line/>
-			<function position="top" type="MOVE"><input name="EN" extensible="true" ENO="true"/><output name="ENO" ENO="true"/></function>
-			<empty/>
-		</row>
-		<row>
 			<analog type="input" name="gConveyor.Parameters.TargetSpeed"/>
 			<function position="bottom" type="MOVE"><input name="" extensible="true"/><output name="40"/></function>
 			<analog type="output" name="Internal.Parameters.Velocity"/>
@@ -53,7 +41,7 @@ ACTION MotionAction:
 			<empty/>
 		</row>
 		<row>
-			<contact type="positive transition" name="gConveyor.Commands.Init"/>
+			<contact type="open" name="gConveyor.Commands.Init"/>
 			<line/>
 			<functionblock position="middle" type="MpAxisBasic"><input name="ErrorReset"/><output name="StatusID"/></functionblock>
 			<empty/>
@@ -151,6 +139,8 @@ ACTION MotionAction:
 	</network>
 </networks>
 END_ACTION
+
+
 
 
 

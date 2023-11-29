@@ -1,0 +1,3 @@
+VAR
+    gStamper : StamperType;
+END_VAR

@@ -6,5 +6,6 @@
     <Object Type="Package">Picker</Object>
     <Object Type="Package">Pusher</Object>
     <Object Type="Package">Conveyor</Object>
+    <Object Type="Package">Stamper</Object>
   </Objects>
 </Package>
