@@ -4,7 +4,7 @@ PROGRAM _INIT
 	
 	MpAlarmXCoreFB(MpLink := ADR(gAlarmXCoreMpLink), Enable := TRUE);	
 	
-	MpAlarmXHistoryFB(MpLink := ADR(gAlarmXCoreHistMpLink), Enable := TRUE, DeviceName := ADR('ALARMS'));
+	MpAlarmXHistoryFB(MpLink := ADR(gAlarmXHistoryMpLink), Enable := TRUE, DeviceName := ADR('ALARMS'));
 	
 	MpAlarmXListUIFB(MpLink :=  ADR(gAlarmXCoreMpLink), Enable := TRUE, UIConnect := ADR(MpAlarmXListUIConnect));
 	
@@ -12,7 +12,7 @@ PROGRAM _INIT
 END_PROGRAM
 
 PROGRAM _CYCLIC
-	MpAlarmXCoreFB(ErrorReset := gMain.Commands.Reset AND MpAlarmXCoreFB.Error);
+	MpAlarmXCoreFB();
 			
 	MpAlarmXHistoryFB();
 	
@@ -20,7 +20,7 @@ PROGRAM _CYCLIC
 	
 	gAlarms.Pending := MpAlarmXCoreFB.PendingAlarms;
 	
-	MpAlarmXAcknowledgeAllFB(Execute := gSimulationPanel.Interface.Inputs.diStart AND gAlarms.Pending>0);
+	MpAlarmXAcknowledgeAllFB();
 	
 END_PROGRAM
 

@@ -3,12 +3,15 @@
 <Configuration>
   <Element ID="gAxisConveyorMpLink" Type="axis">
     <Property ID="BaseTypeIsReadOnly" Value="0" />
-    <Selector ID="BaseType" Value="LinearBounded">
+    <Selector ID="BaseType" Value="LinearPeriodic">
       <Property ID="MeasurementUnit" Value="5066068" />
       <Property ID="MeasurementResolutionIsReadOnly" Value="0" />
       <Property ID="MeasurementResolution" Value="0.01" />
       <Property ID="CountDirectionIsReadOnly" Value="0" />
       <Property ID="CountDirection" Value="Standard" />
+      <Group ID="PeriodSettings">
+        <Property ID="Period" Value="700.0" />
+      </Group>
     </Selector>
     <Property ID="MovementLimitsIsReadOnly" Value="0" />
     <Selector ID="MovementLimits" Value="Internal">
@@ -21,17 +24,17 @@
       <Property ID="VelocityIsReadOnly" Value="0" />
       <Selector ID="Velocity">
         <Property ID="VelocityMax" Value="3.4E38" />
-        <Property ID="Velocity" Value="10.0" />
+        <Property ID="Velocity" Value="500.0" />
       </Selector>
       <Property ID="AccelerationIsReadOnly" Value="0" />
       <Selector ID="Acceleration">
         <Property ID="AccelerationMax" Value="3.4E38" />
-        <Property ID="Acceleration" Value="50.0" />
+        <Property ID="Acceleration" Value="500.0" />
       </Selector>
       <Property ID="DecelerationIsReadOnly" Value="0" />
       <Selector ID="Deceleration">
         <Property ID="DecelerationMax" Value="3.4E38" />
-        <Property ID="Deceleration" Value="50.0" />
+        <Property ID="Deceleration" Value="500.0" />
       </Selector>
     </Selector>
     <Selector ID="Alarms" Value="MpAlarmX" />
