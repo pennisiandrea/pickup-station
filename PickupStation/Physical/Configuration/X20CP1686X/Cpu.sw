@@ -3,11 +3,13 @@
 <SwConfiguration CpuAddress="SL1" xmlns="http://br-automation.co.at/AS/SwConfiguration">
   <TaskClass Name="Cyclic#1">
     <Task Name="RSModelPic" Source="RSModelPick.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="ConveyorPr" Source="Source.Conveyor.ConveyorProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#2">
     <Task Name="PusherProg" Source="Source.Pusher.PusherProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PickerProg" Source="Source.Picker.PickerProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
+  <TaskClass Name="Cyclic#2" />
   <TaskClass Name="Cyclic#3" />
   <TaskClass Name="Cyclic#4">
     <Task Name="Alarms" Source="Source.Infrastructure.Alarms.Alarms.prg" Memory="UserROM" Language="IEC" Debugging="true" />
