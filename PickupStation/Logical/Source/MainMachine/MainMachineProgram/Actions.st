@@ -1,6 +1,6 @@
 ACTION FeedbacksUpdateAction: 
 
-	gMainMachine.Feedbacks.WaitingStart := MachineState.ActualState = WAITING; 
+	gMainMachine.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
 	gMainMachine.Feedbacks.Error := MachineState.ActualState = ERROR;
 
 END_ACTION
@@ -73,7 +73,7 @@ ACTION EnableModules:
 	
 	gConveyor.Commands.Enable := TRUE;
 	
-	IF gStamper.Feedbacks.WaitingStart OR gStamper.Feedbacks.Error THEN
+	IF MachineState.ActualState = WAITING_START THEN
 		gStamper.Commands.Enable := gMainMachine.Parameters.StamperEnable;	
 	END_IF
 	
@@ -82,12 +82,16 @@ END_ACTION
 ACTION StopModules:
 	
 	gPusher.Commands.Start := FALSE;
+	gPusher.Commands.Init := FALSE;
 	
 	gPicker.Commands.Activate := FALSE;
+	gPicker.Commands.Init := FALSE;
 	
-	gConveyor.Commands.Start := FALSE
+	gConveyor.Commands.Start := FALSE;
+	gConveyor.Commands.Init := FALSE;
 	
-	gStamper.Commands.Start := FALSE;	
+	gStamper.Commands.Start := FALSE;
+	gStamper.Commands.Init := FALSE;		
 	
 END_ACTION
 
@@ -98,7 +102,6 @@ ACTION CheckReactions:
 		MachineState.NextState := ERROR;
 	END_IF
 		
-	Internal.OnPhaseStopRequest := MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_ON_PHASE_STOP') 
-		OR (NOT gMainMachine.Commands.Start AND MachineState.ActualState = AUTOMATIC);
+	Internal.OnPhaseStopRequest := MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_ON_PHASE_STOP');
 		
 END_ACTION

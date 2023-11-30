@@ -3,9 +3,8 @@ ACTION FeedbacksUpdateAction:
     gConveyor.Feedbacks.Enabled := TRUE;
     gConveyor.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
     gConveyor.Feedbacks.Error := MachineState.ActualState = ERROR;
-	gConveyor.Feedbacks.WaitingCap := NOT gConveyor.Interface.Inputs.CapInStartPosition;
-	gConveyor.Feedbacks.NewCapTrigger := EDGENEG(gConveyor.Interface.Inputs.CapInStartPosition);
-	
+	gConveyor.Feedbacks.WaitingCap := MachineState.ActualState = WAITING_CAP;
+		
 END_ACTION
 
 ACTION ResetOutputsAction: 
@@ -40,20 +39,18 @@ ACTION SetAlarmsAction:
 		CASE MachineState.ActualState OF
 			HOMING: 
 				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorTimeoutHoming'); // Edge alarm!
-				MachineState.NextState := ERROR;
 				
 			POWER_ON: 
 				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorTimeoutPowerOn'); // Edge alarm!
-				MachineState.NextState := ERROR;
 				
 			MOTION: 
 				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorMissedCap'); // Edge alarm! NO ERROR STATE IN THIS CASE
-				Internal.CapsCount := MAX(0,Internal.CapsCount - 1);
 				
 			INIT: 
 				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorInitFail'); // Edge alarm!
-				MachineState.NextState := ERROR;
 		END_CASE
+		
+		MachineState.NextState := ERROR;
 		
 	END_IF            
 

@@ -81,7 +81,7 @@
       <Group ID="[11]">
         <Property ID="Name" Value="ConveyorMissedCap" />
         <Property ID="Message" Value="{$Source/Conveyor/Alarms/ConveyorMissedCap}" />
-        <Property ID="Severity" Value="0" />
+        <Property ID="Severity" Value="2" />
       </Group>
       <Group ID="[12]">
         <Property ID="Name" Value="ConveyorAxisError" />

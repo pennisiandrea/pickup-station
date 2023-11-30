@@ -17,6 +17,7 @@ TYPE
 		WaitingPickCommand : BOOL;
 		Error : BOOL;
 		WaitingActivate : BOOL;
+		PickACapDone : BOOL;
 	END_STRUCT;
 	PickerInterfaceType : 	STRUCT  (*Picker Interface type*)
 		Inputs : PickerInterfaceInputsType;

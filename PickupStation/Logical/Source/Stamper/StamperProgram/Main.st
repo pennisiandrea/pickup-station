@@ -12,7 +12,7 @@ PROGRAM _INIT
 	Internal.Offset.AdvancedParameters.ShiftMode := mcSHIFT_ABSOLUTE_NO_RESET;
 	Internal.Offset.Enable := TRUE;
 	
-    MachineState.NextState := WAITING;
+    MachineState.NextState := WAITING_START;
 	
 END_PROGRAM
 
@@ -45,6 +45,7 @@ PROGRAM _CYCLIC
         
         WAITING_START:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			gStamper.Feedbacks.StampCapDone := FALSE;
 			
 			IF MachineState.NewTriggerState THEN
 				Internal.Axis.Power := FALSE;
@@ -93,6 +94,11 @@ PROGRAM _CYCLIC
 		WAITING_CAP:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
+			IF gStamper.Commands.StampCap THEN
+				gStamper.Feedbacks.StampCapDone := FALSE;
+				Internal.CamStartTrigger := TRUE;
+			END_IF
+			
 			IF Internal.Cam.InCam AND Internal.Cam.ActualStateIndex = 1 THEN
 				MachineState.NextState := STAMP_FORWARD;
 			ELSIF Internal.LastOffset <> gStamper.Parameters.Offset THEN
@@ -117,6 +123,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			
 			IF gStamper.Interface.Inputs.StampIsBackward THEN
+				gStamper.Feedbacks.StampCapDone := TRUE;
 				MachineState.NextState := WAITING_CAP;
 			END_IF
 			
@@ -128,7 +135,7 @@ PROGRAM _CYCLIC
 				Internal.Offset.StartShift := TRUE;
 			ELSE				
 				IF Internal.Offset.ShiftAttained THEN
-					MachineState.NextState := WAITING;
+					MachineState.NextState := WAITING_START;
 				END_IF 
 			END_IF
 			
@@ -136,15 +143,18 @@ PROGRAM _CYCLIC
             MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			ResetOutputsAction;
 			Internal.Axis.Power := FALSE;
+			gStamper.Feedbacks.StampCapDone := FALSE;
         
         ELSE
-            MachineState.NextState := WAITING;			
+            MachineState.NextState := WAITING_START;			
         
     END_CASE
     
 	Internal.Axis.Home := (MachineState.ActualState = HOMING) AND NOT Internal.Axis.IsHomed AND Internal.Axis.Active;
 	
-	Internal.CamStartTrigger := gStamper.Commands.NewCapTrigger AND (MachineState.ActualState = WAITING_CAP) AND (Internal.Cam.ActualStateIndex = 0);
+	IF MachineState.ActualState <> WAITING_CAP THEN
+		Internal.CamStartTrigger := FALSE;
+	END_IF
 	
 	IF (MachineState.ActualState = WAITING_START) OR (MachineState.ActualState = ERROR) THEN
 		Internal.Cam.EndAutomat := Internal.Cam.Running;

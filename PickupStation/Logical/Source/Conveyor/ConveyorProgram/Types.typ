@@ -21,6 +21,5 @@ TYPE
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;
 		Parameters : MpAxisBasicParType;
-		CapsCount : USINT;
 	END_STRUCT;
 END_TYPE

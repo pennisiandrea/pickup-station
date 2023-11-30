@@ -10,13 +10,14 @@ TYPE
 		Enable : BOOL;
 		Start : BOOL;
 		Init : BOOL;
+		DeliverCap : BOOL;
 	END_STRUCT;
 	ConveyorFeedbacksType : 	STRUCT  (*Conveyor Feedbacks type*)
 		Enabled : BOOL;
 		WaitingStart : BOOL;
 		Error : BOOL;
-		NewCapTrigger : BOOL;
 		WaitingCap : BOOL;
+		DeliverCapDone : BOOL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
 		TargetSpeed : REAL;

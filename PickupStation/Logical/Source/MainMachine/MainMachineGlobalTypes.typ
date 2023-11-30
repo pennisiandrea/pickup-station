@@ -19,6 +19,6 @@ TYPE
 		HeartBeat : BOOL;
 	END_STRUCT;
 	MainMachineParametersType : 	STRUCT  (*MainMachine Parameters type*)
-		StamperEnable : BOOL;
+		StamperEnable : BOOL := TRUE;
 	END_STRUCT;
 END_TYPE

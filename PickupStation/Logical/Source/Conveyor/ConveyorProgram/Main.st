@@ -42,10 +42,10 @@ PROGRAM _CYCLIC
 			IF MachineState.NewTriggerState THEN
 				Internal.Axis.Power := FALSE;
 			END_IF
+			gConveyor.Feedbacks.DeliverCapDone := FALSE;
             IF gConveyor.Commands.Start AND Internal.Axis.Active THEN
                 MachineState.NextState := HOMING;
-            END_IF 
-        
+            END_IF         
 			
 		HOMING:
 			MachineState.TimeoutTimer.PT := T#3S;
@@ -66,22 +66,16 @@ PROGRAM _CYCLIC
 		
 		WAITING_CAP:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			IF gConveyor.Interface.Inputs.CapInStartPosition THEN
+			IF gConveyor.Interface.Inputs.CapInStartPosition AND gConveyor.Commands.DeliverCap THEN
+				gConveyor.Feedbacks.DeliverCapDone := FALSE;
 				MachineState.NextState := MOTION;
 			END_IF 	
 		
 		MOTION:
+			MachineState.TimeoutTimer.PT := T#30S;
+						
 			IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
-				MachineState.TimeoutTimer.PT := T#0S; // Reset state timeout when a cap is delivered
-			ELSE
-				MachineState.TimeoutTimer.PT := T#30S;
-			END_IF
-			
-			IF MachineState.NewTriggerState THEN
-				Internal.CapsCount := 1;
-			END_IF
-			
-			IF Internal.CapsCount = 0 THEN
+				gConveyor.Feedbacks.DeliverCapDone := TRUE;
 				MachineState.NextState := WAITING_CAP;
 			END_IF 	
 			
@@ -95,6 +89,7 @@ PROGRAM _CYCLIC
             MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			ResetOutputsAction;
 			Internal.Axis.Power := FALSE;
+			gConveyor.Feedbacks.DeliverCapDone := FALSE;
         
         ELSE
             MachineState.NextState := WAITING_START;			
@@ -106,13 +101,6 @@ PROGRAM _CYCLIC
 	Internal.Axis.MoveAbsolute := (MachineState.ActualState = INIT);
 	Internal.Axis.Stop := (MachineState.ActualState = ERROR);
 				
-	IF EDGEPOS(gConveyor.Interface.Inputs.CapInStartPosition) THEN
-		Internal.CapsCount := Internal.CapsCount + 1;				
-	END_IF 						
-	IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
-		Internal.CapsCount := MAX(0,Internal.CapsCount - 1);
-	END_IF 	
-	
     FeedbacksUpdateAction;
     
 END_PROGRAM

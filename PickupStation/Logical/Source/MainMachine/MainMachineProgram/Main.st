@@ -1,9 +1,6 @@
 PROGRAM _INIT
-        
-    ResetOutputsAction;
-    ResetFeedbacksAction;
-    
-    MachineState.NextState := WAITING;
+            
+    MachineState.NextState := WAITING_START;
     
 END_PROGRAM
 
@@ -21,102 +18,123 @@ PROGRAM _CYCLIC
 	// Enable modules
 	EnableModules;
 	
-    // Machine state
-    MachineStateManagementAction;
-    CASE MachineState.ActualState OF
+	// Machine state
+	MachineStateManagementAction;
+	CASE MachineState.ActualState OF
             
-        WAITING:
-            MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+		WAITING_START:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			StopModules;
 			IF gMainMachine.Commands.AutomaticMode THEN
 				IF gMainMachine.Commands.Start THEN
-					MachineState.NextState := AUTOMATIC;
+					MachineState.NextState := AUTO_WAITING_MODULES_READY;
 				END_IF
 			ELSE
-				MachineState.NextState := MANUAL;
-            END_IF 
+				//MachineState.NextState := MANUAL;
+			END_IF 
         
-		AUTOMATIC:
-			// Pusher
-			IF Internal.OnPhaseStopRequest AND (gPusher.Feedbacks.WaitingPick OR gPusher.Feedbacks.Error) THEN
-				gPusher.Commands.Start := FALSE;
-			ELSE
+		AUTO_WAITING_MODULES_READY:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			IF MachineState.NewTriggerState THEN
 				gPusher.Commands.Start := TRUE;
-			END_IF
-			
-			// Picker
-			IF Internal.OnPhaseStopRequest AND (gPicker.Feedbacks.WaitingPickCommand OR gPicker.Feedbacks.Error) THEN
-				gPicker.Commands.Activate := FALSE;
-				gPicker.Commands.PickACap := FALSE;
-			ELSE
 				gPicker.Commands.Activate := TRUE;
-				gPicker.Commands.PickACap := gPusher.Feedbacks.CapReady AND gConveyor.Feedbacks.WaitingCap AND gStamper.Feedbacks.WaitingCap;
-			END_IF
-				
-			// Conveyor
-			IF Internal.OnPhaseStopRequest AND (gConveyor.Feedbacks.WaitingCap OR gConveyor.Feedbacks.Error) THEN
-				gConveyor.Commands.Start := FALSE;
-			ELSE
 				gConveyor.Commands.Start := TRUE;
-			END_IF
-			
-			// Stamper
-			IF Internal.OnPhaseStopRequest AND (gStamper.Feedbacks.WaitingCap OR gStamper.Feedbacks.Error) THEN
-				gStamper.Commands.Start := FALSE;
-				gStamper.Commands.NewCapTrigger := FALSE;
-			ELSE
 				gStamper.Commands.Start := TRUE;
-				gStamper.Commands.NewCapTrigger := gConveyor.Feedbacks.NewCapTrigger;
 			END_IF
 			
-			// Exit condition
 			IF Internal.OnPhaseStopRequest THEN
+				MachineState.NextState := ERROR;
 				
-				IF NOT gPusher.Commands.Start 
-					AND NOT gPicker.Commands.Activate
-					AND NOT gConveyor.Commands.Start
-					AND NOT gStamper.Commands.Start THEN
+			ELSIF NOT gMainMachine.Commands.Start THEN
+				MachineState.NextState := WAITING_START;
+			
+			ELSIF gPusher.Feedbacks.WaitingPick 
+				AND gPicker.Feedbacks.WaitingPickCommand 
+				AND gConveyor.Feedbacks.WaitingCap
+				AND (gStamper.Feedbacks.WaitingCap OR NOT gStamper.Feedbacks.Enabled) THEN
+				
+				MachineState.NextState := AUTO_PICK_CAP;
+				
+			END_IF
+				
+		AUTO_PICK_CAP:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			IF MachineState.NewTriggerState THEN
+				gPicker.Commands.PickACap := TRUE;
+			END_IF
+			
+			IF NOT gPicker.Feedbacks.WaitingPickCommand THEN
+				gPicker.Commands.PickACap := FALSE;
+			END_IF
+			
+			IF NOT gPicker.Commands.PickACap AND gPicker.Feedbacks.PickACapDone THEN
+				MachineState.NextState := AUTO_WAITING_CAP_DELIVERY;
+			END_IF
+			
+		AUTO_WAITING_CAP_DELIVERY:	
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			IF MachineState.NewTriggerState THEN
+				gConveyor.Commands.DeliverCap := TRUE;
+				gStamper.Commands.StampCap := TRUE;
+			END_IF
+			
+			IF NOT gConveyor.Feedbacks.WaitingCap THEN
+				gConveyor.Commands.DeliverCap := FALSE;
+			END_IF
+			
+			IF NOT gStamper.Feedbacks.WaitingCap THEN
+				gStamper.Commands.StampCap := FALSE;
+			END_IF
+			
+			IF NOT gConveyor.Commands.DeliverCap AND gConveyor.Feedbacks.DeliverCapDone THEN
+				
+				IF gStamper.Feedbacks.Enabled THEN
 					
-					IF gPusher.Feedbacks.Error
-						OR gPicker.Feedbacks.Error
-						OR gConveyor.Feedbacks.Error
-						OR gStamper.Feedbacks.Error THEN
-						
-						MachineState.NextState := ERROR;
-					ELSE	
-						MachineState.NextState := WAITING;
+					IF NOT gStamper.Commands.StampCap AND gStamper.Feedbacks.StampCapDone THEN
+						MachineState.NextState := AUTO_WAITING_MODULES_READY;
 					END_IF
-					
+				
+				ELSE					
+					MachineState.NextState := AUTO_WAITING_MODULES_READY;
 				END_IF
 				
+			END_IF					
+			
+		ERROR:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			IF MachineState.NewTriggerState THEN
+				StopModules;
 			END_IF
-			
-        ERROR:
-            MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			
-			StopModules;
 			
 			gPusher.Commands.Init := gMainMachine.Commands.Init;
 			gPicker.Commands.Init := gMainMachine.Commands.Init;
 			gConveyor.Commands.Init := gMainMachine.Commands.Init;
 			gStamper.Commands.Init := gMainMachine.Commands.Init;
 			
-			IF NOT gPusher.Feedbacks.Error
-				AND NOT gPicker.Feedbacks.Error
-				AND NOT gConveyor.Feedbacks.Error
-				AND NOT gStamper.Feedbacks.Error THEN
+			IF NOT gPusher.Feedbacks.Error AND gPusher.Feedbacks.WaitingStart
+				AND NOT gPicker.Feedbacks.Error AND gPicker.Feedbacks.WaitingActivate
+				AND NOT gConveyor.Feedbacks.Error AND gConveyor.Feedbacks.WaitingStart
+				AND NOT gStamper.Feedbacks.Error  AND gStamper.Feedbacks.WaitingStart THEN
 				
 				MachineState.NextState := WAITING_START;
 				
 			END_IF
 						 
         
-        ELSE
-            MachineState.NextState := WAITING_START;			
+		ELSE
+			MachineState.NextState := WAITING_START;			
         
-    END_CASE
+	END_CASE
     
-    FeedbacksUpdateAction;
+	IF MachineState.ActualState <> AUTO_PICK_CAP THEN
+		gPicker.Commands.PickACap := FALSE;
+	END_IF
+	IF MachineState.ActualState <> AUTO_WAITING_CAP_DELIVERY THEN
+		gConveyor.Commands.DeliverCap := FALSE;
+		gStamper.Commands.StampCap := FALSE;
+	END_IF
+	
+	FeedbacksUpdateAction;
     
 END_PROGRAM
 

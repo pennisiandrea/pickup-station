@@ -11,7 +11,9 @@ TYPE
 		( (*Machine State enumeration*)
 		INIT, (*INIT state*)
 		WAITING_START, (*WAITING state*)
-		AUTOMATIC,
+		AUTO_WAITING_MODULES_READY,
+		AUTO_PICK_CAP,
+		AUTO_WAITING_CAP_DELIVERY,
 		MANUAL,
 		ERROR (*ERROR state*)
 		);
