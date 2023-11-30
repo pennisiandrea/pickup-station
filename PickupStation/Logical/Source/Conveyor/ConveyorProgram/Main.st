@@ -73,7 +73,12 @@ PROGRAM _CYCLIC
 			END_IF 	
 		
 		MOTION:
-			MachineState.TimeoutTimer.PT := T#30S;	
+			IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
+				MachineState.TimeoutTimer.PT := T#0S; // Reset state timeout when a cap is delivered
+			ELSE
+				MachineState.TimeoutTimer.PT := T#30S;
+			END_IF
+			
 			IF MachineState.NewTriggerState THEN
 				Internal.CapsCount := 1;
 			END_IF
@@ -83,7 +88,7 @@ PROGRAM _CYCLIC
 			END_IF 	
 			
 		INIT:
-			MachineState.TimeoutTimer.PT := T#15S;			
+			MachineState.TimeoutTimer.PT := T#30S;			
 			IF Internal.Axis.MoveDone THEN
 				MachineState.NextState := WAITING_START;
 			END_IF			

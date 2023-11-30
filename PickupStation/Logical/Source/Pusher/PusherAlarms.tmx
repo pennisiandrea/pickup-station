@@ -5,9 +5,25 @@
     <prop type="x-BR-TS:Namespace">Source/Pusher/Alarms</prop>
   </header>
   <body>
-    <tu tuid="PusherTimeoutForward" />
-    <tu tuid="PusherTimeoutBackward" />
-    <tu tuid="PusherTimeoutMagazineEmpty" />
-    <tu tuid="PusherInvalidSensorsCombination" />
+    <tu tuid="PusherTimeoutForward">
+      <tuv xml:lang="en">
+        <seg>Pusher was not able to reach the forward position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PusherTimeoutBackward">
+      <tuv xml:lang="en">
+        <seg>Pusher was not able to reach the backward position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PusherTimeoutMagazineEmpty">
+      <tuv xml:lang="en">
+        <seg>Magazine has not delivered a new cap</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PusherInvalidSensorsCombination">
+      <tuv xml:lang="en">
+        <seg>Pusher forward/backward sensors simultaneously active</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

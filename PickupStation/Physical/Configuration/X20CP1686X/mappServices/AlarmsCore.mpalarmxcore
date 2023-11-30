@@ -1,5 +1,171 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio FileVersion="4.9"?>
 <Configuration>
-  <Element ID="gAlarmXCoreMpLink" Type="mpalarmxcore" />
+  <Element ID="gAlarmXCoreMpLink" Type="mpalarmxcore">
+    <Group ID="mapp.AlarmX.Core">
+      <Group ID="Mapping">
+        <Group ID="[0]" />
+      </Group>
+      <Group ID="BySeverity">
+        <Group ID="[0]">
+          <Property ID="Severity" Value="1" />
+          <Selector ID="[0]" Value="Reaction">
+            <Property ID="Name" Value="MACHINE_IMMEDIATELY_STOP" />
+          </Selector>
+        </Group>
+        <Group ID="[1]">
+          <Property ID="Severity" Value="2" />
+          <Selector ID="[0]" Value="Reaction">
+            <Property ID="Name" Value="MACHINE_ON_PHASE_STOP" />
+          </Selector>
+        </Group>
+        <Group ID="[2]">
+          <Property ID="Severity" Value="3" />
+          <Selector ID="[0]" Value="Reaction">
+            <Property ID="Name" Value="PICKER_STOP" />
+          </Selector>
+        </Group>
+        <Group ID="[3]">
+          <Property ID="Severity" Value="4" />
+          <Selector ID="[0]" Value="Reaction">
+            <Property ID="Name" Value="CONVEYOR_STOP" />
+          </Selector>
+        </Group>
+        <Group ID="[4]">
+          <Property ID="Severity" Value="5" />
+          <Selector ID="[0]" Value="Reaction">
+            <Property ID="Name" Value="STAMPER_STOP" />
+          </Selector>
+        </Group>
+        <Group ID="[5]">
+          <Property ID="Severity" Value="6" />
+          <Selector ID="[0]" Value="Reaction">
+            <Property ID="Name" Value="PUSHER_STOP" />
+          </Selector>
+        </Group>
+      </Group>
+    </Group>
+    <Group ID="mapp.AlarmX.Core.Configuration">
+      <Group ID="[0]">
+        <Property ID="Name" Value="PickerTimeoutForward" />
+        <Property ID="Message" Value="{$Source/Picker/Alarms/PickerTimeoutForward}" />
+        <Property ID="Severity" Value="3" />
+      </Group>
+      <Group ID="[1]">
+        <Property ID="Name" Value="PickerTimeoutBackward" />
+        <Property ID="Message" Value="{$Source/Picker/Alarms/PickerTimeoutBackward}" />
+        <Property ID="Severity" Value="3" />
+      </Group>
+      <Group ID="[2]">
+        <Property ID="Name" Value="PickerTimeoutVacuumPick" />
+        <Property ID="Message" Value="{$Source/Picker/Alarms/PickerTimeoutVacuumPick}" />
+        <Property ID="Severity" Value="3" />
+      </Group>
+      <Group ID="[3]">
+        <Property ID="Name" Value="PickerTimeoutVacuumPlace" />
+        <Property ID="Message" Value="{$Source/Picker/Alarms/PickerTimeoutVacuumPlace}" />
+        <Property ID="Severity" Value="3" />
+      </Group>
+      <Group ID="[4]">
+        <Property ID="Name" Value="PickerInvalidSensorsCombination" />
+        <Property ID="Severity" Value="3" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+      <Group ID="[5]">
+        <Property ID="Name" Value="PusherTimeoutForward" />
+        <Property ID="Message" Value="{$Source/Pusher/Alarms/PusherTimeoutForward}" />
+        <Property ID="Severity" Value="6" />
+      </Group>
+      <Group ID="[6]">
+        <Property ID="Name" Value="PusherTimeoutBackward" />
+        <Property ID="Message" Value="{$Source/Pusher/Alarms/PusherTimeoutBackward}" />
+        <Property ID="Severity" Value="6" />
+      </Group>
+      <Group ID="[7]">
+        <Property ID="Name" Value="PusherTimeoutMagazineEmpty" />
+        <Property ID="Message" Value="{$Source/Pusher/Alarms/PusherTimeoutMagazineEmpty}" />
+        <Property ID="Severity" Value="6" />
+      </Group>
+      <Group ID="[8]">
+        <Property ID="Name" Value="PusherInvalidSensorsCombination" />
+        <Property ID="Message" Value="{$Source/Pusher/Alarms/PusherInvalidSensorsCombination}" />
+        <Property ID="Severity" Value="6" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+      <Group ID="[9]">
+        <Property ID="Name" Value="ConveyorTimeoutHoming" />
+        <Property ID="Message" Value="{$Source/Conveyor/Alarms/ConveyorTimeoutHoming}" />
+        <Property ID="Severity" Value="4" />
+      </Group>
+      <Group ID="[10]">
+        <Property ID="Name" Value="ConveyorTimeoutPowerOn" />
+        <Property ID="Message" Value="{$Source/Conveyor/Alarms/ConveyorTimeoutPowerOn}" />
+        <Property ID="Severity" Value="4" />
+      </Group>
+      <Group ID="[11]">
+        <Property ID="Name" Value="ConveyorMissedCap" />
+        <Property ID="Message" Value="{$Source/Conveyor/Alarms/ConveyorMissedCap}" />
+        <Property ID="Severity" Value="0" />
+      </Group>
+      <Group ID="[12]">
+        <Property ID="Name" Value="ConveyorAxisError" />
+        <Property ID="Message" Value="{$Source/Conveyor/Alarms/ConveyorAxisError}" />
+        <Property ID="Severity" Value="4" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+      <Group ID="[13]">
+        <Property ID="Name" Value="ConveyorInitFail" />
+        <Property ID="Message" Value="{$Source/Conveyor/Alarms/ConveyorInitFail}" />
+        <Property ID="Severity" Value="4" />
+      </Group>
+      <Group ID="[14]">
+        <Property ID="Name" Value="StamperAxisFault" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperAxisFault}" />
+        <Property ID="Severity" Value="5" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+      <Group ID="[15]">
+        <Property ID="Name" Value="StamperInvalidSensorsCombination" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperInvalidSensorsCombination}" />
+        <Property ID="Severity" Value="5" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+      <Group ID="[16]">
+        <Property ID="Name" Value="StamperTimeoutHoming" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperTimeoutHoming}" />
+        <Property ID="Severity" Value="5" />
+      </Group>
+      <Group ID="[17]">
+        <Property ID="Name" Value="StamperTimeoutPowerOn" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperTimeoutPowerOn}" />
+        <Property ID="Severity" Value="5" />
+      </Group>
+      <Group ID="[18]">
+        <Property ID="Name" Value="StamperTimeoutStampBackward" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperTimeoutStampBackward}" />
+        <Property ID="Severity" Value="5" />
+      </Group>
+      <Group ID="[19]">
+        <Property ID="Name" Value="StamperTimeoutStampForward" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperTimeoutStampForward}" />
+        <Property ID="Severity" Value="5" />
+      </Group>
+      <Group ID="[20]">
+        <Property ID="Name" Value="StamperAxisTimeout" />
+        <Property ID="Message" Value="{$Source/Stamper/Alarms/StamperAxisTimeout}" />
+        <Property ID="Severity" Value="5" />
+      </Group>
+      <Group ID="[21]">
+        <Property ID="Name" Value="MainMachineEmergencyCircuitInterrupted" />
+        <Property ID="Message" Value="{$Source/MainMachine/Alarms/MainMachineEmergencyCircuitInterrupted}" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+      <Group ID="[22]">
+        <Property ID="Name" Value="MainMachineCommunicationLost" />
+        <Property ID="Message" Value="{$Source/MainMachine/Alarms/MainMachineCommunicationLost}" />
+        <Property ID="Severity" Value="2" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
+    </Group>
+  </Element>
 </Configuration>

@@ -83,7 +83,7 @@ PROGRAM _CYCLIC
 			END_IF			
 			
 		SET_SHIFT:
-			MachineState.TimeoutTimer.PT := T#10S;
+			MachineState.TimeoutTimer.PT := T#20S;
 			Internal.Offset.Enable := TRUE;
 			IF MachineState.NewTriggerState THEN
 				Internal.Offset.OffsetShift := gStamper.Parameters.Offset;
@@ -126,7 +126,7 @@ PROGRAM _CYCLIC
 			END_IF
 			
 		RESET_SHIFT:
-			MachineState.TimeoutTimer.PT := T#10S;
+			MachineState.TimeoutTimer.PT := T#20S;
 			Internal.Offset.Enable := TRUE;
 			IF MachineState.NewTriggerState THEN
 				Internal.Offset.OffsetShift := 0;

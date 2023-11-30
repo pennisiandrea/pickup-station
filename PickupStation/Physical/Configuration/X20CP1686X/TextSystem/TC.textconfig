@@ -12,6 +12,9 @@
     </Group>
     <Group ID="TargetFiles">
       <Property ID="TargetFile[1]" Value="Source.Picker.PickerAlarms.tmx" />
+      <Property ID="TargetFile[2]" Value="Source.Pusher.PusherAlarms.tmx" />
+      <Property ID="TargetFile[3]" Value="Source.Conveyor.ConveyorAlarms.tmx" />
+      <Property ID="TargetFile[4]" Value="Source.Stamper.StamperAlarms.tmx" />
     </Group>
   </Element>
 </Configuration>

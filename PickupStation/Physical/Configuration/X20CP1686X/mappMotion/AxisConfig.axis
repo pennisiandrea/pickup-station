@@ -37,7 +37,58 @@
         <Property ID="Deceleration" Value="20" />
       </Selector>
     </Selector>
-    <Selector ID="Alarms" Value="MpAlarmX" />
+    <Selector ID="Alarms" Value="MpAlarmX">
+      <Group ID="mapp.AlarmX.Core.Configuration">
+        <Group ID="[0]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[1]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[2]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[3]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[4]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[5]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[9]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[10]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[11]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[12]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[13]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[14]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[15]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[19]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[20]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+        <Group ID="[21]">
+          <Property ID="Severity" Value="4" />
+        </Group>
+      </Group>
+    </Selector>
   </Element>
   <Element ID="gAxisStamperMpLink" Type="axis">
     <Property ID="BaseTypeIsReadOnly" Value="0" />
@@ -72,6 +123,57 @@
         <Property ID="Deceleration" Value="100" />
       </Selector>
     </Selector>
-    <Selector ID="Alarms" Value="MpAlarmX" />
+    <Selector ID="Alarms" Value="MpAlarmX">
+      <Group ID="mapp.AlarmX.Core.Configuration">
+        <Group ID="[0]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[1]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[2]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[3]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[4]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[5]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[9]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[10]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[11]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[12]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[13]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[14]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[15]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[19]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[20]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+        <Group ID="[21]">
+          <Property ID="Severity" Value="5" />
+        </Group>
+      </Group>
+    </Selector>
   </Element>
 </Configuration>

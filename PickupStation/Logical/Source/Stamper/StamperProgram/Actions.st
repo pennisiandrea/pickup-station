@@ -41,7 +41,9 @@ ACTION SetAlarmsAction:
 			POWER_ON: MpAlarmXSet(gAlarmXCoreMpLink,'StamperTimeoutPowerOn'); // Edge alarm!
 			STAMP_FORWARD: MpAlarmXSet(gAlarmXCoreMpLink,'StamperTimeoutStampForward'); // Edge alarm!
 			STAMP_BACKWARD: MpAlarmXSet(gAlarmXCoreMpLink,'StamperTimeoutStampBackward'); // Edge alarm!
-			ELSE MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisFault'); // Persistent alarm!
+			ACTIVATE_CAM: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
+			SET_SHIFT: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
+			RESET_SHIFT: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
 		END_CASE
 
 		MachineState.NextState := ERROR;		
@@ -54,10 +56,18 @@ ACTION SetAlarmsAction:
 		MpAlarmXReset(gAlarmXCoreMpLink,'StamperAxisFault');
 	END_IF
 	
+	IF gStamper.Interface.Inputs.StampIsForward AND gStamper.Interface.Inputs.StampIsBackward THEN
+		MpAlarmXSet(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');
+		MachineState.NextState := ERROR;
+	ELSE
+		MpAlarmXReset(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');
+	END_IF
+	
 END_ACTION
 
 ACTION ResetAlarmsAction:  
 	
 	MpAlarmXReset(gAlarmXCoreMpLink,'StamperAxisFault');
+	MpAlarmXReset(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');
 	
 END_ACTION   

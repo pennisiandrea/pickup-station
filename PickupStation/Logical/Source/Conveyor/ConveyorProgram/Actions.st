@@ -36,13 +36,23 @@ ACTION SetAlarmsAction:
 	IF MachineState.TimeoutTimer.Q THEN
         
 		CASE MachineState.ActualState OF
-		    HOMING: MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorTimeoutHoming'); // Edge alarm!
-		    POWER_ON: MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorTimeoutPowerOn'); // Edge alarm!
-			MOTION: MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorMissedCap'); // Edge alarm!
-			INIT: MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorInitFail'); // Edge alarm!
+			HOMING: 
+				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorTimeoutHoming'); // Edge alarm!
+				MachineState.NextState := ERROR;
+				
+			POWER_ON: 
+				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorTimeoutPowerOn'); // Edge alarm!
+				MachineState.NextState := ERROR;
+				
+			MOTION: 
+				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorMissedCap'); // Edge alarm! NO ERROR STATE IN THIS CASE
+				Internal.CapsCount := MAX(0,Internal.CapsCount - 1);
+				
+			INIT: 
+				MpAlarmXSet(gAlarmXCoreMpLink,'ConveyorInitFail'); // Edge alarm!
+				MachineState.NextState := ERROR;
 		END_CASE
-
-		MachineState.NextState := ERROR;		
+		
 	END_IF            
 
 	IF Internal.Axis.Error THEN
@@ -55,5 +65,7 @@ ACTION SetAlarmsAction:
 END_ACTION
 
 ACTION ResetAlarmsAction:
-
+	
+	MpAlarmXReset(gAlarmXCoreMpLink,'ConveyorAxisError');
+	
 END_ACTION

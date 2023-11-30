@@ -46,7 +46,7 @@ ACTION SetAlarmsAction:
 	END_IF
 	
 	// PickupArmInvalidSensorsCombination
-	IF gPicker.Interface.Inputs.ArmBackward AND gPicker.Interface.Inputs.ArmForward AND gPicker.Commands.Enable THEN
+	IF gPicker.Interface.Inputs.ArmBackward AND gPicker.Interface.Inputs.ArmForward THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'PickupArmInvalidSensorsCombination'); // Periodic alarm!
 		MachineState.NextState := ERROR;
 	ELSE

@@ -5,10 +5,30 @@
     <prop type="x-BR-TS:Namespace">Source/Picker/Alarms</prop>
   </header>
   <body>
-    <tu tuid="PickerTimeoutForward" />
-    <tu tuid="PickerTimeoutBackward" />
-    <tu tuid="PickerTimeoutVacuumPick" />
-    <tu tuid="PickerTimeoutVacuumPlace" />
-    <tu tuid="PickerInvalidSensorsCombination" />
+    <tu tuid="PickerTimeoutForward">
+      <tuv xml:lang="en">
+        <seg>Picker was not able to reach forward position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PickerTimeoutBackward">
+      <tuv xml:lang="en">
+        <seg>Picker was not able to reach backward position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PickerTimeoutVacuumPick">
+      <tuv xml:lang="en">
+        <seg>Picker was not able to pick the cap</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PickerTimeoutVacuumPlace">
+      <tuv xml:lang="en">
+        <seg>Picker was not able to place the cap</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PickerInvalidSensorsCombination">
+      <tuv xml:lang="en">
+        <seg>Picker forward/backward sensors simultaneously active </seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

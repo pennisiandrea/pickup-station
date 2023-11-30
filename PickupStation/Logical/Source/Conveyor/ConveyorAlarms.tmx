@@ -5,10 +5,30 @@
     <prop type="x-BR-TS:Namespace">Source/Conveyor/Alarms</prop>
   </header>
   <body>
-    <tu tuid="ConveyorTimeoutHoming" />
-    <tu tuid="ConveyorTimeoutPowerOn" />
-    <tu tuid="ConveyorMissedCap" />
-    <tu tuid="ConveyorAxisError" />
-    <tu tuid="ConveyorInitFail" />
+    <tu tuid="ConveyorTimeoutHoming">
+      <tuv xml:lang="en">
+        <seg>Conveyor was not able to homing</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConveyorTimeoutPowerOn">
+      <tuv xml:lang="en">
+        <seg>Conveyor was not able to power on</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConveyorMissedCap">
+      <tuv xml:lang="en">
+        <seg>Missing cap detected</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConveyorAxisError">
+      <tuv xml:lang="en">
+        <seg>Conveyor axis is in error</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConveyorInitFail">
+      <tuv xml:lang="en">
+        <seg>Conveyor cannot be initialized</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>
