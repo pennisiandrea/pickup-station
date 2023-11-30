@@ -1,9 +1,11 @@
 ACTION FeedbacksUpdateAction: 
 
     gStamper.Feedbacks.Enabled := TRUE;
-    gStamper.Feedbacks.Waiting := (MachineState.ActualState = WAITING); 
+    gStamper.Feedbacks.WaitingStart := (MachineState.ActualState = WAITING_START); 
 	gStamper.Feedbacks.Error := (MachineState.ActualState = ERROR);
 	gStamper.Feedbacks.OnSyncMotion := Internal.Cam.InCam;
+	gStamper.Feedbacks.WaitingCap := (Internal.Cam.ActualStateIndex = 0) AND (MachineState.ActualState = WAITING_CAP);
+	
 END_ACTION
 
 ACTION ResetOutputsAction: 

@@ -10,13 +10,14 @@ TYPE
 		Enable : BOOL;
 		Start : BOOL;
 		Init : BOOL;
-		CapOnMotion : BOOL;
+		NewCapTrigger : BOOL;
 	END_STRUCT;
 	StamperFeedbacksType : 	STRUCT  (*Stamper Feedbacks type*)
 		Enabled : BOOL;
-		Waiting : BOOL;
+		WaitingStart : BOOL;
 		Error : BOOL;
 		OnSyncMotion : BOOL;
+		WaitingCap : BOOL;
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
 		Offset : LREAL;

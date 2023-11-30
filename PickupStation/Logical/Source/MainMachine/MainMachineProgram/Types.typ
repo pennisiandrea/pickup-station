@@ -9,24 +9,16 @@ TYPE
 	END_STRUCT;
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
+		INIT, (*INIT state*)
 		WAITING_START, (*WAITING state*)
-		POWER_ON, (*INIT state*)
-		SET_SHIFT,
-		HOMING,
-		ACTIVATE_CAM,
-		WAITING_CAP,
-		STAMP_FORWARD,
-		STAMPING,
-		STAMP_BACKWARD,
-		RESET_SHIFT,
+		AUTOMATIC,
+		MANUAL,
 		ERROR (*ERROR state*)
 		);
 	InternalType : 	STRUCT 
-		Axis : MpAxisBasic;
-		Parameters : MpAxisBasicParType;
-		Cam : MC_BR_CamAutomatCommand;
-		Offset : MC_BR_Offset;
-		LastOffset : LREAL;
-		CamStartTrigger : BOOL;
+		HeartBeatTimer : TON := (PT:=T#250MS);
+		CommunicationTimeoutTimer : TON := (PT:=T#3S);
+		MasterCommunicationOk : BOOL;
+		OnPhaseStopRequest : BOOL;
 	END_STRUCT;
 END_TYPE

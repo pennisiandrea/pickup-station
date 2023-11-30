@@ -1,0 +1,5 @@
+VAR
+	MachineState : MachineStateType;
+	Internal : InternalType;
+	CommunicationInitialized : BOOL;
+END_VAR

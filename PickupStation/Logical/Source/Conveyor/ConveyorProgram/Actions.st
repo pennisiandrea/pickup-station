@@ -3,6 +3,8 @@ ACTION FeedbacksUpdateAction:
     gConveyor.Feedbacks.Enabled := TRUE;
     gConveyor.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
     gConveyor.Feedbacks.Error := MachineState.ActualState = ERROR;
+	gConveyor.Feedbacks.WaitingCap := NOT gConveyor.Interface.Inputs.CapInStartPosition;
+	gConveyor.Feedbacks.NewCapTrigger := EDGENEG(gConveyor.Interface.Inputs.CapInStartPosition);
 	
 END_ACTION
 

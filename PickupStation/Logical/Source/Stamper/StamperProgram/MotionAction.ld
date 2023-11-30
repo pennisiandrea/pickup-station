@@ -182,7 +182,7 @@ ACTION MotionAction:
 		</row>
 		<row>
 			<empty/>
-			<analog type="input" name="gStamper.Commands.CapOnMotion"/>
+			<analog type="input" name="Internal.CamStartTrigger"/>
 			<functionblock position="middle" type="MC_BR_CamAutomatCommand"><input name="SetSignal1"/><output name="ActualStateIndex"/></functionblock>
 			<empty/>
 		</row>
@@ -287,6 +287,7 @@ ACTION MotionAction:
 	</network>
 </networks>
 END_ACTION
+
 
 
 

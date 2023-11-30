@@ -7,5 +7,6 @@
     <Object Type="Package">Pusher</Object>
     <Object Type="Package">Conveyor</Object>
     <Object Type="Package">Stamper</Object>
+    <Object Type="Package">MainMachine</Object>
   </Objects>
 </Package>

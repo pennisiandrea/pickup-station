@@ -15,6 +15,7 @@
       <Property ID="TargetFile[2]" Value="Source.Pusher.PusherAlarms.tmx" />
       <Property ID="TargetFile[3]" Value="Source.Conveyor.ConveyorAlarms.tmx" />
       <Property ID="TargetFile[4]" Value="Source.Stamper.StamperAlarms.tmx" />
+      <Property ID="TargetFile[5]" Value="Source.MainMachine.MainMachineAlarms.tmx" />
     </Group>
   </Element>
 </Configuration>

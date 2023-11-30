@@ -14,14 +14,9 @@ PROGRAM _INIT
 	
     MachineState.NextState := WAITING;
 	
-	// JUST FOR DEBUG
-	gStamper.Commands.Enable := TRUE;
-	gStamper.Commands.Start := TRUE;
 END_PROGRAM
 
 PROGRAM _CYCLIC
-	// JUST FOR DEBUG
-	gStamper.Commands.CapOnMotion := gConveyor.Feedbacks.CapOnMotion AND (MachineState.ActualState = WAITING_SYNC_MOTION); 
 	
 	MotionAction;
 	
@@ -37,7 +32,7 @@ PROGRAM _CYCLIC
 		IF Internal.Axis.Info.PLCopenState = mcAXIS_SYNCHRONIZED_MOTION THEN
 			MachineState.NextState := RESET_SHIFT;
 		ELSE
-			MachineState.NextState := WAITING;
+			MachineState.NextState := WAITING_START;
 		END_IF
 	END_IF
 	
@@ -48,7 +43,7 @@ PROGRAM _CYCLIC
     MachineStateManagementAction;
     CASE MachineState.ActualState OF
         
-        WAITING:
+        WAITING_START:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
 			IF MachineState.NewTriggerState THEN
@@ -91,11 +86,11 @@ PROGRAM _CYCLIC
 			ELSE				
 				IF Internal.Offset.ShiftAttained THEN
 					Internal.LastOffset := gStamper.Parameters.Offset;
-					MachineState.NextState := WAITING_SYNC_MOTION;
+					MachineState.NextState := WAITING_CAP;
 				END_IF 
 			END_IF
 			
-		WAITING_SYNC_MOTION:
+		WAITING_CAP:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
 			IF Internal.Cam.InCam AND Internal.Cam.ActualStateIndex = 1 THEN
@@ -122,7 +117,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			
 			IF gStamper.Interface.Inputs.StampIsBackward THEN
-				MachineState.NextState := WAITING_SYNC_MOTION;
+				MachineState.NextState := WAITING_CAP;
 			END_IF
 			
 		RESET_SHIFT:
@@ -148,15 +143,20 @@ PROGRAM _CYCLIC
     END_CASE
     
 	Internal.Axis.Home := (MachineState.ActualState = HOMING) AND NOT Internal.Axis.IsHomed AND Internal.Axis.Active;
-	IF (MachineState.ActualState = WAITING) OR (MachineState.ActualState = ERROR) THEN
+	
+	Internal.CamStartTrigger := gStamper.Commands.NewCapTrigger AND (MachineState.ActualState = WAITING_CAP) AND (Internal.Cam.ActualStateIndex = 0);
+	
+	IF (MachineState.ActualState = WAITING_START) OR (MachineState.ActualState = ERROR) THEN
 		Internal.Cam.EndAutomat := Internal.Cam.Running;
 		Internal.Cam.Start := FALSE;
 		Internal.Cam.Enable := FALSE;
 		Internal.Offset.Enable := FALSE;
 	END_IF
+	
 	IF (MachineState.ActualState <> SET_SHIFT) AND (MachineState.ActualState <> RESET_SHIFT) THEN
 		Internal.Offset.StartShift := FALSE;
 	END_IF
+	
 	gStamper.Interface.Outputs.StampForward := (MachineState.ActualState = STAMP_FORWARD) OR (MachineState.ActualState = STAMPING);
 	
     FeedbacksUpdateAction;

@@ -12,8 +12,10 @@ TYPE
 	END_STRUCT;
 	PusherFeedbacksType : 	STRUCT  (*Pusher Feedbacks type*)
 		Enabled : BOOL;
-		Waiting : BOOL;
+		WaitingStart : BOOL;
 		Error : BOOL;
+		CapReady : BOOL;
+		WaitingPick : BOOL;
 	END_STRUCT;
 	PusherInterfaceType : 	STRUCT  (*Pusher Interface type*)
 		Inputs : PusherInterfaceInputsType;

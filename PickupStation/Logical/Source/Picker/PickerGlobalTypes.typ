@@ -14,8 +14,9 @@ TYPE
 	PickerFeedbacksType : 	STRUCT  (*Picker Feedbacks type*)
 		Enabled : BOOL;
 		Activated : BOOL;
-		Waiting : BOOL;
+		WaitingPickCommand : BOOL;
 		Error : BOOL;
+		WaitingActivate : BOOL;
 	END_STRUCT;
 	PickerInterfaceType : 	STRUCT  (*Picker Interface type*)
 		Inputs : PickerInterfaceInputsType;

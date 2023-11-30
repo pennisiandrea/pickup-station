@@ -17,9 +17,6 @@ PROGRAM _INIT
     
     MachineState.NextState := WAITING_ACTIVATE;
     
-	// DEBUG
-	gPicker.Commands.Enable := TRUE;
-	gPicker.Commands.Activate := TRUE;
 END_PROGRAM
 
 PROGRAM _CYCLIC	

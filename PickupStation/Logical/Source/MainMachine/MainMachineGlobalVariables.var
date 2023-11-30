@@ -1,0 +1,3 @@
+VAR
+    gMainMachine : MainMachineType;
+END_VAR

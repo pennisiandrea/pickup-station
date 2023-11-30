@@ -7,10 +7,10 @@
     <Task Name="StamperPro" Source="Source.Stamper.StamperProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#2">
+    <Task Name="MainMachin" Source="Source.MainMachine.MainMachineProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PusherProg" Source="Source.Pusher.PusherProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PickerProg" Source="Source.Picker.PickerProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
-  <TaskClass Name="Cyclic#2" />
   <TaskClass Name="Cyclic#3" />
   <TaskClass Name="Cyclic#4">
     <Task Name="Alarms" Source="Source.Infrastructure.Alarms.Alarms.prg" Memory="UserROM" Language="IEC" Debugging="true" />
@@ -50,6 +50,7 @@
     <BinaryObject Name="TC" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="ashwd" Source="" Memory="SystemROM" Language="Binary" />
     <BinaryObject Name="User" Source="" Memory="UserROM" Language="Binary" />
+    <BinaryObject Name="Cam" Source="" Memory="UserROM" Language="Binary" />
   </Binaries>
   <Libraries>
     <LibraryObject Name="McBase" Source="Libraries.McBase.lby" Memory="UserROM" Language="binary" Debugging="true" />

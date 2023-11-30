@@ -11,9 +11,7 @@ PROGRAM _INIT
     MachineState.NextState := WAITING_START;
     
 	// JUST FOR DEBUG
-	gConveyor.Commands.Enable := TRUE;
-	gConveyor.Commands.Start := TRUE;
-	gConveyor.Parameters.TargetSpeed := 0.05;
+	gConveyor.Parameters.TargetSpeed := 0.1;
 END_PROGRAM
 
 PROGRAM _CYCLIC
@@ -107,9 +105,7 @@ PROGRAM _CYCLIC
 	Internal.Axis.MoveVelocity := (MachineState.ActualState = MOTION);
 	Internal.Axis.MoveAbsolute := (MachineState.ActualState = INIT);
 	Internal.Axis.Stop := (MachineState.ActualState = ERROR);
-			
-	gConveyor.Feedbacks.CapOnMotion := (MachineState.ActualState = MOTION);
-	
+				
 	IF EDGEPOS(gConveyor.Interface.Inputs.CapInStartPosition) THEN
 		Internal.CapsCount := Internal.CapsCount + 1;				
 	END_IF 						

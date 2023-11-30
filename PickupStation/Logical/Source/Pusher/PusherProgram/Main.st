@@ -5,9 +5,6 @@ PROGRAM _INIT
     
     MachineState.NextState := WAITING_START;
     
-	// DEBUG
-	gPusher.Commands.Enable := TRUE;
-	gPusher.Commands.Start := TRUE;
 END_PROGRAM
 
 PROGRAM _CYCLIC

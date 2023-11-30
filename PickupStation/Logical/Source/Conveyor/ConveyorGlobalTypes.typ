@@ -15,7 +15,8 @@ TYPE
 		Enabled : BOOL;
 		WaitingStart : BOOL;
 		Error : BOOL;
-		CapOnMotion : BOOL;
+		NewCapTrigger : BOOL;
+		WaitingCap : BOOL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
 		TargetSpeed : REAL;

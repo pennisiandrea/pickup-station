@@ -1,7 +1,8 @@
 ACTION FeedbacksUpdateAction: 
 
-    gPicker.Feedbacks.Enabled := TRUE;
-    gPicker.Feedbacks.Waiting := MachineState.ActualState = WAITING_PICK_COMMAND; 
+	gPicker.Feedbacks.Enabled := TRUE;
+	gPicker.Feedbacks.WaitingActivate := MachineState.ActualState = WAITING_ACTIVATE; 
+    gPicker.Feedbacks.WaitingPickCommand := MachineState.ActualState = WAITING_PICK_COMMAND; 
     gPicker.Feedbacks.Error := MachineState.ActualState = ERROR;
 	
 END_ACTION
