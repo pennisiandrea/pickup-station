@@ -4,7 +4,8 @@ ACTION FeedbacksUpdateAction:
     gConveyor.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
     gConveyor.Feedbacks.Error := MachineState.ActualState = ERROR;
 	gConveyor.Feedbacks.WaitingCap := MachineState.ActualState = WAITING_CAP;
-		
+	gConveyor.Feedbacks.AxisHomed := Internal.Axis.IsHomed;	
+	gConveyor.Feedbacks.AxisPowered := Internal.Axis.PowerOn;	
 END_ACTION
 
 ACTION ResetOutputsAction: 

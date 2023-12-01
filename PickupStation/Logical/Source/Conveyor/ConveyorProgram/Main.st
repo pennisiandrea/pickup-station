@@ -64,18 +64,7 @@ PROGRAM _CYCLIC
 			
 			IF NOT gConveyor.Commands.ManualMode THEN
 				MachineState.NextState := WAITING_INIT;		
-			END_IF
-			
-		POWER_ON_MANUAL:
-			MachineState.TimeoutTimer.PT := T#3S;
-			Internal.Axis.Power := TRUE;
-			IF Internal.Axis.PowerOn THEN
-				IF NOT gConveyor.Feedbacks.InitDone THEN
-					MachineState.NextState := INIT;
-				ELSE
-					MachineState.NextState := WAITING_CAP;
-				END_IF
-			END_IF
+			END_IF			
 			
 		HOMING:
 			MachineState.TimeoutTimer.PT := T#3S;

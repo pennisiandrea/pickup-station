@@ -11,10 +11,6 @@ TYPE
 		Start : BOOL;
 		Init : BOOL;
 		StampCap : BOOL;
-		PowerOnManualCommand : BOOL;
-		JogManualCommand : BOOL;
-		HomeManualCommand : BOOL;
-		ManualMode : BOOL;
 	END_STRUCT;
 	StamperFeedbacksType : 	STRUCT  (*Stamper Feedbacks type*)
 		Enabled : BOOL;

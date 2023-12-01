@@ -10,5 +10,40 @@
         <seg>Manual</seg>
       </tuv>
     </tu>
+    <tu tuid="Push">
+      <tuv xml:lang="en">
+        <seg>Push cap</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ArmFwd">
+      <tuv xml:lang="en">
+        <seg>Arm forward</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ArmBwd">
+      <tuv xml:lang="en">
+        <seg>Arm backward</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ArmVacuum">
+      <tuv xml:lang="en">
+        <seg>Grip cap</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Home">
+      <tuv xml:lang="en">
+        <seg>Home</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Power">
+      <tuv xml:lang="en">
+        <seg>PowerOn</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Jog">
+      <tuv xml:lang="en">
+        <seg>Move</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

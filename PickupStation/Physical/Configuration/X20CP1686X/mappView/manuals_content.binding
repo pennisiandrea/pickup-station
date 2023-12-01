@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BindingsSet id="manuals_content_binding" xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Bindings>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorSpeedEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="BasicSlider1" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ManualButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton2" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ManualButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton2" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorSpeed" attribute="node" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="BasicSlider1" attribute="node" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ArmForwardButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton4" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ArmForwardButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton4" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.PushCapButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton3" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.PushCapButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton3" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ArmBackwardButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton5" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ArmBackwardButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton5" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ArmVaacumButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton6" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ArmVaacumButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton6" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorHomeButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton7" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorHomeButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton7" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorPowerButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton8" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorPowerButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton8" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorJogButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton9" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorJogButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton9" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorAxisPowered" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="Ellipse2" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorAxisHomed" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="Ellipse4" attribute="visible" />
+</Binding>
+</Bindings>
+</BindingsSet>

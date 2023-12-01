@@ -10,5 +10,6 @@
     <Object Type="File">header_content.eventbinding</Object>
     <Object Type="File">init_content.eventbinding</Object>
     <Object Type="File">automatic_content.eventbinding</Object>
+    <Object Type="File">manuals_content.binding</Object>
   </Objects>
 </Package>

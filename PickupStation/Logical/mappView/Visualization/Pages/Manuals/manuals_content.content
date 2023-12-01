@@ -1,4 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Content id="manuals_content" height="680" width="1280" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:types="http://www.br-automation.com/iat2015/widgetTypes/v2">
-  <Widgets></Widgets>
+<Content id="manuals_content" height="680" width="1280" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton2" top="15" left="10" width="160" zIndex="0" text="$IAT/Manual/Manual" style="Command" />
+    <Widget xsi:type="widgets.brease.BasicSlider" id="BasicSlider1" top="340" left="640" width="356" height="115" zIndex="1" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" showUnit="true" showValueDisplay="true" thumbSize="30px" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" valueDisplaySize="50px" trackColor="rgba(0, 0, 0, 1)" fontSize="15px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label1" top="430" left="760" width="151" zIndex="2" text="$IAT/Automatic/Speed" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton3" top="220" left="10" width="160" zIndex="3" text="$IAT/Manual/Push" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton4" top="220" left="320" width="160" zIndex="4" text="$IAT/Manual/ArmFwd" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton5" top="255" left="320" width="160" zIndex="5" text="$IAT/Manual/ArmBwd" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton6" top="290" left="320" width="160" zIndex="6" text="$IAT/Manual/ArmVacuum" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton7" top="225" left="640" width="160" zIndex="7" text="$IAT/Manual/Home" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton8" top="260" left="640" width="160" zIndex="8" text="$IAT/Manual/Power" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton9" top="295" left="640" width="160" zIndex="9" text="$IAT/Manual/Jog" style="Command" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse1" top="260" left="810" width="30" height="30" zIndex="10" backColor="rgba(255, 0, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse2" top="260" left="810" width="30" height="30" zIndex="11" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse3" top="225" left="810" width="30" height="30" zIndex="12" backColor="rgba(255, 0, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse4" top="225" left="810" width="30" height="30" zIndex="13" backColor="rgba(0, 192, 0, 1)" />
+  </Widgets>
 </Content>

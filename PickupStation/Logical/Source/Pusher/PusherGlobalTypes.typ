@@ -1,17 +1,17 @@
 
 TYPE
 	PusherType : 	STRUCT  (*Pusher Main type*)
-		Commands : PusherCommadsType;
+		Commands : PusherCommandsType;
 		Feedbacks : PusherFeedbacksType;
 		Interface : PusherInterfaceType;
 	END_STRUCT;
-	PusherCommadsType : 	STRUCT  (*Pusher Commands type*)
+	PusherCommandsType : 	STRUCT 
 		Enable : BOOL;
 		Start : BOOL;
 		Init : BOOL;
 		TakeACap : BOOL;
-		PushManualCommand : BOOL;
 		ManualMode : BOOL;
+		PushManualCommand : BOOL;
 	END_STRUCT;
 	PusherFeedbacksType : 	STRUCT  (*Pusher Feedbacks type*)
 		Enabled : BOOL;

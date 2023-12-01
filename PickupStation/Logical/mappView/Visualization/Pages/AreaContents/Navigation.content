@@ -4,8 +4,8 @@
     <Widget xsi:type="widgets.brease.NavigationBar" id="NavigationBar1" top="0" left="-5" width="1285" height="40" zIndex="0" childPositioning="relative">
       <Widgets>
         <Widget xsi:type="widgets.brease.NavigationButton" id="NavigationButton1" top="5" left="10" width="175" zIndex="0" pageId="automatic_page" text="$IAT/Automatic/Automatic" />
-        <Widget xsi:type="widgets.brease.NavigationButton" id="NavigationButton2" top="5" left="50" width="175" zIndex="1" pageId="pageId1" text="$IAT/Manual/Manual" />
-        <Widget xsi:type="widgets.brease.NavigationButton" id="NavigationButton3" top="5" left="90" width="175" zIndex="2" pageId="pageId1" text="$IAT/Service/Service" />
+        <Widget xsi:type="widgets.brease.NavigationButton" id="NavigationButton2" top="5" left="50" width="175" zIndex="1" pageId="manuals_page" text="$IAT/Manual/Manual" />
+        <Widget xsi:type="widgets.brease.NavigationButton" id="NavigationButton3" top="5" left="90" width="175" zIndex="2" pageId="service_page" text="$IAT/Service/Service" />
       </Widgets>
     </Widget>
   </Widgets>

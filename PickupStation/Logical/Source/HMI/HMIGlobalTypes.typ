@@ -15,8 +15,6 @@ TYPE
 		ConveyorSpeedEnable : BOOL;
 		AutoButtonEnable : BOOL;
 		AutoButton : BOOL;
-		ManualButtonEnable : BOOL;
-		ManualButton : BOOL;
 		LinkButtonEnable : BOOL;
 		LinkButton : BOOL;
 		ReadyToStartVisibility : BOOL;
@@ -28,6 +26,24 @@ TYPE
 	HMIManualPageType : 	STRUCT  (*HMI Interface Output type*)
 		ManualButtonEnable : BOOL;
 		ManualButton : BOOL;
+		PushCapButtonEnable : BOOL;
+		PushCapButton : BOOL;
+		ArmForwardButtonEnable : BOOL;
+		ArmForwardButton : BOOL;
+		ArmBackwardButtonEnable : BOOL;
+		ArmBackwardButton : BOOL;
+		ArmVaacumButtonEnable : BOOL;
+		ArmVaacumButton : BOOL;
+		ConveyorHomeButtonEnable : BOOL;
+		ConveyorHomeButton : BOOL;
+		ConveyorPowerButtonEnable : BOOL;
+		ConveyorPowerButton : BOOL;
+		ConveyorJogButtonEnable : BOOL;
+		ConveyorJogButton : BOOL;
+		ConveyorSpeed : REAL;
+		ConveyorSpeedEnable : BOOL;
+		ConveyorAxisHomed : BOOL;
+		ConveyorAxisPowered : BOOL;
 	END_STRUCT;
 	HMIHeaderContentType : 	STRUCT  (*HMI Interface Output type*)
 		MasterConnectionOk : BOOL;

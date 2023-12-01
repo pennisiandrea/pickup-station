@@ -23,6 +23,8 @@ TYPE
 		WaitingCap : BOOL;
 		DeliverCapDone : BOOL;
 		InitDone : BOOL;
+		AxisHomed : BOOL;
+		AxisPowered : BOOL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
 		TargetSpeed : REAL := 50;

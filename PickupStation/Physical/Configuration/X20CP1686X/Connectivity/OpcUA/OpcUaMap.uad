@@ -27,6 +27,9 @@
             <Variable Name="LastCapWorkedTime" EngineeringUnitId="3" />
             <Variable Name="AvgCapWorkTime" EngineeringUnitId="3" />
           </Variable>
+          <Variable Name="ManualPage">
+            <Variable Name="ConveyorSpeed" EURangesId="1" EngineeringUnitId="1" />
+          </Variable>
         </Variable>
         <Variable Name="gMainMachine" RecursiveEnable="2" />
         <Variable Name="gAlarms" RecursiveEnable="2" />

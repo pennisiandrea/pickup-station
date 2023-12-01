@@ -37,6 +37,17 @@ PROGRAM _CYCLIC
 				MachineState.NextState := MANUAL;
 			END_IF 
 		
+		MANUAL:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			
+			gPusher.Commands.ManualMode := TRUE;
+			gPicker.Commands.ManualMode := TRUE;
+			gConveyor.Commands.ManualMode := TRUE;
+			
+			IF NOT gMainMachine.Commands.ManualMode THEN
+				MachineState.NextState := WAITING_MODE_SELECTION;
+			END_IF
+			
 		AUTO_WAITING_INIT:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
