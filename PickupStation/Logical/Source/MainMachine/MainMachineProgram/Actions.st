@@ -132,3 +132,42 @@ ACTION CheckReactions:
 	END_IF
 	
 END_ACTION
+
+ACTION StatisticsAction: 
+	
+	// Stats clear
+	IF gMainMachine.Commands.ClearStats THEN
+		memset(ADR(CapsWorkingTimeHistory),0,SIZEOF(CapsWorkingTimeHistory));	
+		gMainMachine.Feedbacks.ClearStatsDone := TRUE;
+		CapWorkStopwatch.IN := FALSE;
+	ELSE
+		gMainMachine.Feedbacks.ClearStatsDone := FALSE;
+	END_IF
+	
+	// Manage the stopwatch to measure the current cap working time
+	IF EDGE(gMainMachine.Feedbacks.NewCapOnWork) THEN
+		IF gMainMachine.Feedbacks.NewCapOnWork THEN
+			CapWorkStopwatch.IN := TRUE;	
+		ELSE
+			CapWorkStopwatch.IN := FALSE;
+			memmove(ADR(CapsWorkingTimeHistory[1]),ADR(CapsWorkingTimeHistory[0]),SIZEOF(CapsWorkingTimeHistory)-SIZEOF(CapsWorkingTimeHistory[0]));
+			CapsWorkingTimeHistory[0] := CapWorkStopwatch.ET;
+		END_IF
+	END_IF	
+		
+	CapWorkStopwatch();	
+		
+	// Calc the total amount of time stored in the history array
+	TotHistoryWorkedTime := T#0S;
+	FOR Index:=0 TO STATS_HISTORY_MAX_INDEX DO
+		IF CapsWorkingTimeHistory[Index]>T#0s THEN
+			TotHistoryWorkedTime := TotHistoryWorkedTime + CapsWorkingTimeHistory[Index];
+		ELSE
+			EXIT;
+		END_IF
+	END_FOR
+	
+	gMainMachine.Statistics.CurrentCapWorkingTime := CapWorkStopwatch.ET; 
+	gMainMachine.Statistics.LastCapWorkingTime := CapsWorkingTimeHistory[0];
+	gMainMachine.Statistics.AverageCapWorkingTime := UDINT_TO_TIME(TIME_TO_UDINT(TotHistoryWorkedTime)/MAX(1,Index));
+END_ACTION

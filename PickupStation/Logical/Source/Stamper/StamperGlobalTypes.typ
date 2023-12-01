@@ -11,6 +11,10 @@ TYPE
 		Start : BOOL;
 		Init : BOOL;
 		StampCap : BOOL;
+		PowerOnManualCommand : BOOL;
+		JogManualCommand : BOOL;
+		HomeManualCommand : BOOL;
+		ManualMode : BOOL;
 	END_STRUCT;
 	StamperFeedbacksType : 	STRUCT  (*Stamper Feedbacks type*)
 		Enabled : BOOL;
@@ -23,6 +27,7 @@ TYPE
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
 		Offset : LREAL;
+		TargetPositionManual : BOOL;
 	END_STRUCT;
 	StamperInterfaceType : 	STRUCT  (*Stamper Interface type*)
 		Inputs : StamperInterfaceInputsType;

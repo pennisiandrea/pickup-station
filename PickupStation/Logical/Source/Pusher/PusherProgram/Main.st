@@ -33,8 +33,19 @@ PROGRAM _CYCLIC
 			gPusher.Feedbacks.InitDone := FALSE;
 			IF gPusher.Commands.Init THEN
 				MachineState.NextState := MOVE_BACKWARD;
-			END_IF 
+			
+			ELSIF gPusher.Commands.ManualMode THEN
+				MachineState.NextState := MANUALS;
+				
+			END_IF
         
+		MANUALS:
+			// Manual commands
+			gPusher.Interface.Outputs.MoveForward := gPusher.Commands.PushManualCommand;
+			IF NOT gPusher.Commands.ManualMode THEN
+				MachineState.NextState := WAITING_INIT;
+			END_IF			
+			
 		MOVE_BACKWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF gPusher.Interface.Inputs.PusherInBackwardPosition THEN
@@ -69,6 +80,7 @@ PROGRAM _CYCLIC
 			
 		MOVE_FORWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
+			gPusher.Interface.Outputs.MoveForward := TRUE;
 			IF gPusher.Interface.Inputs.CapAtPickPosition THEN
 				gPusher.Feedbacks.TakeACapDone := TRUE;
 				MachineState.NextState := MOVE_BACKWARD;
@@ -84,7 +96,9 @@ PROGRAM _CYCLIC
         
     END_CASE
     
-	gPusher.Interface.Outputs.MoveForward := (MachineState.ActualState = MOVE_FORWARD);
+	IF (MachineState.ActualState <> MOVE_FORWARD) AND (MachineState.ActualState <> MANUALS) THEN
+		gPusher.Interface.Outputs.MoveForward := FALSE;
+	END_IF
 		
     FeedbacksUpdateAction;
     

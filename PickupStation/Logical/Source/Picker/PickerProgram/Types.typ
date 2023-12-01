@@ -16,7 +16,8 @@ TYPE
 		WAITING_PICK_COMMAND, (*ERROR state*)
 		MOVE_FORWARD,
 		PICK_CAP,
-		ERROR
+		ERROR,
+		MANUALS
 		);
 	InternalType : 	STRUCT 
 		CapPicked : BOOL;

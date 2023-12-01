@@ -17,7 +17,8 @@ TYPE
 		MOTION,
 		POWER_OFF,
 		INIT,
-		WAITING_START
+		WAITING_START,
+		MANUALS
 		);
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;

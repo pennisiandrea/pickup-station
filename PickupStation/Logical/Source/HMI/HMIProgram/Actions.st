@@ -79,8 +79,24 @@ ACTION AutomaticPageAction:
 	// Ready to start
 	gHMI.AutomaticPage.ReadyToStartVisibility := gMainMachine.Feedbacks.WaitingStart;
 	
+	// Clear statistics button	
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		IF NOT gMainMachine.Feedbacks.ClearStatsDone THEN
+			gMainMachine.Commands.ClearStats := gHMI.AutomaticPage.ClearStats;
+		ELSE
+			gMainMachine.Commands.ClearStats := FALSE;
+			gHMI.AutomaticPage.ClearStats := FALSE;
+		END_IF
+	END_IF
+	
+	// Statistics	
+	gHMI.AutomaticPage.CurrentCapWorkingTime := TIME_TO_UDINT(gMainMachine.Statistics.CurrentCapWorkingTime);
+	gHMI.AutomaticPage.LastCapWorkedTime := TIME_TO_UDINT(gMainMachine.Statistics.LastCapWorkingTime);
+	gHMI.AutomaticPage.AvgCapWorkTime := TIME_TO_UDINT(gMainMachine.Statistics.AverageCapWorkingTime);
+	
 END_ACTION
 
+	
 ACTION HeaderContentAction: 
 	
 	gHMI.HeaderContent.PendingAlarms := UDINT_TO_STRING(MIN(999,gAlarms.Feedbacks.Pendings));

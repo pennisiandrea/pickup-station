@@ -14,6 +14,7 @@
     </EURangesAliases>
     <EngineeringUnitAliases>
       <EngineeringUnit Id="1" UnitId="4403510" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millimetre per second" Symbol="mm/s" />
+      <EngineeringUnit Id="3" UnitId="4403766" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millisecond" Symbol="ms" />
     </EngineeringUnitAliases>
   </Aliases>
   <DefaultView>
@@ -22,6 +23,9 @@
         <Variable Name="gHMI" RecursiveEnable="2">
           <Variable Name="AutomaticPage">
             <Variable Name="ConveyorSpeed" EURangesId="1" EngineeringUnitId="1" />
+            <Variable Name="CurrentCapWorkingTime" EngineeringUnitId="3" />
+            <Variable Name="LastCapWorkedTime" EngineeringUnitId="3" />
+            <Variable Name="AvgCapWorkTime" EngineeringUnitId="3" />
           </Variable>
         </Variable>
         <Variable Name="gMainMachine" RecursiveEnable="2" />

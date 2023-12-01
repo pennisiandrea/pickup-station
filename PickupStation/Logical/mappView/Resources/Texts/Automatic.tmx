@@ -71,5 +71,10 @@
         <seg>Average work time (last 10 caps)</seg>
       </tuv>
     </tu>
+    <tu tuid="ClearStats">
+      <tuv xml:lang="en">
+        <seg>Clear statistics</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

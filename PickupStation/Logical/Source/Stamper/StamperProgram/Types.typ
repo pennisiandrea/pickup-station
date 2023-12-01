@@ -21,7 +21,8 @@ TYPE
 		STAMPING,
 		STAMP_BACKWARD,
 		RESET_SHIFT,
-		ERROR (*ERROR state*)
+		ERROR, (*ERROR state*)
+		MANUALS
 		);
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;

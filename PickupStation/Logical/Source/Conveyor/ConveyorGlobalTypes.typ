@@ -11,6 +11,10 @@ TYPE
 		Start : BOOL;
 		Init : BOOL;
 		DeliverCap : BOOL;
+		PowerOnManualCommand : BOOL;
+		JogManualCommand : BOOL;
+		ManualMode : BOOL;
+		HomeManualCommand : BOOL;
 	END_STRUCT;
 	ConveyorFeedbacksType : 	STRUCT  (*Conveyor Feedbacks type*)
 		Enabled : BOOL;

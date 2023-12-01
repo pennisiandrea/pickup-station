@@ -46,8 +46,32 @@ PROGRAM _CYCLIC
 			gStamper.Feedbacks.InitDone := FALSE;
 			IF gStamper.Commands.Init AND Internal.Axis.Active THEN
 				MachineState.NextState := HOMING;
+				
+			ELSIF gStamper.Commands.ManualMode AND Internal.Axis.Active THEN
+				MachineState.NextState := MANUALS;
+				
 			END_IF
-						
+			
+		MANUALS:			
+			// Manual commands
+			Internal.Axis.Home := gStamper.Commands.HomeManualCommand;
+			IF Internal.Axis.IsHomed THEN			
+				Internal.Axis.Power := gStamper.Commands.PowerOnManualCommand;
+				IF Internal.Axis.PowerOn THEN		
+					Internal.Axis.MoveAbsolute := gStamper.Commands.JogManualCommand;
+					Internal.Parameters.Position := gStamper.Parameters.TargetPositionManual;
+				ELSE
+					Internal.Axis.MoveVelocity := FALSE;
+				END_IF
+			ELSE
+				Internal.Axis.Power := FALSE;
+				Internal.Axis.MoveVelocity := FALSE;
+			END_IF
+			
+			IF NOT gStamper.Commands.ManualMode THEN
+				MachineState.NextState := WAITING_INIT;		
+			END_IF
+			
 		HOMING:
 			MachineState.TimeoutTimer.PT := T#3S;
 			

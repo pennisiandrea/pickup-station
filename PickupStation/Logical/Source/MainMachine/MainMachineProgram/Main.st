@@ -46,11 +46,7 @@ PROGRAM _CYCLIC
 			IF NOT gMainMachine.Commands.AutomaticMode THEN
 				MachineState.NextState := WAITING_MODE_SELECTION;
 				
-			ELSIF NOT gPusher.Feedbacks.InitDone 
-				AND NOT gPicker.Feedbacks.InitDone 
-				AND NOT gConveyor.Feedbacks.InitDone 
-				AND NOT gStamper.Feedbacks.InitDone 
-				AND gMainMachine.Commands.Init THEN
+			ELSIF gMainMachine.Commands.Init THEN
 					
 				MachineState.NextState := AUTO_INITIALIZING;
 				
@@ -121,6 +117,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				gPusher.Commands.TakeACap := TRUE;
+				gMainMachine.Feedbacks.NewCapOnWork := TRUE;
 			END_IF
 			
 			IF NOT gPusher.Feedbacks.WaitingTakeACapCommand THEN
@@ -208,9 +205,17 @@ PROGRAM _CYCLIC
 		gConveyor.Commands.DeliverCap := FALSE;
 		gStamper.Commands.StampCap := FALSE;
 	END_IF
-			
+		
+	IF MachineState.ActualState <> AUTO_PUSH_CAP 
+		AND MachineState.ActualState <> AUTO_PICK_CAP 
+		AND MachineState.ActualState <> AUTO_WAITING_CAP_DELIVERY THEN
+		
+		gMainMachine.Feedbacks.NewCapOnWork := FALSE;
+		
+	END_IF
+	
 	FeedbacksUpdateAction;
-    
+    StatisticsAction;
 END_PROGRAM
 
 PROGRAM _EXIT

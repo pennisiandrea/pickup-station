@@ -10,6 +10,10 @@ TYPE
 		PickACap : BOOL;
 		Init : BOOL;
 		Start : BOOL;
+		ForwardManualCommand : BOOL;
+		BackwardManualCommand : BOOL;
+		VaacumManualCommand : BOOL;
+		ManualMode : BOOL;
 	END_STRUCT;
 	PickerFeedbacksType : 	STRUCT  (*Picker Feedbacks type*)
 		Enabled : BOOL;

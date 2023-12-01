@@ -43,16 +43,32 @@ PROGRAM _CYCLIC
 			gPicker.Feedbacks.InitDone := FALSE;
 			IF gPicker.Commands.Init THEN
 				MachineState.NextState := MOVE_BACKWARD;
+				
+			ELSIF gPicker.Commands.ManualMode THEN
+				MachineState.NextState := MANUALS;
+				
+			END_IF
+        
+		MANUALS:
+			// Manual commands
+			gPicker.Interface.Outputs.ArmForward := gPicker.Commands.ForwardManualCommand;
+			gPicker.Interface.Outputs.ArmBackward := gPicker.Commands.BackwardManualCommand;
+			gPicker.Interface.Outputs.GripperPick := gPicker.Commands.VaacumManualCommand;
+			
+			IF NOT gPicker.Commands.ManualMode THEN
+				MachineState.NextState := WAITING_INIT;
 			END_IF
         			
 		MOVE_BACKWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
+			gPicker.Interface.Outputs.ArmBackward := TRUE;
 			IF gPicker.Interface.Inputs.ArmBackward THEN
 				MachineState.NextState := PLACE_CAP;
 			END_IF
 			 
 		PLACE_CAP:
 			MachineState.TimeoutTimer.PT := T#3S;
+			gPicker.Interface.Outputs.GripperPick := FALSE;
 			IF NOT gPicker.Interface.Inputs.GripperVacuum THEN
 				gPicker.Feedbacks.PickACapDone := Internal.CapPicked;
 				Internal.CapPicked := FALSE;
@@ -78,12 +94,14 @@ PROGRAM _CYCLIC
 		
 		MOVE_FORWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
+			gPicker.Interface.Outputs.ArmForward := TRUE;
 			IF gPicker.Interface.Inputs.ArmForward THEN
 				MachineState.NextState := PICK_CAP;
 			END_IF
 						 
 		PICK_CAP:
 			MachineState.TimeoutTimer.PT := T#3S;
+			gPicker.Interface.Outputs.GripperPick := TRUE;
 			IF gPicker.Interface.Inputs.GripperVacuum THEN
 				Internal.CapPicked := TRUE;
 				MachineState.NextState := MOVE_BACKWARD;
@@ -100,9 +118,15 @@ PROGRAM _CYCLIC
         
     END_CASE
     
-	gPicker.Interface.Outputs.ArmBackward := MachineState.ActualState = MOVE_BACKWARD;
-	gPicker.Interface.Outputs.ArmForward := MachineState.ActualState = MOVE_FORWARD;
-	gPicker.Interface.Outputs.GripperPick := (MachineState.ActualState = PICK_CAP OR Internal.CapPicked) AND NOT (MachineState.ActualState = PLACE_CAP);
+	IF MachineState.ActualState <> MOVE_BACKWARD AND MachineState.ActualState <> MANUALS THEN
+		gPicker.Interface.Outputs.ArmBackward := FALSE;
+	END_IF
+	IF MachineState.ActualState <> MOVE_FORWARD AND MachineState.ActualState <> MANUALS THEN
+		gPicker.Interface.Outputs.ArmForward := FALSE;
+	END_IF
+	IF MachineState.ActualState <> PICK_CAP AND NOT Internal.CapPicked AND MachineState.ActualState <> MANUALS THEN
+		gPicker.Interface.Outputs.GripperPick := FALSE;
+	END_IF
 		
     FeedbacksUpdateAction;
     

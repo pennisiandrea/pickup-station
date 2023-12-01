@@ -20,9 +20,9 @@ TYPE
 		LinkButtonEnable : BOOL;
 		LinkButton : BOOL;
 		ReadyToStartVisibility : BOOL;
-		CurrentCapWorkingTime : TIME;
-		LastCapWorkedTime : TIME;
-		AvgCapWorkTime : TIME;
+		CurrentCapWorkingTime : UDINT;
+		LastCapWorkedTime : UDINT;
+		AvgCapWorkTime : UDINT;
 		ClearStats : BOOL;
 	END_STRUCT;
 	HMIManualPageType : 	STRUCT  (*HMI Interface Output type*)

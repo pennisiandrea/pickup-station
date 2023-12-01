@@ -13,5 +13,9 @@
     <Widget xsi:type="widgets.brease.Label" id="Label4" top="50" left="869" width="281" zIndex="9" text="$IAT/Automatic/ActCapTime" textAlign="left" fontSize="16px" />
     <Widget xsi:type="widgets.brease.Label" id="Label5" top="80" left="870" width="281" zIndex="10" text="$IAT/Automatic/PrevCapTime" textAlign="left" fontSize="16px" />
     <Widget xsi:type="widgets.brease.Label" id="Label6" top="109" left="870" width="326" zIndex="11" text="$IAT/Automatic/AvgCapTime" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton6" top="145" left="985" width="160" zIndex="12" text="$IAT/Automatic/ClearStats" style="Command" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput1" top="50" left="1145" width="125" zIndex="13" unit="{'metric':'SEC','imperial':'SEC','imperial-us':'SEC'}" unitAlign="right" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput2" top="80" left="1145" width="125" zIndex="14" unit="{'metric':'SEC','imperial':'SEC','imperial-us':'SEC'}" unitAlign="right" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput3" top="110" left="1145" width="125" zIndex="15" unit="{'metric':'SEC','imperial':'SEC','imperial-us':'SEC'}" unitAlign="right" />
   </Widgets>
 </Content>

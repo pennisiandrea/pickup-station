@@ -10,6 +10,8 @@ TYPE
 		Start : BOOL;
 		Init : BOOL;
 		TakeACap : BOOL;
+		PushManualCommand : BOOL;
+		ManualMode : BOOL;
 	END_STRUCT;
 	PusherFeedbacksType : 	STRUCT  (*Pusher Feedbacks type*)
 		Enabled : BOOL;
