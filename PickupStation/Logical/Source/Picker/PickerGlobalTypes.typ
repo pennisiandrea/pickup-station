@@ -7,17 +7,17 @@ TYPE
 	END_STRUCT;
 	PickerCommadsType : 	STRUCT  (*Picker Commands type*)
 		Enable : BOOL;
-		Activate : BOOL;
 		PickACap : BOOL;
 		Init : BOOL;
+		Start : BOOL;
 	END_STRUCT;
 	PickerFeedbacksType : 	STRUCT  (*Picker Feedbacks type*)
 		Enabled : BOOL;
-		Activated : BOOL;
 		WaitingPickCommand : BOOL;
 		Error : BOOL;
-		WaitingActivate : BOOL;
+		WaitingStart : BOOL;
 		PickACapDone : BOOL;
+		InitDone : BOOL;
 	END_STRUCT;
 	PickerInterfaceType : 	STRUCT  (*Picker Interface type*)
 		Inputs : PickerInterfaceInputsType;

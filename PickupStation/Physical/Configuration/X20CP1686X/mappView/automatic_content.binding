@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BindingsSet id="automatic_content_binding" xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Bindings>
+
+
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.ConveyorSpeed" attribute="node" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="BasicSlider1" attribute="node" />
+</Binding>
+
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.LinkButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton1" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.LinkButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton1" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.AutoButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton2" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.AutoButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton2" attribute="value" />
+</Binding>
+
+
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.InitButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton5" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.InitButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton5" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.ConveyorSpeedEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="BasicSlider1" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StopButtonVisibility" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton4" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StartButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton4" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StartButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton3" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StartButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="ToggleButton3" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.ReadyToStartVisibility" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="Label2" attribute="visible" />
+</Binding>
+</Bindings>
+</BindingsSet>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="automatic_content" height="680" width="1280" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton1" top="25" left="25" width="160" zIndex="0" text="$IAT/Automatic/Link" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton2" top="70" left="25" width="160" zIndex="1" text="$IAT/Automatic/Automatic" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton3" top="295" left="245" width="280" height="267" zIndex="2" text="$IAT/Automatic/Start" cornerRadius="150px" backColor="rgba(0, 192, 0, 1)" fontSize="30px" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton5" top="295" left="695" width="280" height="267" zIndex="3" text="$IAT/Automatic/Init" cornerRadius="150px" fontSize="30px" style="Command" />
+    <Widget xsi:type="widgets.brease.BasicSlider" id="BasicSlider1" top="10" left="310" width="356" height="115" zIndex="4" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" showUnit="true" showValueDisplay="true" thumbSize="30px" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" valueDisplaySize="50px" trackColor="rgba(0, 0, 0, 1)" fontSize="15px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label1" top="100" left="430" width="151" zIndex="5" text="$IAT/Automatic/Speed" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton4" top="295" left="245" width="280" height="267" zIndex="6" text="$IAT/Automatic/Stop" cornerRadius="150px" backColor="rgba(255, 0, 0, 1)" mouseDownBackColor="rgba(255, 0, 0, 1)" fontSize="30px" checkedBackColor="rgba(255, 0, 0, 1)" style="Command" />
+    <Widget xsi:type="widgets.brease.Label" id="Label2" top="590" left="220" width="325" zIndex="7" text="$IAT/Automatic/ReadyToStart" textColor="rgba(0, 192, 0, 1)" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label3" top="20" left="840" width="186" zIndex="8" text="$IAT/Automatic/Stats" textAlign="left" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label4" top="50" left="869" width="281" zIndex="9" text="$IAT/Automatic/ActCapTime" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label5" top="80" left="870" width="281" zIndex="10" text="$IAT/Automatic/PrevCapTime" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label6" top="109" left="870" width="326" zIndex="11" text="$IAT/Automatic/AvgCapTime" textAlign="left" fontSize="16px" />
+  </Widgets>
+</Content>

@@ -45,14 +45,14 @@ PROGRAM _CYCLIC
 	gConveyor.Interface.Inputs.CapInStartPosition := diCapOnLogoConveyor;
 	gConveyor.Interface.Inputs.CapInExitPosition := diCapExitLogoConveyor;
 	
-	aoLogoConveyorSetSpeed := gConveyor.Interface.Outputs.SetSpeed;
+	aoLogoConveyorSetSpeed := gConveyor.Interface.Outputs.SetSpeed/1000;
 	
 	// Stamper
-	gStamper.Interface.Inputs.ActualPosition := aiLogoAxisActPos;
+	gStamper.Interface.Inputs.ActualPosition := aiLogoAxisActPos*1000;
 	gStamper.Interface.Inputs.StampIsForward := diLogoStamperForward;
 	gStamper.Interface.Inputs.StampIsBackward := diLogoStamperBack;
 	
-	aoLogoAxisSetPos := LREAL_TO_REAL(gStamper.Interface.Outputs.SetPosition);
+	aoLogoAxisSetPos := LREAL_TO_REAL(gStamper.Interface.Outputs.SetPosition/1000);
 	doLogoStamper := gStamper.Interface.Outputs.StampForward;
 END_PROGRAM
 

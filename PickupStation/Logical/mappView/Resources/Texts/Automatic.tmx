@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tmx version="1.4">
+  <header creationtool="B&amp;R Automation Studio" creationtoolversion="4.2" datatype="unknown" segtype="sentence" adminlang="en" srclang="en" o-tmf="TMX">
+    <note>Change the namespace to define where this text module should be located within the logical structure of your texts</note>
+    <prop type="x-BR-TS:Namespace">IAT/Automatic</prop>
+  </header>
+  <body>
+    <tu tuid="Automatic">
+      <tuv xml:lang="en">
+        <seg>Automatic</seg>
+      </tuv>
+      <tuv xml:lang="de">
+        <seg>Servus Welt!</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Bonjour tout le monde!</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Start">
+      <tuv xml:lang="en">
+        <seg>Start</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Stop">
+      <tuv xml:lang="en">
+        <seg>Stop</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Init">
+      <tuv xml:lang="en">
+        <seg>Initialize</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Link">
+      <tuv xml:lang="en">
+        <seg>Link</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Speed">
+      <tuv xml:lang="en">
+        <seg>Conveyor speed</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ReadyToStart">
+      <tuv xml:lang="en">
+        <seg>Machine ready to start</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Stats">
+      <tuv xml:lang="en">
+        <seg>Statistics</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Tot">
+      <tuv xml:lang="en">
+        <seg>Total caps</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ActCapTime">
+      <tuv xml:lang="en">
+        <seg>Current cap working time</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrevCapTime">
+      <tuv xml:lang="en">
+        <seg>Last cap worked time</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AvgCapTime">
+      <tuv xml:lang="en">
+        <seg>Average work time (last 10 caps)</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

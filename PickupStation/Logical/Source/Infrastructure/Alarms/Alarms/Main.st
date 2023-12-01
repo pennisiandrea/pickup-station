@@ -18,10 +18,9 @@ PROGRAM _CYCLIC
 	
 	MpAlarmXListUIFB();
 	
-	gAlarms.Pending := MpAlarmXCoreFB.PendingAlarms;
+	gAlarms.Feedbacks.Pendings := MpAlarmXCoreFB.PendingAlarms;
 	
-	MpAlarmXAcknowledgeAllFB();
-	
+	MpAlarmXAcknowledgeAllFB(Execute := FALSE);
 END_PROGRAM
 
 PROGRAM _EXIT

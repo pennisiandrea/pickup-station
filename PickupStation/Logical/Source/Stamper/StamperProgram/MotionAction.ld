@@ -29,8 +29,8 @@ ACTION MotionAction:
 			<empty/>
 		</row>
 		<row>
-			<contact type="open" name="gStamper.Commands.Init"/>
-			<line/>
+			<empty/>
+			<empty/>
 			<functionblock position="middle" type="MpAxisBasic"><input name="ErrorReset"/><output name="StatusID"/></functionblock>
 			<empty/>
 		</row>
@@ -287,6 +287,10 @@ ACTION MotionAction:
 	</network>
 </networks>
 END_ACTION
+
+
+
+
 
 
 

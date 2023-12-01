@@ -18,9 +18,10 @@ TYPE
 		Error : BOOL;
 		WaitingCap : BOOL;
 		DeliverCapDone : BOOL;
+		InitDone : BOOL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
-		TargetSpeed : REAL;
+		TargetSpeed : REAL := 50;
 	END_STRUCT;
 	ConveyorInterfaceType : 	STRUCT  (*Conveyor Interface type*)
 		Inputs : ConveyorInterfaceInputsType;

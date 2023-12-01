@@ -3,17 +3,18 @@
 <SwConfiguration CpuAddress="SL1" xmlns="http://br-automation.co.at/AS/SwConfiguration">
   <TaskClass Name="Cyclic#1">
     <Task Name="RSModelPic" Source="RSModelPick.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="MainMachin" Source="Source.MainMachine.MainMachineProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="ConveyorPr" Source="Source.Conveyor.ConveyorProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="StamperPro" Source="Source.Stamper.StamperProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#2">
-    <Task Name="MainMachin" Source="Source.MainMachine.MainMachineProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PusherProg" Source="Source.Pusher.PusherProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PickerProg" Source="Source.Picker.PickerProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#3" />
   <TaskClass Name="Cyclic#4">
     <Task Name="Alarms" Source="Source.Infrastructure.Alarms.Alarms.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="HMIProgram" Source="Source.HMI.HMIProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#5" />
   <TaskClass Name="Cyclic#6" />
@@ -37,6 +38,7 @@
     <BinaryObject Name="FWRules" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="arcoal" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="arsvcreg" Source="" Memory="UserROM" Language="Binary" />
+    <BinaryObject Name="OpcUaSrv" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="Settings" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="iomap" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="asfw" Source="" Memory="SystemROM" Language="Binary" />

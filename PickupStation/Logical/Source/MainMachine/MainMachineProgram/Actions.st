@@ -1,8 +1,26 @@
 ACTION FeedbacksUpdateAction: 
 
-	gMainMachine.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
+	gMainMachine.Feedbacks.WaitingStart := MachineState.ActualState = AUTO_WAITING_START; 
+	
 	gMainMachine.Feedbacks.Error := MachineState.ActualState = ERROR;
-
+	
+	gMainMachine.Feedbacks.WaitModeSelection := MachineState.ActualState = WAITING_MODE_SELECTION;
+	
+	gMainMachine.Feedbacks.Stopping := gMainMachine.Feedbacks.Started AND Internal.OnPhaseStopRequest;
+	
+	gMainMachine.Feedbacks.WaitingInit := MachineState.ActualState = AUTO_WAITING_INIT;
+	
+	// Started
+	IF (MachineState.ActualState = AUTO_WAITING_MODULES_READY)
+		OR (MachineState.ActualState = AUTO_PUSH_CAP)
+		OR (MachineState.ActualState = AUTO_PICK_CAP)
+		OR (MachineState.ActualState = AUTO_WAITING_CAP_DELIVERY) THEN
+	
+		gMainMachine.Feedbacks.Started := TRUE;
+	ELSE
+		gMainMachine.Feedbacks.Started := FALSE;
+	END_IF
+	
 END_ACTION
 
 ACTION MachineStateManagementAction: 
@@ -62,7 +80,9 @@ ACTION MasterCommunication:
 	END_IF
 	Internal.CommunicationTimeoutTimer();
 	Internal.MasterCommunicationOk := NOT Internal.CommunicationTimeoutTimer.Q AND CommunicationInitialized;
-
+	
+	gMainMachine.Feedbacks.LinkOk := Internal.MasterCommunicationOk;
+	
 END_ACTION
 
 ACTION EnableModules:
@@ -73,7 +93,7 @@ ACTION EnableModules:
 	
 	gConveyor.Commands.Enable := TRUE;
 	
-	IF MachineState.ActualState = WAITING_START THEN
+	IF MachineState.ActualState = WAITING_MODE_SELECTION THEN
 		gStamper.Commands.Enable := gMainMachine.Parameters.StamperEnable;	
 	END_IF
 	
@@ -84,7 +104,7 @@ ACTION StopModules:
 	gPusher.Commands.Start := FALSE;
 	gPusher.Commands.Init := FALSE;
 	
-	gPicker.Commands.Activate := FALSE;
+	gPicker.Commands.Start := FALSE;
 	gPicker.Commands.Init := FALSE;
 	
 	gConveyor.Commands.Start := FALSE;
@@ -99,9 +119,16 @@ END_ACTION
 ACTION CheckReactions:
 	
 	IF MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_IMMEDIATELY_STOP') THEN
+		Internal.ErrorReaction := TRUE;
 		MachineState.NextState := ERROR;
+		
+	ELSIF MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_ON_PHASE_STOP') THEN
+		Internal.ErrorReaction := TRUE;
+		Internal.OnPhaseStopRequest := TRUE;
+		
+	ELSE
+		Internal.ErrorReaction := FALSE;
+		Internal.OnPhaseStopRequest := FALSE;
 	END_IF
-		
-	Internal.OnPhaseStopRequest := MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_ON_PHASE_STOP');
-		
+	
 END_ACTION

@@ -4,7 +4,7 @@ ACTION FeedbacksUpdateAction:
     gPusher.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
     gPusher.Feedbacks.Error := MachineState.ActualState = ERROR;
 	gPusher.Feedbacks.CapReady := gPusher.Interface.Inputs.CapAtPickPosition;
-	gPusher.Feedbacks.WaitingPick := MachineState.ActualState = WAITING_PICK;
+	gPusher.Feedbacks.WaitingTakeACapCommand := MachineState.ActualState = WAITING_TAKE_A_CAP_COMMAND;
 	
 END_ACTION
 

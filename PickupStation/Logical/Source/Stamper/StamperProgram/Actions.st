@@ -50,12 +50,12 @@ ACTION SetAlarmsAction:
 
 		MachineState.NextState := ERROR;		
 	END_IF 
-
-	IF Internal.Axis.Error OR Internal.Cam.Error OR Internal.Offset.Error THEN
-		MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisFault');
-		MachineState.NextState := ERROR;
-	ELSE
-		MpAlarmXReset(gAlarmXCoreMpLink,'StamperAxisFault');
+	
+	IF MachineState.ActualState <> ERROR THEN
+		IF Internal.Axis.Error OR Internal.Cam.Error OR Internal.Offset.Error THEN
+			MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisFault');
+			MachineState.NextState := ERROR;
+		END_IF
 	END_IF
 	
 	IF gStamper.Interface.Inputs.StampIsForward AND gStamper.Interface.Inputs.StampIsBackward THEN
@@ -69,7 +69,6 @@ END_ACTION
 
 ACTION ResetAlarmsAction:  
 	
-	MpAlarmXReset(gAlarmXCoreMpLink,'StamperAxisFault');
 	MpAlarmXReset(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');
 	
 END_ACTION   

@@ -9,13 +9,16 @@ TYPE
 		Enable : BOOL;
 		Start : BOOL;
 		Init : BOOL;
+		TakeACap : BOOL;
 	END_STRUCT;
 	PusherFeedbacksType : 	STRUCT  (*Pusher Feedbacks type*)
 		Enabled : BOOL;
 		WaitingStart : BOOL;
 		Error : BOOL;
 		CapReady : BOOL;
-		WaitingPick : BOOL;
+		WaitingTakeACapCommand : BOOL;
+		InitDone : BOOL;
+		TakeACapDone : BOOL;
 	END_STRUCT;
 	PusherInterfaceType : 	STRUCT  (*Pusher Interface type*)
 		Inputs : PusherInterfaceInputsType;

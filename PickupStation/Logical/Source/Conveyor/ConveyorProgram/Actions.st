@@ -65,6 +65,6 @@ END_ACTION
 
 ACTION ResetAlarmsAction:
 	
-	MpAlarmXReset(gAlarmXCoreMpLink,'ConveyorAxisError');
+	MpAlarmXReset(gAlarmXCoreMpLink,'ConveyorAxisError');	
 	
 END_ACTION

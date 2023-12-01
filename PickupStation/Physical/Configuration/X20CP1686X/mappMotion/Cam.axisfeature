@@ -8,7 +8,7 @@
           <Group ID="Master">
             <Selector ID="ValueSource" Value="SetPosition">
               <Property ID="AxisReference" Value="gAxisConveyorMpLink" />
-              <Property ID="MaxVelocity" Value="0.5" />
+              <Property ID="MaxVelocity" Value="500" />
             </Selector>
             <Property ID="StartPosition" Value="0.0" />
             <Selector ID="StartInterval" Value="MasterAxisPeriod" />
@@ -60,8 +60,8 @@
             <Property ID="MasterFactor" Value="20000" />
             <Property ID="SlaveFactor" Value="20000" />
             <Selector ID="CompensationMode" Value="DistancesBetweenExitEntryPoints">
-              <Property ID="MasterDistance" Value="0.1" />
-              <Property ID="SlaveDistance" Value="0.02" />
+              <Property ID="MasterDistance" Value="100" />
+              <Property ID="SlaveDistance" Value="20" />
               <Selector ID="AdvancedParameters" Value="NotUsed" />
             </Selector>
             <Group ID="AdvancedParameters">
@@ -84,8 +84,8 @@
             <Property ID="MasterFactor" Value="1" />
             <Property ID="SlaveFactor" Value="0" />
             <Selector ID="CompensationMode" Value="DistancesBetweenExitEntryPoints">
-              <Property ID="MasterDistance" Value="0.1" />
-              <Property ID="SlaveDistance" Value="-0.22" />
+              <Property ID="MasterDistance" Value="100" />
+              <Property ID="SlaveDistance" Value="-220" />
               <Selector ID="AdvancedParameters" Value="NotUsed" />
             </Selector>
             <Group ID="AdvancedParameters">

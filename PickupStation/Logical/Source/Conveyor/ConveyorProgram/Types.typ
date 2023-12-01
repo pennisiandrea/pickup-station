@@ -9,14 +9,15 @@ TYPE
 	END_STRUCT;
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
-		WAITING_START, (*WAITING state*)
+		WAITING_INIT, (*WAITING state*)
 		ERROR, (*ERROR state*)
 		HOMING,
 		POWER_ON,
 		WAITING_CAP,
 		MOTION,
 		POWER_OFF,
-		INIT
+		INIT,
+		WAITING_START
 		);
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;

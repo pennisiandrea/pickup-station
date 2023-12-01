@@ -9,6 +9,8 @@ TYPE
 	END_STRUCT;
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
+		WAITING_INIT,
+		INIT,
 		WAITING_START, (*WAITING state*)
 		POWER_ON, (*INIT state*)
 		SET_SHIFT,

@@ -19,6 +19,7 @@ TYPE
 		OnSyncMotion : BOOL;
 		WaitingCap : BOOL;
 		StampCapDone : BOOL;
+		InitDone : BOOL;
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
 		Offset : LREAL;

@@ -9,7 +9,8 @@ TYPE
 	END_STRUCT;
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
-		WAITING_ACTIVATE,
+		WAITING_INIT,
+		WAITING_START,
 		MOVE_BACKWARD, (*INIT state*)
 		PLACE_CAP, (*WAITING state*)
 		WAITING_PICK_COMMAND, (*ERROR state*)
