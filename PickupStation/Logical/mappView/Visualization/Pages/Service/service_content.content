@@ -3,5 +3,6 @@
   <Widgets>
     <Widget xsi:type="widgets.brease.WebViewer" id="WebViewer1" top="14" left="429" width="838" height="657" zIndex="0" />
     <Widget xsi:type="widgets.brease.LanguageSelector" id="LanguageSelector1" top="15" left="15" zIndex="1" />
+    <Widget xsi:type="widgets.brease.MeasurementSystemSelector" id="MeasurementSystemSelector1" top="70" left="15" zIndex="2" />
   </Widgets>
 </Content>

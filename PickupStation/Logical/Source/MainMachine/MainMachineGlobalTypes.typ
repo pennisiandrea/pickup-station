@@ -33,6 +33,7 @@ TYPE
 		StamperEnable : BOOL := TRUE;
 	END_STRUCT;
 	MainMachineStatisticsType : 	STRUCT 
+		CapsCounter : UDINT;
 		CurrentCapWorkingTime : TIME;
 		LastCapWorkingTime : TIME;
 		AverageCapWorkingTime : TIME;

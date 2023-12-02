@@ -256,7 +256,7 @@ ACTION MotionAction:
 		</row>
 		<row>
 			<empty/>
-			<empty/>
+			<analog type="input" name="gStamper.Parameters.Offset"/>
 			<functionblock position="middle" type="MC_BR_Offset"><input name="OffsetShift"/><output name="Error"/></functionblock>
 			<empty/>
 		</row>
@@ -287,6 +287,7 @@ ACTION MotionAction:
 	</network>
 </networks>
 END_ACTION
+
 
 
 

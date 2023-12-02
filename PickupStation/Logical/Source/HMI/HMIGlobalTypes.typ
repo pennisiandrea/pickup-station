@@ -24,6 +24,9 @@ TYPE
 		ClearStats : BOOL;
 		StamperIncludedCheckbox : BOOL;
 		StamperIncludedCheckboxEnable : BOOL;
+		StamperOffset : LREAL;
+		StamperOffsetEnable : BOOL;
+		CapsCounter : UDINT;
 	END_STRUCT;
 	HMIManualPageType : 	STRUCT  (*HMI Interface Output type*)
 		ManualButtonEnable : BOOL;

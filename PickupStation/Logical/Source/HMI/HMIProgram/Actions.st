@@ -96,9 +96,21 @@ ACTION AutomaticPageAction:
 	END_IF
 	
 	// Statistics	
+	gHMI.AutomaticPage.CapsCounter := gMainMachine.Statistics.CapsCounter;
 	gHMI.AutomaticPage.CurrentCapWorkingTime := TIME_TO_UDINT(gMainMachine.Statistics.CurrentCapWorkingTime);
 	gHMI.AutomaticPage.LastCapWorkedTime := TIME_TO_UDINT(gMainMachine.Statistics.LastCapWorkingTime);
 	gHMI.AutomaticPage.AvgCapWorkTime := TIME_TO_UDINT(gMainMachine.Statistics.AverageCapWorkingTime);
+		
+	// Stamper offset slider button
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		
+		gHMI.AutomaticPage.StamperOffsetEnable := TRUE;
+		gStamper.Parameters.Offset := gHMI.AutomaticPage.StamperOffset;
+		
+	ELSE
+		gHMI.AutomaticPage.StamperOffsetEnable := FALSE;
+		gHMI.AutomaticPage.StamperOffset := gStamper.Parameters.Offset;
+	END_IF
 	
 END_ACTION
 

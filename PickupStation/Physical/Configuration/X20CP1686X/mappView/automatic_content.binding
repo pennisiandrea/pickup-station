@@ -79,5 +79,17 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StamperIncludedCheckbox" attribute="value" />
 <Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="CheckBox1" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StamperOffset" attribute="node" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="BasicSlider2" attribute="node" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StamperOffsetEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="BasicSlider2" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.CapsCounter" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="NumericOutput4" attribute="value" />
+</Binding>
 </Bindings>
 </BindingsSet>

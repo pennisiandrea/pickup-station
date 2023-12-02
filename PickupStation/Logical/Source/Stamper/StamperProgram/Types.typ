@@ -13,14 +13,12 @@ TYPE
 		INIT,
 		WAITING_START, (*WAITING state*)
 		POWER_ON, (*INIT state*)
-		SET_SHIFT,
 		HOMING,
 		ACTIVATE_CAM,
 		WAITING_CAP,
 		STAMP_FORWARD,
 		STAMPING,
 		STAMP_BACKWARD,
-		RESET_SHIFT,
 		ERROR, (*ERROR state*)
 		MANUAL
 		);
@@ -32,6 +30,6 @@ TYPE
 		LastOffset : LREAL;
 		CamStartTrigger : BOOL;
 		Error : BOOL;
-		OffsetDone : BOOL;
+		OffsetToDo : BOOL;
 	END_STRUCT;
 END_TYPE

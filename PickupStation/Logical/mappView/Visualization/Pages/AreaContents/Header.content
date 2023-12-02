@@ -16,8 +16,8 @@
                     <Widget xsi:type="widgets.brease.AlarmListItem" id="AlarmListState" zIndex="2" columnType="state" text="$IAT/Alarms/State" />
                   </Widgets>
                 </Widget>
-                <Widget xsi:type="widgets.brease.MomentaryPushButton" id="AckButton" top="405" left="14" width="167" zIndex="1" text="$IAT/Alarms/Ack" cornerRadius="10px" style="Command" />
-                <Widget xsi:type="widgets.brease.MomentaryPushButton" id="AckAllButton" top="405" left="209" width="165" zIndex="2" text="$IAT/Alarms/AckAll" cornerRadius="10px" style="Command" />
+                <Widget xsi:type="widgets.brease.ToggleButton" id="AckButton" top="405" left="14" width="167" zIndex="1" text="$IAT/Alarms/Ack" cornerRadius="10px" style="Command" />
+                <Widget xsi:type="widgets.brease.ToggleButton" id="AckAllButton" top="405" left="209" width="165" zIndex="2" text="$IAT/Alarms/AckAll" cornerRadius="10px" style="Command" />
               </Widgets>
             </Widget>
             <Widget xsi:type="widgets.brease.TabItem" id="TabItem2" left="0" width="140" zIndex="1" text="$IAT/Alarms/AlarmHistory" cornerRadius="0px 10px 0px 0px" activeCornerRadius="0px 10px 0px 0px">
@@ -39,5 +39,6 @@
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse1" top="40" left="1165" width="30" height="30" zIndex="4" backColor="rgba(255, 0, 0, 1)" />
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse2" top="40" left="1165" width="30" height="30" zIndex="5" backColor="rgba(0, 192, 0, 1)" />
     <Widget xsi:type="widgets.brease.Label" id="Label1" top="35" left="890" width="265" height="40" zIndex="6" text="$IAT/General/Comm" fontSize="16px" padding="0px" />
+    <Widget xsi:type="widgets.brease.Image" id="Image2" top="10" left="790" width="70" height="60" zIndex="7" image="Media/SymbolLib/User/Login.svg" />
   </Widgets>
 </Content>

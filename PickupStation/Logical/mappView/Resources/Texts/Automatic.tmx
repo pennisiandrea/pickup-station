@@ -81,5 +81,15 @@
         <seg>Stamper inclusion</seg>
       </tuv>
     </tu>
+    <tu tuid="StamperOffset">
+      <tuv xml:lang="en">
+        <seg>Stamper offset</seg>
+      </tuv>
+    </tu>
+    <tu tuid="TotCaps">
+      <tuv xml:lang="en">
+        <seg>Total number of caps</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

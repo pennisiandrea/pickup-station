@@ -20,5 +20,10 @@
         <seg>Confirm</seg>
       </tuv>
     </tu>
+    <tu tuid="Close">
+      <tuv xml:lang="en">
+        <seg>Close</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

@@ -19,8 +19,7 @@ PROGRAM _CYCLIC
 	
 	gAlarms.Feedbacks.Pendings := MpAlarmXCoreFB.PendingAlarms;
 	
-	MpAlarmXListUIConnect.Acknowledge := gAlarms.Commands.Acknowledge;
-	MpAlarmXListUIConnect.AcknowledgeAll := gAlarms.Commands.AcknowledgeAll;
+	AcknowledgeManagement;
 		
 END_PROGRAM
 

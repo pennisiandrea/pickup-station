@@ -178,10 +178,9 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				StopModules;
+				gMainMachine.Commands.Reset := FALSE;
 			END_IF
 			
-			gMainMachine.Commands.Reset := gAlarms.Commands.Acknowledge OR gAlarms.Commands.AcknowledgeAll;
-						
 			IF gMainMachine.Commands.Reset THEN
 				ResetModules;
 			END_IF

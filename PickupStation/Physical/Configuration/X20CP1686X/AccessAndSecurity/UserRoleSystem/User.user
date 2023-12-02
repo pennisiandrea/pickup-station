@@ -9,7 +9,7 @@
   </Element>
   <Element ID="admin" Type="User">
     <Property ID="UserID" Value="2" />
-    <Property ID="Password" Value="SbtOFxlD79aom75Ks6KA9kLZEctGh/6u1hRaCU44OMWZJBxHmJQ=" />
+    <Property ID="Password" Value="q4Yg2WA8NnKtOmZBgW1mR8GLbWdV87REUY794hqwrfbk6s2lCt4=" />
     <Group ID="Roles">
       <Property ID="Role[1]" Value="Administrators" />
     </Group>

@@ -2,7 +2,16 @@
 <?AutomationStudio FileVersion="4.9"?>
 <OpcUaSource FileVersion="9" ArVersion="H4.93">
   <Aliases>
-    <ACLAliases />
+    <ACLAliases>
+      <ACL Id="1">
+        <ACE RoleName="Everyone" Access="0x005F" />
+        <ACE RoleName="Administrators" Access="0x017F" />
+      </ACL>
+      <ACL Id="2">
+        <ACE RoleName="Everyone" Access="0x007F" />
+        <ACE RoleName="Administrators" Access="0x017F" />
+      </ACL>
+    </ACLAliases>
     <EURangeViolationAliases />
     <EURangesAliases>
       <EURanges Id="1">
@@ -29,6 +38,12 @@
           <High ValueProvider="Const">460</High>
         </EURange>
       </EURanges>
+      <EURanges Id="7">
+        <EURange>
+          <Low ValueProvider="Const">0</Low>
+          <High ValueProvider="Const">200</High>
+        </EURange>
+      </EURanges>
     </EURangesAliases>
     <EngineeringUnitAliases>
       <EngineeringUnit Id="1" UnitId="4403510" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millimetre per second" Symbol="mm/s" />
@@ -36,15 +51,16 @@
       <EngineeringUnit Id="4" UnitId="5066068" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millimetre" Symbol="mm" />
     </EngineeringUnitAliases>
   </Aliases>
-  <DefaultView>
+  <DefaultView AclId="1">
     <Module Name="&lt;Default&gt;">
       <GlobalVariables Name="Global Variables">
         <Variable Name="gHMI" RecursiveEnable="2">
-          <Variable Name="AutomaticPage">
+          <Variable AclId="2" AclInherit="2" Name="AutomaticPage">
             <Variable Name="ConveyorSpeed" EURangesId="1" EngineeringUnitId="1" />
             <Variable Name="CurrentCapWorkingTime" EngineeringUnitId="3" />
             <Variable Name="LastCapWorkedTime" EngineeringUnitId="3" />
             <Variable Name="AvgCapWorkTime" EngineeringUnitId="3" />
+            <Variable Name="StamperOffset" EURangesId="7" EngineeringUnitId="4" />
           </Variable>
           <Variable Name="ManualPage">
             <Variable Name="ConveyorSpeed" EURangesId="4" EngineeringUnitId="1" />
@@ -53,7 +69,7 @@
           </Variable>
         </Variable>
         <Variable Name="gMainMachine" RecursiveEnable="2" />
-        <Variable Name="gAlarms" RecursiveEnable="2" />
+        <Variable AclId="2" AclInherit="2" Name="gAlarms" RecursiveEnable="2" />
       </GlobalVariables>
     </Module>
   </DefaultView>

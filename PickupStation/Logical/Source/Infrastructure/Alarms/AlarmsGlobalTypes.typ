@@ -10,5 +10,6 @@ TYPE
 	AlarmsCommandsType : 	STRUCT 
 		Acknowledge : BOOL;
 		AcknowledgeAll : BOOL;
+		AlarmID : UINT;
 	END_STRUCT;
 END_TYPE

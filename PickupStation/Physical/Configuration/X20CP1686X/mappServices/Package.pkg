@@ -4,5 +4,6 @@
   <Objects>
     <Object Type="File">AlarmsCore.mpalarmxcore</Object>
     <Object Type="File">AlarmsHist.mpalarmxhistory</Object>
+    <Object Type="File">Users.mpuserx</Object>
   </Objects>
 </Package>

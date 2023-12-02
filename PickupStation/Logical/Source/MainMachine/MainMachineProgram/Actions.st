@@ -160,7 +160,8 @@ ACTION StatisticsAction:
 	
 	// Stats clear
 	IF gMainMachine.Commands.ClearStats THEN
-		memset(ADR(CapsWorkingTimeHistory),0,SIZEOF(CapsWorkingTimeHistory));	
+		memset(ADR(CapsWorkingTimeHistory),0,SIZEOF(CapsWorkingTimeHistory));
+		gMainMachine.Statistics.CapsCounter := 0;
 		gMainMachine.Feedbacks.ClearStatsDone := TRUE;
 		CapWorkStopwatch.IN := FALSE;
 	ELSE
@@ -170,6 +171,7 @@ ACTION StatisticsAction:
 	// Manage the stopwatch to measure the current cap working time
 	IF EDGE(gMainMachine.Feedbacks.NewCapOnWork) THEN
 		IF gMainMachine.Feedbacks.NewCapOnWork THEN
+			gMainMachine.Statistics.CapsCounter := gMainMachine.Statistics.CapsCounter + 1;
 			CapWorkStopwatch.IN := TRUE;	
 		ELSE
 			CapWorkStopwatch.IN := FALSE;

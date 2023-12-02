@@ -121,7 +121,7 @@ PROGRAM _CYCLIC
 			Internal.Parameters.Position := 0;
 			Internal.Axis.MoveAbsolute := TRUE;
 			IF Internal.Axis.MoveDone THEN
-				Internal.OffsetDone := FALSE;
+				Internal.OffsetToDo := TRUE;
 				Internal.Axis.MoveAbsolute := FALSE;
 				MachineState.NextState := WAITING_START;
 			END_IF		
@@ -142,32 +142,8 @@ PROGRAM _CYCLIC
 			Internal.Cam.Enable := TRUE;
 			Internal.Cam.Start := TRUE;
 			IF Internal.Axis.Info.PLCopenState = mcAXIS_SYNCHRONIZED_MOTION THEN
-				Internal.Offset.Enable := TRUE;
-				IF Internal.Offset.Valid THEN
-					IF NOT Internal.OffsetDone THEN
-						MachineState.NextState := SET_SHIFT;
-					ELSE
-						MachineState.NextState := WAITING_CAP;
-					END_IF
-				END_IF
-			END_IF			
-			
-		SET_SHIFT:
-			MachineState.TimeoutTimer.PT := T#20S;
-			IF MachineState.NewTriggerState THEN
-				Internal.Offset.OffsetShift := gStamper.Parameters.Offset;
-				Internal.Offset.StartShift := TRUE;
-			END_IF
-							
-			IF Internal.Offset.ShiftStarted THEN
-				Internal.Offset.StartShift := FALSE;
-			END_IF
-			
-			IF NOT Internal.Offset.StartShift AND Internal.Offset.ShiftAttained THEN
-				Internal.LastOffset := gStamper.Parameters.Offset;
-				Internal.OffsetDone := TRUE;
 				MachineState.NextState := WAITING_CAP;
-			END_IF 
+			END_IF			
 			
 		WAITING_CAP:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state			
@@ -179,8 +155,6 @@ PROGRAM _CYCLIC
 			IF Internal.Cam.InCam AND Internal.Cam.ActualStateIndex = 1 THEN // Syncronized motion
 				Internal.CamStartTrigger := FALSE;
 				MachineState.NextState := STAMP_FORWARD;
-			ELSIF Internal.LastOffset <> gStamper.Parameters.Offset THEN
-				MachineState.NextState := SET_SHIFT;
 			END_IF
 			
 		STAMP_FORWARD:
@@ -220,7 +194,9 @@ PROGRAM _CYCLIC
         
     END_CASE
 			
-    FeedbacksUpdateAction;
+	OffsetManagement;
+	
+    FeedbacksUpdateAction;	
 	
 END_PROGRAM
 

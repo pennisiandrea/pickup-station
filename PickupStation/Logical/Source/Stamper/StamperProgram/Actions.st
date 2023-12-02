@@ -67,8 +67,6 @@ ACTION SetAlarmsAction:
 			STAMP_FORWARD: MpAlarmXSet(gAlarmXCoreMpLink,'StamperTimeoutStampForward'); // Edge alarm!
 			STAMP_BACKWARD: MpAlarmXSet(gAlarmXCoreMpLink,'StamperTimeoutStampBackward'); // Edge alarm!
 			ACTIVATE_CAM: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
-			SET_SHIFT: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
-			RESET_SHIFT: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
 			STAMPING: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
 		END_CASE
 
@@ -99,3 +97,11 @@ ACTION ResetAlarmsAction:
 	MpAlarmXReset(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');
 	
 END_ACTION   
+
+ACTION OffsetManagement:  
+	
+	Internal.Offset.Enable := Internal.Axis.Info.PLCopenState = mcAXIS_SYNCHRONIZED_MOTION;
+	Internal.Offset.StartShift := (Internal.OffsetToDo OR Internal.LastOffset <> gStamper.Parameters.Offset) AND Internal.Offset.Valid;
+	Internal.LastOffset := gStamper.Parameters.Offset;
+	
+END_ACTION  

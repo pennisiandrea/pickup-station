@@ -16,9 +16,11 @@
     <EventBindingsSet refId="init_content_eventbinding" />
     <EventBindingsSet refId="automatic_content_eventbinding" />
     <EventBindingsSet refId="header_content_eventbinding" />
+    <EventBindingsSet refId="login_content_eventbinding" />
   </EventBindingsSets>
   <Dialogs>
     <Dialog refId="init_dialog" />
+    <Dialog refId="dialog_login" />
   </Dialogs>
   <Contents>
     <Content refId="header_content" />
@@ -27,6 +29,7 @@
     <Content refId="manuals_content" />
     <Content refId="service_content" />
     <Content refId="init_content" />
+    <Content refId="login_content" />
   </Contents>
   <SnippetsSets />
   <VariablesSets />

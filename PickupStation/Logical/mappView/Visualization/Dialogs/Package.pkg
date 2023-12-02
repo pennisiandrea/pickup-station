@@ -4,5 +4,6 @@
   <Objects>
     <Object Type="Package" Description="AreaContents">AreaContents</Object>
     <Object Type="Package">Init</Object>
+    <Object Type="Package">Login</Object>
   </Objects>
 </Package>
