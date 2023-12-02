@@ -9,9 +9,8 @@ TYPE
 	StamperCommadsType : 	STRUCT  (*Stamper Commands type*)
 		Enable : BOOL;
 		Reset : BOOL;
-		Start : BOOL;
-		Init : BOOL;
-		StampCap : BOOL;
+		Automatic : StamperAutomaticCommadsType;
+		Manual : StamperManualCommadsType;
 	END_STRUCT;
 	StamperFeedbacksType : 	STRUCT  (*Stamper Feedbacks type*)
 		Enabled : BOOL;
@@ -22,10 +21,15 @@ TYPE
 		StampCapDone : BOOL;
 		InitDone : BOOL;
 		InitPosition : BOOL;
+		AxisSpeed : REAL;
+		AxisPosition : LREAL;
+		AxisHomed : BOOL;
+		AxisPowered : BOOL;
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
 		Offset : LREAL;
-		TargetPositionManual : BOOL;
+		Speed : REAL := 10000;
+		Acceleration : REAL := 20000;
 	END_STRUCT;
 	StamperInterfaceType : 	STRUCT  (*Stamper Interface type*)
 		Inputs : StamperInterfaceInputsType;
@@ -39,5 +43,20 @@ TYPE
 		ActualPosition : REAL;
 		StampIsForward : BOOL;
 		StampIsBackward : BOOL;
+	END_STRUCT;
+	StamperAutomaticCommadsType : 	STRUCT  (*Stamper Commands type*)
+		Start : BOOL;
+		Init : BOOL;
+		StampCap : BOOL;
+	END_STRUCT;
+	StamperManualCommadsType : 	STRUCT  (*Stamper Commands type*)
+		Enable : BOOL;
+		StamperForward : BOOL;
+		Position : LREAL;
+		Acceleration : REAL := 500;
+		Speed : REAL := 50;
+		PowerOn : BOOL;
+		Move : BOOL;
+		Home : BOOL;
 	END_STRUCT;
 END_TYPE

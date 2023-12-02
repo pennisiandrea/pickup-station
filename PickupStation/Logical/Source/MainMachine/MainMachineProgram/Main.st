@@ -27,27 +27,28 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				StopModules;
+				gMainMachine.Feedbacks.AutomaticMode := FALSE;
+				gMainMachine.Feedbacks.ManualMode := FALSE;
 			END_IF
 			
-			IF gMainMachine.Commands.AutomaticMode THEN				
+			IF gMainMachine.Commands.Automatic.Enable THEN				
 				MachineState.NextState := AUTO_WAITING_INIT;			
 			
-			ELSIF gMainMachine.Commands.ManualMode THEN
+			ELSIF gMainMachine.Commands.Manual.Enable THEN
 				MachineState.NextState := MANUAL;
 			END_IF 
 		
 		MANUAL:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
-				gMainMachine.Feedbacks.AutomaticMode := FALSE;
-				gMainMachine.Feedbacks.ManualMode := TRUE;
 			END_IF
 			
-			gPusher.Commands.ManualMode := TRUE;
-			gPicker.Commands.ManualMode := TRUE;
-			gConveyor.Commands.ManualMode := TRUE;
-			
-			IF NOT gMainMachine.Commands.ManualMode THEN
+			gPusher.Commands.Manual.Enable := TRUE;
+			gPicker.Commands.Manual.Enable := TRUE;
+			gConveyor.Commands.Manual.Enable := TRUE;
+			gStamper.Commands.Manual.Enable := TRUE;
+					
+			IF NOT gMainMachine.Commands.Manual.Enable THEN
 				MachineState.NextState := WAITING_MODE_SELECTION;
 			END_IF
 			
@@ -59,16 +60,16 @@ PROGRAM _CYCLIC
 				gMainMachine.Feedbacks.InitDone := FALSE;
 			END_IF
 						
-			IF NOT gMainMachine.Commands.AutomaticMode THEN
+			IF NOT gMainMachine.Commands.Automatic.Enable THEN
 				MachineState.NextState := WAITING_MODE_SELECTION;
 				
-			ELSIF gMainMachine.Commands.Init THEN					
+			ELSIF gMainMachine.Commands.Automatic.Init THEN					
 				MachineState.NextState := AUTO_INITIALIZING;	
 				
 			END_IF
 		
 		AUTO_INITIALIZING:
-			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			MachineState.TimeoutTimer.PT := T#30S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				InitModules;
 			END_IF
@@ -89,10 +90,10 @@ PROGRAM _CYCLIC
 				StopModules;
 			END_IF
 			
-			IF NOT gMainMachine.Commands.AutomaticMode THEN
+			IF NOT gMainMachine.Commands.Automatic.Enable THEN
 				MachineState.NextState := WAITING_MODE_SELECTION;
 				
-			ELSIF gMainMachine.Commands.Start THEN				
+			ELSIF gMainMachine.Commands.Automatic.Start THEN				
 				MachineState.NextState := AUTO_WAITING_MODULES_READY;
 				
 			END_IF 
@@ -104,66 +105,66 @@ PROGRAM _CYCLIC
 				gMainMachine.Feedbacks.NewCapOnWork := FALSE;
 			END_IF
 			
-			IF NOT gMainMachine.Commands.Start THEN
+			IF NOT gMainMachine.Commands.Automatic.Start THEN
 				MachineState.NextState := WAITING_MODE_SELECTION;
 			
 			ELSIF gPusher.Feedbacks.WaitingTakeACapCommand 
 				AND gPicker.Feedbacks.WaitingPickCommand 
 				AND gConveyor.Feedbacks.WaitingCap
-				AND (gStamper.Feedbacks.WaitingCap OR NOT gMainMachine.Parameters.StamperEnable) THEN
+				AND (gStamper.Feedbacks.WaitingCap OR NOT gStamper.Commands.Automatic.Start) THEN
 				
-				gMainMachine.Feedbacks.NewCapOnWork := TRUE;
 				MachineState.NextState := AUTO_PUSH_CAP;				
 			END_IF
 				
 		AUTO_PUSH_CAP:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
-				gPusher.Commands.TakeACap := TRUE;
+				gMainMachine.Feedbacks.NewCapOnWork := TRUE;
+				gPusher.Commands.Automatic.TakeACap := TRUE;
 			END_IF
 			
 			IF NOT gPusher.Feedbacks.WaitingTakeACapCommand THEN
-				gPusher.Commands.TakeACap := FALSE;
+				gPusher.Commands.Automatic.TakeACap := FALSE;
 			END_IF
 			
-			IF NOT gPusher.Commands.TakeACap AND gPusher.Feedbacks.TakeACapDone THEN
+			IF NOT gPusher.Commands.Automatic.TakeACap AND gPusher.Feedbacks.TakeACapDone THEN
 				MachineState.NextState := AUTO_PICK_CAP;
 			END_IF
 		
 		AUTO_PICK_CAP:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
-				gPicker.Commands.PickACap := TRUE;
+				gPicker.Commands.Automatic.PickACap := TRUE;
 			END_IF 
 			
 			IF NOT gPicker.Feedbacks.WaitingPickCommand THEN
-				gPicker.Commands.PickACap := FALSE;
+				gPicker.Commands.Automatic.PickACap := FALSE;
 			END_IF
 			
-			IF NOT gPicker.Commands.PickACap AND gPicker.Feedbacks.PickACapDone THEN
+			IF NOT gPicker.Commands.Automatic.PickACap AND gPicker.Feedbacks.PickACapDone THEN
 				MachineState.NextState := AUTO_WAITING_CAP_DELIVERY;
 			END_IF
 			
 		AUTO_WAITING_CAP_DELIVERY:	
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
-				gConveyor.Commands.DeliverCap := TRUE;
-				gStamper.Commands.StampCap := TRUE;
+				gConveyor.Commands.Automatic.DeliverCap := TRUE;
+				gStamper.Commands.Automatic.StampCap := TRUE;
 			END_IF
 			
 			IF NOT gConveyor.Feedbacks.WaitingCap THEN
-				gConveyor.Commands.DeliverCap := FALSE;
+				gConveyor.Commands.Automatic.DeliverCap := FALSE;
 			END_IF
 			
 			IF NOT gStamper.Feedbacks.WaitingCap THEN
-				gStamper.Commands.StampCap := FALSE;
+				gStamper.Commands.Automatic.StampCap := FALSE;
 			END_IF
 			
-			IF NOT gConveyor.Commands.DeliverCap AND gConveyor.Feedbacks.DeliverCapDone THEN
+			IF NOT gConveyor.Commands.Automatic.DeliverCap AND gConveyor.Feedbacks.DeliverCapDone THEN
 				
-				IF gMainMachine.Parameters.StamperEnable THEN
+				IF gStamper.Commands.Automatic.Start THEN
 					
-					IF NOT gStamper.Commands.StampCap AND gStamper.Feedbacks.StampCapDone THEN
+					IF NOT gStamper.Commands.Automatic.StampCap AND gStamper.Feedbacks.StampCapDone THEN
 						MachineState.NextState := AUTO_WAITING_MODULES_READY;
 					END_IF
 				
@@ -179,11 +180,14 @@ PROGRAM _CYCLIC
 				StopModules;
 			END_IF
 			
+			gMainMachine.Commands.Reset := gAlarms.Commands.Acknowledge OR gAlarms.Commands.AcknowledgeAll;
+						
 			IF gMainMachine.Commands.Reset THEN
 				ResetModules;
 			END_IF
 			
 			IF NOT MpAlarmXCheckReaction(gAlarmXCoreMpLink,'ERROR') THEN
+				gMainMachine.Commands.Reset := FALSE;
 				MachineState.NextState := WAITING_MODE_SELECTION;
 			END_IF						 
         

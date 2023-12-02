@@ -15,5 +15,10 @@
         <seg>Lost communication with sorting station</seg>
       </tuv>
     </tu>
+    <tu tuid="MainMachineInitializationTimeout">
+      <tuv xml:lang="en">
+        <seg>Machine was not able to initialize a module</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

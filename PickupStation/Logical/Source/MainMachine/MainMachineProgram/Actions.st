@@ -10,6 +10,10 @@ ACTION FeedbacksUpdateAction:
 	
 	gMainMachine.Feedbacks.WaitingInit := MachineState.ActualState = AUTO_WAITING_INIT;
 	
+	gMainMachine.Feedbacks.ManualMode := (MachineState.ActualState = MANUAL);
+	
+	gMainMachine.Feedbacks.AutomaticMode := NOT gMainMachine.Feedbacks.ManualMode AND NOT gMainMachine.Feedbacks.WaitModeSelection AND NOT gMainMachine.Feedbacks.Error;
+		
 	// Started
 	IF (MachineState.ActualState = AUTO_WAITING_MODULES_READY)
 		OR (MachineState.ActualState = AUTO_PUSH_CAP)
@@ -21,6 +25,9 @@ ACTION FeedbacksUpdateAction:
 		gMainMachine.Feedbacks.Started := FALSE;
 	END_IF
 	
+	IF NOT gMainMachine.Feedbacks.Started THEN
+		gMainMachine.Feedbacks.NewCapOnWork := FALSE;
+	END_IF
 END_ACTION
 
 ACTION MachineStateManagementAction: 
@@ -37,14 +44,15 @@ ACTION MachineStateManagementAction:
 
 END_ACTION
 
-ACTION SetAlarmsAction:             
+ACTION SetAlarmsAction:      
+	
+	
 	IF MachineState.TimeoutTimer.Q THEN
         
 		// Throw here timeout alarms
-		//CASE MachineState.ActualState OF
-		//    <STATE_1_WITH_TIMEOUT>: MpAlarmXSet(gAlarmXCoreMpLink,'<AlarmName>'); // Edge alarm!
-		//    <STATE_2_WITH_TIMEOUT>: MpAlarmXSet(gAlarmXCoreMpLink,'<AlarmName>'); // Edge alarm!
-		//END_CASE
+		CASE MachineState.ActualState OF
+		    AUTO_INITIALIZING: MpAlarmXSet(gAlarmXCoreMpLink,'MainMachineInitializationTimeout'); // Edge alarm!
+		END_CASE
 		
 		MachineState.NextState := ERROR;		
 	END_IF 
@@ -99,25 +107,25 @@ END_ACTION
 
 ACTION StopModules:
 	
-	gPusher.Commands.Start := FALSE;
-	gPusher.Commands.Init := FALSE;
+	gPusher.Commands.Automatic.Start := FALSE;
+	gPusher.Commands.Automatic.Init := FALSE;
 	gPusher.Commands.Reset := FALSE;
-	gPusher.Commands.TakeACap := FALSE;
+	gPusher.Commands.Automatic.TakeACap := FALSE;
 	
-	gPicker.Commands.Start := FALSE;
-	gPicker.Commands.Init := FALSE;
+	gPicker.Commands.Automatic.Start := FALSE;
+	gPicker.Commands.Automatic.Init := FALSE;
 	gPicker.Commands.Reset := FALSE;
-	gPicker.Commands.PickACap := FALSE;
+	gPicker.Commands.Automatic.PickACap := FALSE;
 	
-	gConveyor.Commands.Start := FALSE;
-	gConveyor.Commands.Init := FALSE;
+	gConveyor.Commands.Automatic.Start := FALSE;
+	gConveyor.Commands.Automatic.Init := FALSE;
 	gConveyor.Commands.Reset := FALSE;
-	gConveyor.Commands.DeliverCap := FALSE;
+	gConveyor.Commands.Automatic.DeliverCap := FALSE;
 	
-	gStamper.Commands.Start := FALSE;
-	gStamper.Commands.Init := FALSE;
+	gStamper.Commands.Automatic.Start := FALSE;
+	gStamper.Commands.Automatic.Init := FALSE;
 	gStamper.Commands.Reset := FALSE;
-	gStamper.Commands.StampCap := FALSE;		
+	gStamper.Commands.Automatic.StampCap := FALSE;		
 	
 END_ACTION
 
@@ -132,19 +140,19 @@ END_ACTION
 
 ACTION InitModules:
 	
-	gPusher.Commands.Init := TRUE;	
-	gPicker.Commands.Init := TRUE;	
-	gConveyor.Commands.Init := TRUE;	
-	gStamper.Commands.Init := TRUE;		
+	gPusher.Commands.Automatic.Init := TRUE;	
+	gPicker.Commands.Automatic.Init := TRUE;	
+	gConveyor.Commands.Automatic.Init := TRUE;	
+	gStamper.Commands.Automatic.Init := TRUE;		
 	
 END_ACTION
 
 ACTION StartModules:
 	
-	gPusher.Commands.Start := TRUE;	
-	gPicker.Commands.Start := TRUE;	
-	gConveyor.Commands.Start := TRUE;	
-	gStamper.Commands.Start := gMainMachine.Parameters.StamperEnable;		
+	gPusher.Commands.Automatic.Start := TRUE;	
+	gPicker.Commands.Automatic.Start := TRUE;	
+	gConveyor.Commands.Automatic.Start := TRUE;	
+	gStamper.Commands.Automatic.Start := gMainMachine.Parameters.StamperEnable;		
 	
 END_ACTION
 
@@ -160,7 +168,7 @@ ACTION StatisticsAction:
 	END_IF
 	
 	// Manage the stopwatch to measure the current cap working time
-	IF EDGE(gMainMachine.Feedbacks.NewCapOnWork) AND gMainMachine.Feedbacks.Started THEN
+	IF EDGE(gMainMachine.Feedbacks.NewCapOnWork) THEN
 		IF gMainMachine.Feedbacks.NewCapOnWork THEN
 			CapWorkStopwatch.IN := TRUE;	
 		ELSE
@@ -169,7 +177,7 @@ ACTION StatisticsAction:
 			CapsWorkingTimeHistory[0] := CapWorkStopwatch.ET;
 		END_IF
 	END_IF	
-		
+	
 	CapWorkStopwatch();	
 		
 	// Calc the total amount of time stored in the history array

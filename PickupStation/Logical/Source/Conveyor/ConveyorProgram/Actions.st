@@ -7,7 +7,9 @@ ACTION FeedbacksUpdateAction:
 	gConveyor.Feedbacks.AxisHomed := Internal.Axis.IsHomed;	
 	gConveyor.Feedbacks.AxisPowered := Internal.Axis.PowerOn;	
 	gConveyor.Feedbacks.InitPosition := ABS(Internal.Axis.Position - Internal.Parameters.Position)<0.1;
-	gConveyor.Feedbacks.InitDone := gConveyor.Feedbacks.InitPosition AND gConveyor.Commands.Init;
+	gConveyor.Feedbacks.InitDone := gConveyor.Feedbacks.InitPosition AND gConveyor.Commands.Automatic.Init;
+	gConveyor.Feedbacks.AxisSpeed := Internal.Axis.Velocity;
+	gConveyor.Feedbacks.AxisPosition := Internal.Axis.Position;
 END_ACTION
 
 ACTION ResetOutputsAction: 

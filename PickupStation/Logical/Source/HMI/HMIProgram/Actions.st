@@ -9,7 +9,7 @@ ACTION AutomaticPageAction:
 			gHMI.AutomaticPage.InitButtonEnable := FALSE;
 			gHMI.AutomaticPage.InitButton := FALSE;
 		END_IF
-		gMainMachine.Commands.Init := gHMI.AutomaticPage.InitButton;
+		gMainMachine.Commands.Automatic.Init := gHMI.AutomaticPage.InitButton;
 	ELSE
 		gHMI.AutomaticPage.InitButtonEnable := FALSE;
 		gHMI.AutomaticPage.InitButton := FALSE;
@@ -23,7 +23,7 @@ ACTION AutomaticPageAction:
 			gHMI.AutomaticPage.StartButtonEnable := TRUE;
 			gHMI.AutomaticPage.StopButtonVisibility := FALSE;		
 			
-		ELSIF gMainMachine.Feedbacks.Started AND gMainMachine.Commands.Start THEN		
+		ELSIF gMainMachine.Feedbacks.Started AND gMainMachine.Commands.Automatic.Start THEN		
 		
 			gHMI.AutomaticPage.StartButtonEnable := FALSE;
 			gHMI.AutomaticPage.StopButtonVisibility := TRUE;			
@@ -33,7 +33,7 @@ ACTION AutomaticPageAction:
 			gHMI.AutomaticPage.StartButton := FALSE;
 		END_IF
 		
-		gMainMachine.Commands.Start := gHMI.AutomaticPage.StartButton;
+		gMainMachine.Commands.Automatic.Start := gHMI.AutomaticPage.StartButton;
 		
 	ELSE
 		gHMI.AutomaticPage.StartButtonEnable := FALSE;
@@ -46,13 +46,16 @@ ACTION AutomaticPageAction:
 		IF gMainMachine.Feedbacks.WaitModeSelection OR NOT gMainMachine.Feedbacks.Started THEN
 		
 			gHMI.AutomaticPage.AutoButtonEnable := TRUE;
-			gMainMachine.Commands.AutomaticMode := gHMI.AutomaticPage.AutoButton;
+			gMainMachine.Commands.Automatic.Enable := gHMI.AutomaticPage.AutoButton;
 		ELSE
 			gHMI.AutomaticPage.AutoButtonEnable := FALSE;
 		END_IF
 	ELSE
 		gHMI.AutomaticPage.AutoButtonEnable := FALSE;
 		gHMI.AutomaticPage.AutoButton := FALSE;
+	END_IF
+	IF EDGEPOS(gMainMachine.Commands.Automatic.Enable) THEN
+		gHMI.ManualPage.ManualButton := FALSE;
 	END_IF
 		
 	// Link button
@@ -64,6 +67,9 @@ ACTION AutomaticPageAction:
 	END_IF
 	
 	// Conveyor speed slider button
+	IF gHMI.AutomaticPage.ConveyorSpeed = 0 THEN
+		gHMI.AutomaticPage.ConveyorSpeed := gConveyor.Parameters.TargetSpeed;
+	END_IF
 	IF NOT gMainMachine.Commands.LinkMode THEN
 		IF NOT gMainMachine.Feedbacks.Started THEN
 			gHMI.AutomaticPage.ConveyorSpeedEnable := TRUE;
@@ -112,7 +118,7 @@ ACTION ManualPageAction:
 		IF gMainMachine.Feedbacks.WaitModeSelection OR NOT gMainMachine.Feedbacks.Started THEN
 		
 			gHMI.ManualPage.ManualButtonEnable := TRUE;
-			gMainMachine.Commands.ManualMode := gHMI.ManualPage.ManualButton;
+			gMainMachine.Commands.Manual.Enable := gHMI.ManualPage.ManualButton;
 		ELSE
 			gHMI.ManualPage.ManualButtonEnable := FALSE;
 		END_IF
@@ -120,12 +126,15 @@ ACTION ManualPageAction:
 		gHMI.ManualPage.ManualButtonEnable := FALSE;
 		gHMI.ManualPage.ManualButton := FALSE;
 	END_IF
+	IF EDGEPOS(gMainMachine.Commands.Manual.Enable) THEN
+		gHMI.AutomaticPage.AutoButton := FALSE;
+	END_IF
 	
 	// Push button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
-		gHMI.ManualPage.PushCapButtonEnable := TRUE;
-		gPusher.Commands.PushManualCommand := gHMI.ManualPage.PushCapButton;
+		gHMI.ManualPage.PushCapButtonEnable := NOT (gPusher.Interface.Inputs.CapAtPickPosition XOR gPusher.Interface.Inputs.MagazineEmpty);
+		gPusher.Commands.Manual.Push := gHMI.ManualPage.PushCapButton;
 
 	ELSE
 		gHMI.ManualPage.PushCapButtonEnable := FALSE;
@@ -135,8 +144,8 @@ ACTION ManualPageAction:
 	// Picker forward button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
-		gHMI.ManualPage.ArmForwardButtonEnable := TRUE;
-		gPicker.Commands.ForwardManualCommand := gHMI.ManualPage.ArmForwardButton;
+		gHMI.ManualPage.ArmForwardButtonEnable := NOT gPusher.Interface.Inputs.CapAtPickPosition OR (gPusher.Interface.Inputs.CapAtPickPosition AND NOT gPicker.Commands.Manual.ActivateGrip);
+		gPicker.Commands.Manual.MoveForward := gHMI.ManualPage.ArmForwardButton;
 
 	ELSE
 		gHMI.ManualPage.ArmForwardButtonEnable := FALSE;
@@ -146,8 +155,8 @@ ACTION ManualPageAction:
 	// Picker backward button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
-		gHMI.ManualPage.ArmBackwardButtonEnable := TRUE;
-		gPicker.Commands.BackwardManualCommand := gHMI.ManualPage.ArmBackwardButton;
+		gHMI.ManualPage.ArmBackwardButtonEnable := NOT gHMI.ManualPage.ArmForwardButton AND NOT gConveyor.Interface.Inputs.CapInStartPosition;
+		gPicker.Commands.Manual.MoveBackward := gHMI.ManualPage.ArmBackwardButton;
 
 	ELSE
 		gHMI.ManualPage.ArmBackwardButtonEnable := FALSE;
@@ -157,8 +166,8 @@ ACTION ManualPageAction:
 	// Picker vaacum button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
-		gHMI.ManualPage.ArmVaacumButtonEnable := TRUE;
-		gPicker.Commands.VaacumManualCommand := gHMI.ManualPage.ArmVaacumButton;
+		gHMI.ManualPage.ArmVaacumButtonEnable := (gPusher.Interface.Inputs.CapAtPickPosition AND gPicker.Interface.Inputs.ArmForward) OR (gPicker.Interface.Inputs.ArmBackward AND gPicker.Commands.Manual.ActivateGrip);
+		gPicker.Commands.Manual.ActivateGrip := gHMI.ManualPage.ArmVaacumButton;
 
 	ELSE
 		gHMI.ManualPage.ArmVaacumButtonEnable := FALSE;
@@ -169,7 +178,7 @@ ACTION ManualPageAction:
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
 		gHMI.ManualPage.ConveyorHomeButtonEnable := TRUE;
-		gConveyor.Commands.HomeManualCommand := gHMI.ManualPage.ConveyorHomeButton;
+		gConveyor.Commands.Manual.Home := gHMI.ManualPage.ConveyorHomeButton;
 
 	ELSE
 		gHMI.ManualPage.ConveyorHomeButtonEnable := FALSE;
@@ -181,7 +190,7 @@ ACTION ManualPageAction:
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
 		gHMI.ManualPage.ConveyorPowerButtonEnable := gConveyor.Feedbacks.AxisHomed;
-		gConveyor.Commands.PowerManualCommand := gHMI.ManualPage.ConveyorPowerButton;
+		gConveyor.Commands.Manual.PowerOn := gHMI.ManualPage.ConveyorPowerButton;
 
 	ELSE
 		gHMI.ManualPage.ConveyorPowerButtonEnable := FALSE;
@@ -189,26 +198,104 @@ ACTION ManualPageAction:
 	END_IF
 	gHMI.ManualPage.ConveyorAxisPowered := gConveyor.Feedbacks.AxisPowered;
 	
-	// Conveyor jog button
+	// Conveyor move button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
-		gHMI.ManualPage.ConveyorJogButtonEnable := gConveyor.Feedbacks.AxisHomed AND gConveyor.Feedbacks.AxisPowered;
-		gConveyor.Commands.JogManualCommand := gHMI.ManualPage.ConveyorJogButton;
+		gHMI.ManualPage.ConveyorMoveButtonEnable := gConveyor.Feedbacks.AxisHomed AND gConveyor.Feedbacks.AxisPowered AND (gConveyor.Commands.Manual.Speed>0 OR NOT gConveyor.Interface.Inputs.CapInStartPosition);
+		gConveyor.Commands.Manual.Move := gHMI.ManualPage.ConveyorMoveButton;
 
 	ELSE
-		gHMI.ManualPage.ConveyorJogButtonEnable := FALSE;
-		gHMI.ManualPage.ConveyorJogButton := FALSE;
+		gHMI.ManualPage.ConveyorMoveButtonEnable := FALSE;
+		gHMI.ManualPage.ConveyorMoveButton := FALSE;
 	END_IF
 		
 	// Conveyor speed slider button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
-		gHMI.ManualPage.ConveyorSpeedEnable := TRUE;
-		gConveyor.Parameters.TargetSpeed := gHMI.ManualPage.ConveyorSpeed;
+		gHMI.ManualPage.ConveyorSpeedEnable := NOT gConveyor.Commands.Manual.Move;
+		gConveyor.Commands.Manual.Speed := gHMI.ManualPage.ConveyorSpeed;
 		
 	ELSE
 		gHMI.ManualPage.ConveyorSpeedEnable := FALSE;
-		gHMI.ManualPage.ConveyorSpeed := gConveyor.Parameters.TargetSpeed;
+		gHMI.ManualPage.ConveyorSpeed := gConveyor.Commands.Manual.Speed;
+	END_IF
+	
+	// Stamper home button
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
+		
+		gHMI.ManualPage.StamperHomeButtonEnable := TRUE;
+		gStamper.Commands.Manual.Home := gHMI.ManualPage.StamperHomeButton;
+
+	ELSE
+		gHMI.ManualPage.StamperHomeButtonEnable := FALSE;
+		gHMI.ManualPage.StamperHomeButton := FALSE;
+	END_IF
+	gHMI.ManualPage.StamperAxisHomed := gStamper.Feedbacks.AxisHomed;
+	
+	// Stamper power button
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
+		
+		gHMI.ManualPage.StamperPowerButtonEnable := gStamper.Feedbacks.AxisHomed;
+		gStamper.Commands.Manual.PowerOn := gHMI.ManualPage.StamperPowerButton;
+
+	ELSE
+		gHMI.ManualPage.StamperPowerButtonEnable := FALSE;
+		gHMI.ManualPage.StamperPowerButton := FALSE;
+	END_IF
+	gHMI.ManualPage.StamperAxisPowered := gStamper.Feedbacks.AxisPowered;
+	
+	// Stamper move button
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
+		
+		gHMI.ManualPage.StamperMoveButtonEnable := gStamper.Feedbacks.AxisHomed AND gStamper.Feedbacks.AxisPowered;
+		gStamper.Commands.Manual.Move := gHMI.ManualPage.StamperMoveButton;
+
+	ELSE
+		gHMI.ManualPage.StamperMoveButtonEnable := FALSE;
+		gHMI.ManualPage.StamperMoveButton := FALSE;
+	END_IF
+		
+	// Stamper speed slider button
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
+		
+		gHMI.ManualPage.StamperSpeedEnable := NOT gStamper.Commands.Manual.Move;
+		gStamper.Commands.Manual.Speed := gHMI.ManualPage.StamperSpeed;
+		
+	ELSE
+		gHMI.ManualPage.StamperSpeedEnable := FALSE;
+		gHMI.ManualPage.StamperSpeed := gStamper.Commands.Manual.Speed;
+	END_IF
+		
+	// Stamper position slider button
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
+		
+		gHMI.ManualPage.StamperPositionEnable := NOT gStamper.Commands.Manual.Move;
+		gStamper.Commands.Manual.Position := gHMI.ManualPage.StamperPosition;
+		
+	ELSE
+		gHMI.ManualPage.StamperPositionEnable := FALSE;
+		gHMI.ManualPage.StamperPosition := gStamper.Commands.Manual.Position;
+	END_IF
+	
+	// Sensors
+	gHMI.ManualPage.PusherInterface := gPusher.Interface;
+	gHMI.ManualPage.PickerInterface := gPicker.Interface;
+	gHMI.ManualPage.ConveyorInterface := gConveyor.Interface;
+	gHMI.ManualPage.StamperInterface := gStamper.Interface;
+	
+	// Motion Feedback
+	gHMI.ManualPage.ConveyorActPosition := gConveyor.Feedbacks.AxisPosition;
+	gHMI.ManualPage.ConveyorActSpeed := gConveyor.Feedbacks.AxisSpeed;
+	
+	gHMI.ManualPage.StamperActPosition := gStamper.Feedbacks.AxisPosition;
+	gHMI.ManualPage.StamperActSpeed := gStamper.Feedbacks.AxisSpeed;
+	
+	// Stamper inclusion
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		gHMI.AutomaticPage.StamperIncludedCheckboxEnable := TRUE;
+		gMainMachine.Parameters.StamperEnable := gHMI.AutomaticPage.StamperIncludedCheckbox;
+	ELSE
+		gHMI.AutomaticPage.StamperIncludedCheckboxEnable := FALSE;
+		gHMI.AutomaticPage.StamperIncludedCheckbox := gMainMachine.Parameters.StamperEnable;
 	END_IF
 END_ACTION
-	

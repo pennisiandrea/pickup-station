@@ -16,8 +16,8 @@
                     <Widget xsi:type="widgets.brease.AlarmListItem" id="AlarmListState" zIndex="2" columnType="state" text="$IAT/Alarms/State" />
                   </Widgets>
                 </Widget>
-                <Widget xsi:type="widgets.brease.Button" id="AckButton" top="405" left="14" width="167" zIndex="1" text="$IAT/Alarms/Ack" cornerRadius="10px" style="Command" />
-                <Widget xsi:type="widgets.brease.Button" id="AckAllButton" top="405" left="209" width="165" zIndex="2" text="$IAT/Alarms/AckAll" cornerRadius="10px" style="Command" />
+                <Widget xsi:type="widgets.brease.MomentaryPushButton" id="AckButton" top="405" left="14" width="167" zIndex="1" text="$IAT/Alarms/Ack" cornerRadius="10px" style="Command" />
+                <Widget xsi:type="widgets.brease.MomentaryPushButton" id="AckAllButton" top="405" left="209" width="165" zIndex="2" text="$IAT/Alarms/AckAll" cornerRadius="10px" style="Command" />
               </Widgets>
             </Widget>
             <Widget xsi:type="widgets.brease.TabItem" id="TabItem2" left="0" width="140" zIndex="1" text="$IAT/Alarms/AlarmHistory" cornerRadius="0px 10px 0px 0px" activeCornerRadius="0px 10px 0px 0px">

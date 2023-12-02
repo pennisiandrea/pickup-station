@@ -4,8 +4,8 @@ ACTION FeedbacksUpdateAction:
     gPicker.Feedbacks.WaitingPickCommand := MachineState.ActualState = WAITING_PICK_COMMAND; 
     gPicker.Feedbacks.Error := MachineState.ActualState = ERROR;		
 	gPicker.Feedbacks.InitPosition := gPicker.Interface.Inputs.ArmBackward AND NOT gPicker.Interface.Inputs.GripperVacuum;
-	gPicker.Feedbacks.InitDone := gPicker.Feedbacks.InitPosition AND gPicker.Commands.Init;
-	
+	gPicker.Feedbacks.InitDone := gPicker.Feedbacks.InitPosition AND gPicker.Commands.Automatic.Init;
+
 END_ACTION
 
 ACTION ResetOutputsAction: 

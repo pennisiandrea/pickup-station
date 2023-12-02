@@ -7,9 +7,9 @@
     <Object Type="File">automatic_content.binding</Object>
     <Object Type="File">OpcUaServer.uaserver</Object>
     <Object Type="File">header_content.binding</Object>
-    <Object Type="File">header_content.eventbinding</Object>
     <Object Type="File">init_content.eventbinding</Object>
     <Object Type="File">automatic_content.eventbinding</Object>
     <Object Type="File">manuals_content.binding</Object>
+    <Object Type="File">header_content.eventbinding</Object>
   </Objects>
 </Package>

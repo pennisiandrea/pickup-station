@@ -11,10 +11,29 @@
           <High ValueProvider="Const">500</High>
         </EURange>
       </EURanges>
+      <EURanges Id="4">
+        <EURange>
+          <Low ValueProvider="Const">-500</Low>
+          <High ValueProvider="Const">500</High>
+        </EURange>
+      </EURanges>
+      <EURanges Id="5">
+        <EURange>
+          <Low ValueProvider="Const">-2000</Low>
+          <High ValueProvider="Const">2000</High>
+        </EURange>
+      </EURanges>
+      <EURanges Id="6">
+        <EURange>
+          <Low ValueProvider="Const">0</Low>
+          <High ValueProvider="Const">460</High>
+        </EURange>
+      </EURanges>
     </EURangesAliases>
     <EngineeringUnitAliases>
       <EngineeringUnit Id="1" UnitId="4403510" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millimetre per second" Symbol="mm/s" />
       <EngineeringUnit Id="3" UnitId="4403766" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millisecond" Symbol="ms" />
+      <EngineeringUnit Id="4" UnitId="5066068" NameSpaceUri="http://www.opcfoundation.org/UA/units/un/cefact" Name="millimetre" Symbol="mm" />
     </EngineeringUnitAliases>
   </Aliases>
   <DefaultView>
@@ -28,7 +47,9 @@
             <Variable Name="AvgCapWorkTime" EngineeringUnitId="3" />
           </Variable>
           <Variable Name="ManualPage">
-            <Variable Name="ConveyorSpeed" EURangesId="1" EngineeringUnitId="1" />
+            <Variable Name="ConveyorSpeed" EURangesId="4" EngineeringUnitId="1" />
+            <Variable Name="StamperSpeed" EURangesId="5" EngineeringUnitId="1" />
+            <Variable Name="StamperPosition" EURangesId="6" EngineeringUnitId="4" />
           </Variable>
         </Variable>
         <Variable Name="gMainMachine" RecursiveEnable="2" />

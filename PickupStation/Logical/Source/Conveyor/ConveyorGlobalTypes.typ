@@ -9,13 +9,8 @@ TYPE
 	ConveyorCommadsType : 	STRUCT  (*Conveyor Commands type*)
 		Enable : BOOL;
 		Reset : BOOL;
-		Start : BOOL;
-		Init : BOOL;
-		DeliverCap : BOOL;
-		PowerOnManualCommand : BOOL;
-		JogManualCommand : BOOL;
-		ManualMode : BOOL;
-		HomeManualCommand : BOOL;
+		Automatic : ConveyorAutomaticCommadsType;
+		Manual : ConveyorManualCommadsType;
 	END_STRUCT;
 	ConveyorFeedbacksType : 	STRUCT  (*Conveyor Feedbacks type*)
 		Enabled : BOOL;
@@ -27,9 +22,12 @@ TYPE
 		AxisHomed : BOOL;
 		AxisPowered : BOOL;
 		InitPosition : BOOL;
+		AxisSpeed : REAL;
+		AxisPosition : LREAL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
 		TargetSpeed : REAL := 50;
+		Acceleration : REAL := 5000;
 	END_STRUCT;
 	ConveyorInterfaceType : 	STRUCT  (*Conveyor Interface type*)
 		Inputs : ConveyorInterfaceInputsType;
@@ -41,5 +39,18 @@ TYPE
 	ConveyorInterfaceInputsType : 	STRUCT  (*Conveyor Interface Input type*)
 		CapInStartPosition : BOOL;
 		CapInExitPosition : BOOL;
+	END_STRUCT;
+	ConveyorAutomaticCommadsType : 	STRUCT  (*Conveyor Commands type*)
+		Start : BOOL;
+		Init : BOOL;
+		DeliverCap : BOOL;
+	END_STRUCT;
+	ConveyorManualCommadsType : 	STRUCT  (*Conveyor Commands type*)
+		Enable : BOOL;
+		PowerOn : BOOL;
+		Move : BOOL;
+		Home : BOOL;
+		Speed : REAL := 50;
+		Acceleration : REAL := 5000;
 	END_STRUCT;
 END_TYPE

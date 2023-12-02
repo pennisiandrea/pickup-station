@@ -7,14 +7,12 @@ TYPE
 		Statistics : MainMachineStatisticsType;
 	END_STRUCT;
 	MainMachineCommadsType : 	STRUCT  (*MainMachine Commands type*)
-		Start : BOOL;
+		LinkMode : BOOL;
 		Reset : BOOL;
 		HeartBeat : BOOL;
-		LinkMode : BOOL;
-		AutomaticMode : BOOL;
-		Init : BOOL;
-		ManualMode : BOOL;
 		ClearStats : BOOL;
+		Automatic : MainMachineAutomaticCommadsType;
+		Manual : MainMachineManualCommadsType;
 	END_STRUCT;
 	MainMachineFeedbacksType : 	STRUCT  (*MainMachine Feedbacks type*)
 		WaitingStart : BOOL;
@@ -38,5 +36,13 @@ TYPE
 		CurrentCapWorkingTime : TIME;
 		LastCapWorkingTime : TIME;
 		AverageCapWorkingTime : TIME;
+	END_STRUCT;
+	MainMachineAutomaticCommadsType : 	STRUCT  (*MainMachine Commands type*)
+		Enable : BOOL;
+		Init : BOOL;
+		Start : BOOL;
+	END_STRUCT;
+	MainMachineManualCommadsType : 	STRUCT  (*MainMachine Commands type*)
+		Enable : BOOL;
 	END_STRUCT;
 END_TYPE

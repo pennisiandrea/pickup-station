@@ -3,5 +3,4 @@ VAR
 	MpAlarmXHistoryFB : MpAlarmXHistory;
 	MpAlarmXListUIFB : MpAlarmXListUI;
 	MpAlarmXListUIConnect : MpAlarmXListUIConnectType;
-	MpAlarmXAcknowledgeAllFB : MpAlarmXAcknowledgeAll;
 END_VAR

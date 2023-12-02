@@ -21,7 +21,8 @@ TYPE
 		STAMPING,
 		STAMP_BACKWARD,
 		RESET_SHIFT,
-		ERROR (*ERROR state*)
+		ERROR, (*ERROR state*)
+		MANUAL
 		);
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;
@@ -31,5 +32,6 @@ TYPE
 		LastOffset : LREAL;
 		CamStartTrigger : BOOL;
 		Error : BOOL;
+		OffsetDone : BOOL;
 	END_STRUCT;
 END_TYPE

@@ -6,7 +6,8 @@ ACTION FeedbacksUpdateAction:
 	gPusher.Feedbacks.CapReady := gPusher.Interface.Inputs.CapAtPickPosition;
 	gPusher.Feedbacks.WaitingTakeACapCommand := MachineState.ActualState = WAITING_TAKE_A_CAP_COMMAND;		
 	gPusher.Feedbacks.InitPosition := gPusher.Interface.Inputs.PusherInBackwardPosition;
-	gPusher.Feedbacks.InitDone := gPusher.Feedbacks.InitPosition AND gPusher.Commands.Init;
+	gPusher.Feedbacks.InitDone := gPusher.Feedbacks.InitPosition AND gPusher.Commands.Automatic.Init;
+	
 END_ACTION
 
 ACTION ResetOutputsAction: 

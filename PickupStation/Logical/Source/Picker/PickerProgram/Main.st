@@ -28,13 +28,13 @@ PROGRAM _CYCLIC
         RETURN;
     END_IF
     
-	IF EDGENEG(gPicker.Commands.Start) THEN
+	IF EDGENEG(gPicker.Commands.Automatic.Start) THEN
 		IF MachineState.NextState <> ERROR THEN
 			MachineState.NextState := WAITING_START;
 		END_IF
 	END_IF
 	
-	IF EDGEPOS(gPicker.Commands.Init) THEN
+	IF EDGEPOS(gPicker.Commands.Automatic.Init) THEN
 		IF MachineState.NextState <> ERROR THEN
 			MachineState.NextState := WAITING_INIT;
 		END_IF
@@ -54,10 +54,10 @@ PROGRAM _CYCLIC
 				gPicker.Feedbacks.PickACapDone := FALSE;
 			END_IF
 			
-			IF gPicker.Commands.Init THEN
+			IF gPicker.Commands.Automatic.Init THEN
 				MachineState.NextState := MOVE_BACKWARD;
 				
-			ELSIF gPicker.Commands.ManualMode THEN
+			ELSIF gPicker.Commands.Manual.Enable THEN
 				MachineState.NextState := MANUALS;
 				
 			END_IF
@@ -65,11 +65,11 @@ PROGRAM _CYCLIC
 		MANUALS:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			// Manual commands
-			gPicker.Interface.Outputs.ArmForward := gPicker.Commands.ForwardManualCommand;
-			gPicker.Interface.Outputs.ArmBackward := gPicker.Commands.BackwardManualCommand;
-			gPicker.Interface.Outputs.GripperPick := gPicker.Commands.VaacumManualCommand;
+			gPicker.Interface.Outputs.ArmForward := gPicker.Commands.Manual.MoveForward;
+			gPicker.Interface.Outputs.ArmBackward := gPicker.Commands.Manual.MoveBackward;
+			gPicker.Interface.Outputs.GripperPick := gPicker.Commands.Manual.ActivateGrip;
 			
-			IF NOT gPicker.Commands.ManualMode THEN
+			IF NOT gPicker.Commands.Manual.Enable THEN
 				MachineState.NextState := WAITING_INIT;
 			END_IF
         			
@@ -94,14 +94,14 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			gPicker.Feedbacks.PickACapDone := FALSE;
 			
-			IF gPicker.Commands.Start THEN
+			IF gPicker.Commands.Automatic.Start THEN
 				MachineState.NextState := WAITING_PICK_COMMAND;
 			END_IF  
 			
         WAITING_PICK_COMMAND:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
-			IF gPicker.Commands.PickACap THEN
+			IF gPicker.Commands.Automatic.PickACap THEN
 				gPicker.Feedbacks.PickACapDone := FALSE;
                 MachineState.NextState := MOVE_FORWARD;
             END_IF         

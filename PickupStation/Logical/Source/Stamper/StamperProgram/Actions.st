@@ -6,7 +6,11 @@ ACTION FeedbacksUpdateAction:
 	gStamper.Feedbacks.OnSyncMotion := Internal.Cam.InCam;
 	gStamper.Feedbacks.WaitingCap := (Internal.Cam.ActualStateIndex = 0) AND (MachineState.ActualState = WAITING_CAP);	
 	gStamper.Feedbacks.InitPosition := ABS(Internal.Axis.Position - Internal.Parameters.Position)<0.1;
-	gStamper.Feedbacks.InitDone := gStamper.Feedbacks.InitPosition AND gStamper.Commands.Init;
+	gStamper.Feedbacks.InitDone := gStamper.Feedbacks.InitPosition AND gStamper.Commands.Automatic.Init;
+	gStamper.Feedbacks.AxisHomed := Internal.Axis.IsHomed;	
+	gStamper.Feedbacks.AxisPowered := Internal.Axis.PowerOn;
+	gStamper.Feedbacks.AxisSpeed := Internal.Axis.Velocity;
+	gStamper.Feedbacks.AxisPosition := Internal.Axis.Position;
 	
 END_ACTION
 

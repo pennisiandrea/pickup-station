@@ -22,6 +22,8 @@ TYPE
 		LastCapWorkedTime : UDINT;
 		AvgCapWorkTime : UDINT;
 		ClearStats : BOOL;
+		StamperIncludedCheckbox : BOOL;
+		StamperIncludedCheckboxEnable : BOOL;
 	END_STRUCT;
 	HMIManualPageType : 	STRUCT  (*HMI Interface Output type*)
 		ManualButtonEnable : BOOL;
@@ -38,12 +40,34 @@ TYPE
 		ConveyorHomeButton : BOOL;
 		ConveyorPowerButtonEnable : BOOL;
 		ConveyorPowerButton : BOOL;
-		ConveyorJogButtonEnable : BOOL;
-		ConveyorJogButton : BOOL;
+		ConveyorMoveButtonEnable : BOOL;
+		ConveyorMoveButton : BOOL;
 		ConveyorSpeed : REAL;
 		ConveyorSpeedEnable : BOOL;
 		ConveyorAxisHomed : BOOL;
 		ConveyorAxisPowered : BOOL;
+		StamperHomeButtonEnable : BOOL;
+		StamperHomeButton : BOOL;
+		StamperPowerButtonEnable : BOOL;
+		StamperPowerButton : BOOL;
+		StamperMoveButtonEnable : BOOL;
+		StamperMoveButton : BOOL;
+		StamperSpeed : REAL;
+		StamperSpeedEnable : BOOL;
+		StamperAxisHomed : BOOL;
+		StamperAxisPowered : BOOL;
+		StamperForwardButtonEnable : BOOL;
+		StamperForwardButton : BOOL;
+		StamperPosition : LREAL;
+		StamperPositionEnable : BOOL;
+		PusherInterface : PusherInterfaceType;
+		PickerInterface : PickerInterfaceType;
+		ConveyorInterface : ConveyorInterfaceType;
+		StamperInterface : StamperInterfaceType;
+		ConveyorActSpeed : REAL;
+		ConveyorActPosition : LREAL;
+		StamperActSpeed : REAL;
+		StamperActPosition : LREAL;
 	END_STRUCT;
 	HMIHeaderContentType : 	STRUCT  (*HMI Interface Output type*)
 		MasterConnectionOk : BOOL;

@@ -76,5 +76,10 @@
         <seg>Clear statistics</seg>
       </tuv>
     </tu>
+    <tu tuid="StamperInc">
+      <tuv xml:lang="en">
+        <seg>Stamper inclusion</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

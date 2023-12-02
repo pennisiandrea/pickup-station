@@ -6,7 +6,7 @@
       <EventHandler>
         <Action>
           <Target xsi:type="clientSystem.Action">
-            <Method xsi:type="clientSystem.Action.OpenDialog" dialogId="init_dialog" mode="modeless" />
+            <Method xsi:type="clientSystem.Action.OpenDialog" dialogId="init_dialog" />
           </Target>
         </Action>
       </EventHandler>

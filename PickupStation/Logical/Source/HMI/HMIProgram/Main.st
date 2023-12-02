@@ -1,5 +1,5 @@
 PROGRAM _INIT
-	gHMI.AutomaticPage.ConveyorSpeed := gConveyor.Parameters.TargetSpeed;
+	
 END_PROGRAM
 
 PROGRAM _CYCLIC
@@ -7,6 +7,8 @@ PROGRAM _CYCLIC
 	HeaderContentAction;
 	
 	AutomaticPageAction;
+	
+	ManualPageAction;
 	
 END_PROGRAM
 

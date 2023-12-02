@@ -8,7 +8,6 @@ PROGRAM _INIT
 	
 	MpAlarmXListUIFB(MpLink :=  ADR(gAlarmXCoreMpLink), Enable := TRUE, UIConnect := ADR(MpAlarmXListUIConnect));
 	
-	MpAlarmXAcknowledgeAllFB(MpLink :=  ADR(gAlarmXCoreMpLink), Enable := TRUE);
 END_PROGRAM
 
 PROGRAM _CYCLIC
@@ -20,7 +19,9 @@ PROGRAM _CYCLIC
 	
 	gAlarms.Feedbacks.Pendings := MpAlarmXCoreFB.PendingAlarms;
 	
-	MpAlarmXAcknowledgeAllFB(Execute := FALSE);
+	MpAlarmXListUIConnect.Acknowledge := gAlarms.Commands.Acknowledge;
+	MpAlarmXListUIConnect.AcknowledgeAll := gAlarms.Commands.AcknowledgeAll;
+		
 END_PROGRAM
 
 PROGRAM _EXIT
@@ -32,9 +33,6 @@ PROGRAM _EXIT
 		
 	MpAlarmXListUIFB.Enable := FALSE;
 	MpAlarmXListUIFB();
-		
-	MpAlarmXAcknowledgeAllFB.Enable := FALSE;
-	MpAlarmXAcknowledgeAllFB();
-	 
+			 
 END_PROGRAM
 

@@ -35,7 +35,8 @@ TYPE
 		MagazineEmpty : BOOL;
 	END_STRUCT;
 	PusherManualCommandsType : 	STRUCT 
-		PushManualCommand : BOOL;
+		Enable : BOOL;
+		Push : BOOL;
 	END_STRUCT;
 	PusherAutomaticCommandsType : 	STRUCT 
 		Start : BOOL;

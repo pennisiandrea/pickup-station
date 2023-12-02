@@ -13,9 +13,9 @@
     <BindingsSet refId="manuals_content_binding" />
   </BindingsSets>
   <EventBindingsSets>
-    <EventBindingsSet refId="header_content_eventbinding" />
     <EventBindingsSet refId="init_content_eventbinding" />
     <EventBindingsSet refId="automatic_content_eventbinding" />
+    <EventBindingsSet refId="header_content_eventbinding" />
   </EventBindingsSets>
   <Dialogs>
     <Dialog refId="init_dialog" />

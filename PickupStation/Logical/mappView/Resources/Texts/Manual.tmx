@@ -15,17 +15,12 @@
         <seg>Push cap</seg>
       </tuv>
     </tu>
-    <tu tuid="ArmFwd">
+    <tu tuid="Arm">
       <tuv xml:lang="en">
-        <seg>Arm forward</seg>
+        <seg>Arm</seg>
       </tuv>
     </tu>
-    <tu tuid="ArmBwd">
-      <tuv xml:lang="en">
-        <seg>Arm backward</seg>
-      </tuv>
-    </tu>
-    <tu tuid="ArmVacuum">
+    <tu tuid="Grip">
       <tuv xml:lang="en">
         <seg>Grip cap</seg>
       </tuv>
@@ -37,12 +32,97 @@
     </tu>
     <tu tuid="Power">
       <tuv xml:lang="en">
-        <seg>PowerOn</seg>
+        <seg>Power On</seg>
       </tuv>
     </tu>
     <tu tuid="Jog">
       <tuv xml:lang="en">
         <seg>Move</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Forward">
+      <tuv xml:lang="en">
+        <seg>Forward</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Backward">
+      <tuv xml:lang="en">
+        <seg>Backward</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Magazine">
+      <tuv xml:lang="en">
+        <seg>Magazine</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CapInPosition">
+      <tuv xml:lang="en">
+        <seg>Cap in position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Pusher">
+      <tuv xml:lang="en">
+        <seg>Pusher</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Picker">
+      <tuv xml:lang="en">
+        <seg>Picker</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Conveyor">
+      <tuv xml:lang="en">
+        <seg>Conveyor</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Stamper">
+      <tuv xml:lang="en">
+        <seg>Stamper</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Vacuum">
+      <tuv xml:lang="en">
+        <seg>Vacuum</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Cmd">
+      <tuv xml:lang="en">
+        <seg>Commands</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Fbk">
+      <tuv xml:lang="en">
+        <seg>Feedbacks</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Homed">
+      <tuv xml:lang="en">
+        <seg>Homed</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Powered">
+      <tuv xml:lang="en">
+        <seg>Powered</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CapAtStart">
+      <tuv xml:lang="en">
+        <seg>Cap at start</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CapAtExit">
+      <tuv xml:lang="en">
+        <seg>Cap at exit</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Speed">
+      <tuv xml:lang="en">
+        <seg>Speed</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Position">
+      <tuv xml:lang="en">
+        <seg>Position</seg>
       </tuv>
     </tu>
   </body>

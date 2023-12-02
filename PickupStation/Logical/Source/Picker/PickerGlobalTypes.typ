@@ -8,13 +8,8 @@ TYPE
 	PickerCommadsType : 	STRUCT  (*Picker Commands type*)
 		Enable : BOOL;
 		Reset : BOOL;
-		PickACap : BOOL;
-		Init : BOOL;
-		Start : BOOL;
-		ForwardManualCommand : BOOL;
-		BackwardManualCommand : BOOL;
-		VaacumManualCommand : BOOL;
-		ManualMode : BOOL;
+		Manual : PickerManualCommadsType;
+		Automatic : PickerAutomaticCommadsType;
 	END_STRUCT;
 	PickerFeedbacksType : 	STRUCT  (*Picker Feedbacks type*)
 		Enabled : BOOL;
@@ -38,5 +33,16 @@ TYPE
 		ArmBackward : BOOL;
 		ArmForward : BOOL;
 		GripperVacuum : BOOL;
+	END_STRUCT;
+	PickerAutomaticCommadsType : 	STRUCT  (*Picker Commands type*)
+		PickACap : BOOL;
+		Init : BOOL;
+		Start : BOOL;
+	END_STRUCT;
+	PickerManualCommadsType : 	STRUCT  (*Picker Commands type*)
+		Enable : BOOL;
+		MoveForward : BOOL;
+		MoveBackward : BOOL;
+		ActivateGrip : BOOL;
 	END_STRUCT;
 END_TYPE

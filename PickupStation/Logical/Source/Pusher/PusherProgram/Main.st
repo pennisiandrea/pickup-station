@@ -17,13 +17,13 @@ PROGRAM _CYCLIC
         RETURN;
 	END_IF
 	
-	IF EDGENEG(gPusher.Commands.Start) THEN
+	IF EDGENEG(gPusher.Commands.Automatic.Start) THEN
 		IF MachineState.NextState <> ERROR THEN
 			MachineState.NextState := WAITING_START;
 		END_IF
 	END_IF
 	
-	IF EDGEPOS(gPusher.Commands.Init) THEN
+	IF EDGEPOS(gPusher.Commands.Automatic.Init) THEN
 		IF MachineState.NextState <> ERROR THEN
 			MachineState.NextState := WAITING_INIT;
 		END_IF
@@ -42,10 +42,10 @@ PROGRAM _CYCLIC
 				ResetOutputsAction;
 				gPusher.Feedbacks.TakeACapDone := FALSE;
 			END_IF
-			IF gPusher.Commands.Init THEN
+			IF gPusher.Commands.Automatic.Init THEN
 				MachineState.NextState := MOVE_BACKWARD;
 			
-			ELSIF gPusher.Commands.ManualMode THEN
+			ELSIF gPusher.Commands.Manual.Enable THEN
 				MachineState.NextState := MANUALS;
 				
 			END_IF
@@ -53,8 +53,8 @@ PROGRAM _CYCLIC
 		MANUALS:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			// Manual commands
-			gPusher.Interface.Outputs.MoveForward := gPusher.Commands.PushManualCommand;
-			IF NOT gPusher.Commands.ManualMode THEN
+			gPusher.Interface.Outputs.MoveForward := gPusher.Commands.Manual.Push;
+			IF NOT gPusher.Commands.Manual.Enable THEN
 				MachineState.NextState := WAITING_INIT;
 			END_IF			
 			
@@ -66,7 +66,7 @@ PROGRAM _CYCLIC
 		
 		WAITING_START:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			IF gPusher.Commands.Start THEN
+			IF gPusher.Commands.Automatic.Start THEN
 				MachineState.NextState := WAITING_MAGAZINE;
 			END_IF 
 			
@@ -78,9 +78,9 @@ PROGRAM _CYCLIC
 			
 		WAITING_TAKE_A_CAP_COMMAND:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			IF NOT gPusher.Commands.Start THEN
+			IF NOT gPusher.Commands.Automatic.Start THEN
 				MachineState.NextState := WAITING_START;
-			ELSIF NOT gPusher.Interface.Inputs.CapAtPickPosition AND gPusher.Commands.TakeACap THEN
+			ELSIF NOT gPusher.Interface.Inputs.CapAtPickPosition AND gPusher.Commands.Automatic.TakeACap THEN
 				gPusher.Feedbacks.TakeACapDone := FALSE;
 				MachineState.NextState := MOVE_FORWARD;
 			END_IF 
