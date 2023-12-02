@@ -45,7 +45,7 @@ ACTION SetAlarmsAction:
 		//    <STATE_1_WITH_TIMEOUT>: MpAlarmXSet(gAlarmXCoreMpLink,'<AlarmName>'); // Edge alarm!
 		//    <STATE_2_WITH_TIMEOUT>: MpAlarmXSet(gAlarmXCoreMpLink,'<AlarmName>'); // Edge alarm!
 		//END_CASE
-
+		
 		MachineState.NextState := ERROR;		
 	END_IF 
 	
@@ -93,9 +93,7 @@ ACTION EnableModules:
 	
 	gConveyor.Commands.Enable := TRUE;
 	
-	IF MachineState.ActualState = WAITING_MODE_SELECTION THEN
-		gStamper.Commands.Enable := gMainMachine.Parameters.StamperEnable;	
-	END_IF
+	gStamper.Commands.Enable := TRUE;	
 	
 END_ACTION
 
@@ -103,33 +101,50 @@ ACTION StopModules:
 	
 	gPusher.Commands.Start := FALSE;
 	gPusher.Commands.Init := FALSE;
+	gPusher.Commands.Reset := FALSE;
+	gPusher.Commands.TakeACap := FALSE;
 	
 	gPicker.Commands.Start := FALSE;
 	gPicker.Commands.Init := FALSE;
+	gPicker.Commands.Reset := FALSE;
+	gPicker.Commands.PickACap := FALSE;
 	
 	gConveyor.Commands.Start := FALSE;
 	gConveyor.Commands.Init := FALSE;
+	gConveyor.Commands.Reset := FALSE;
+	gConveyor.Commands.DeliverCap := FALSE;
 	
 	gStamper.Commands.Start := FALSE;
-	gStamper.Commands.Init := FALSE;		
+	gStamper.Commands.Init := FALSE;
+	gStamper.Commands.Reset := FALSE;
+	gStamper.Commands.StampCap := FALSE;		
 	
 END_ACTION
 
-
-ACTION CheckReactions:
+ACTION ResetModules:
 	
-	IF MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_IMMEDIATELY_STOP') THEN
-		Internal.ErrorReaction := TRUE;
-		MachineState.NextState := ERROR;
-		
-	ELSIF MpAlarmXCheckReaction(gAlarmXCoreMpLink,'MACHINE_ON_PHASE_STOP') THEN
-		Internal.ErrorReaction := TRUE;
-		Internal.OnPhaseStopRequest := TRUE;
-		
-	ELSE
-		Internal.ErrorReaction := FALSE;
-		Internal.OnPhaseStopRequest := FALSE;
-	END_IF
+	gPusher.Commands.Reset := TRUE;	
+	gPicker.Commands.Reset := TRUE;	
+	gConveyor.Commands.Reset := TRUE;	
+	gStamper.Commands.Reset := TRUE;		
+	
+END_ACTION
+
+ACTION InitModules:
+	
+	gPusher.Commands.Init := TRUE;	
+	gPicker.Commands.Init := TRUE;	
+	gConveyor.Commands.Init := TRUE;	
+	gStamper.Commands.Init := TRUE;		
+	
+END_ACTION
+
+ACTION StartModules:
+	
+	gPusher.Commands.Start := TRUE;	
+	gPicker.Commands.Start := TRUE;	
+	gConveyor.Commands.Start := TRUE;	
+	gStamper.Commands.Start := gMainMachine.Parameters.StamperEnable;		
 	
 END_ACTION
 
@@ -145,7 +160,7 @@ ACTION StatisticsAction:
 	END_IF
 	
 	// Manage the stopwatch to measure the current cap working time
-	IF EDGE(gMainMachine.Feedbacks.NewCapOnWork) THEN
+	IF EDGE(gMainMachine.Feedbacks.NewCapOnWork) AND gMainMachine.Feedbacks.Started THEN
 		IF gMainMachine.Feedbacks.NewCapOnWork THEN
 			CapWorkStopwatch.IN := TRUE;	
 		ELSE

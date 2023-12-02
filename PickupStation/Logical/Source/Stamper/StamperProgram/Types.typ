@@ -30,5 +30,6 @@ TYPE
 		Offset : MC_BR_Offset;
 		LastOffset : LREAL;
 		CamStartTrigger : BOOL;
+		Error : BOOL;
 	END_STRUCT;
 END_TYPE

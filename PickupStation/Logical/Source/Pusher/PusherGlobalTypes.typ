@@ -7,11 +7,9 @@ TYPE
 	END_STRUCT;
 	PusherCommandsType : 	STRUCT 
 		Enable : BOOL;
-		Start : BOOL;
-		Init : BOOL;
-		TakeACap : BOOL;
-		ManualMode : BOOL;
-		PushManualCommand : BOOL;
+		Reset : BOOL;
+		Automatic : PusherAutomaticCommandsType;
+		Manual : PusherManualCommandsType;
 	END_STRUCT;
 	PusherFeedbacksType : 	STRUCT  (*Pusher Feedbacks type*)
 		Enabled : BOOL;
@@ -20,6 +18,7 @@ TYPE
 		CapReady : BOOL;
 		WaitingTakeACapCommand : BOOL;
 		InitDone : BOOL;
+		InitPosition : BOOL;
 		TakeACapDone : BOOL;
 	END_STRUCT;
 	PusherInterfaceType : 	STRUCT  (*Pusher Interface type*)
@@ -34,5 +33,13 @@ TYPE
 		PusherInForwardPosition : BOOL;
 		CapAtPickPosition : BOOL;
 		MagazineEmpty : BOOL;
+	END_STRUCT;
+	PusherManualCommandsType : 	STRUCT 
+		PushManualCommand : BOOL;
+	END_STRUCT;
+	PusherAutomaticCommandsType : 	STRUCT 
+		Start : BOOL;
+		Init : BOOL;
+		TakeACap : BOOL;
 	END_STRUCT;
 END_TYPE

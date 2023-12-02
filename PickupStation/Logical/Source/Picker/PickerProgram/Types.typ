@@ -21,5 +21,6 @@ TYPE
 		);
 	InternalType : 	STRUCT 
 		CapPicked : BOOL;
+		Error : BOOL;
 	END_STRUCT;
 END_TYPE

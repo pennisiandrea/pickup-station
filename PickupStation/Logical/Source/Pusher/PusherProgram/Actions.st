@@ -4,8 +4,9 @@ ACTION FeedbacksUpdateAction:
     gPusher.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
     gPusher.Feedbacks.Error := MachineState.ActualState = ERROR;
 	gPusher.Feedbacks.CapReady := gPusher.Interface.Inputs.CapAtPickPosition;
-	gPusher.Feedbacks.WaitingTakeACapCommand := MachineState.ActualState = WAITING_TAKE_A_CAP_COMMAND;
-	
+	gPusher.Feedbacks.WaitingTakeACapCommand := MachineState.ActualState = WAITING_TAKE_A_CAP_COMMAND;		
+	gPusher.Feedbacks.InitPosition := gPusher.Interface.Inputs.PusherInBackwardPosition;
+	gPusher.Feedbacks.InitDone := gPusher.Feedbacks.InitPosition AND gPusher.Commands.Init;
 END_ACTION
 
 ACTION ResetOutputsAction: 
@@ -34,7 +35,11 @@ ACTION MachineStateManagementAction:
 
 END_ACTION
 
-ACTION SetAlarmsAction:             
+ACTION SetAlarmsAction:  
+	IF gPusher.Commands.Reset THEN
+		Internal.Error := FALSE;
+	END_IF
+	
     // Timeouts alarms
 	IF MachineState.TimeoutTimer.Q THEN  
 		CASE MachineState.ActualState OF
@@ -42,12 +47,14 @@ ACTION SetAlarmsAction:
 			MOVE_FORWARD: MpAlarmXSet(gAlarmXCoreMpLink,'PusherTimeoutForward'); // Edge alarm!
 			WAITING_MAGAZINE: MpAlarmXSet(gAlarmXCoreMpLink,'PusherTimeoutMagazineEmpty'); // Edge alarm!
 		END_CASE
-		MachineState.NextState := ERROR;		
+		Internal.Error := TRUE;	
+		MachineState.NextState := ERROR;	
 	END_IF
 
 	// PusherInvalidSensorsCombination
 	IF gPusher.Interface.Inputs.PusherInBackwardPosition AND gPusher.Interface.Inputs.PusherInForwardPosition THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'PusherInvalidSensorsCombination'); // Periodic alarm!
+		Internal.Error := TRUE;		
 		MachineState.NextState := ERROR;
 	ELSE
 		MpAlarmXReset(gAlarmXCoreMpLink,'PusherInvalidSensorsCombination');

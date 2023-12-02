@@ -17,8 +17,16 @@ PROGRAM _CYCLIC
         RETURN;
 	END_IF
 	
-	IF EDGENEG(gPusher.Commands.Start) OR EDGEPOS(gPusher.Commands.Init) THEN
-		MachineState.NextState := WAITING_INIT;
+	IF EDGENEG(gPusher.Commands.Start) THEN
+		IF MachineState.NextState <> ERROR THEN
+			MachineState.NextState := WAITING_START;
+		END_IF
+	END_IF
+	
+	IF EDGEPOS(gPusher.Commands.Init) THEN
+		IF MachineState.NextState <> ERROR THEN
+			MachineState.NextState := WAITING_INIT;
+		END_IF
 	END_IF
 	
 	// Alarms
@@ -30,7 +38,10 @@ PROGRAM _CYCLIC
         
 		WAITING_INIT:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			gPusher.Feedbacks.InitDone := FALSE;
+			IF MachineState.NewTriggerState THEN
+				ResetOutputsAction;
+				gPusher.Feedbacks.TakeACapDone := FALSE;
+			END_IF
 			IF gPusher.Commands.Init THEN
 				MachineState.NextState := MOVE_BACKWARD;
 			
@@ -40,6 +51,7 @@ PROGRAM _CYCLIC
 			END_IF
         
 		MANUALS:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			// Manual commands
 			gPusher.Interface.Outputs.MoveForward := gPusher.Commands.PushManualCommand;
 			IF NOT gPusher.Commands.ManualMode THEN
@@ -49,12 +61,7 @@ PROGRAM _CYCLIC
 		MOVE_BACKWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF gPusher.Interface.Inputs.PusherInBackwardPosition THEN
-				IF gPusher.Commands.Start THEN
-					MachineState.NextState := WAITING_START;
-				ELSE
-					MachineState.NextState := WAITING_MAGAZINE;
-				END_IF					
-				gPusher.Feedbacks.InitDone := TRUE;
+				MachineState.NextState := WAITING_START;				
 			END_IF 			
 		
 		WAITING_START:
@@ -82,26 +89,25 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			gPusher.Interface.Outputs.MoveForward := TRUE;
 			IF gPusher.Interface.Inputs.CapAtPickPosition THEN
+				gPusher.Interface.Outputs.MoveForward := FALSE;
 				gPusher.Feedbacks.TakeACapDone := TRUE;
 				MachineState.NextState := MOVE_BACKWARD;
 			END_IF 			
 			
         ERROR:
-            MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			ResetOutputsAction;
-			gPusher.Feedbacks.TakeACapDone := FALSE;
+			IF NOT Internal.Error THEN
+				MachineState.NextState := WAITING_INIT;
+			END_IF
         
         ELSE
             MachineState.NextState := WAITING_INIT;			
         
     END_CASE
-    
-	IF (MachineState.ActualState <> MOVE_FORWARD) AND (MachineState.ActualState <> MANUALS) THEN
-		gPusher.Interface.Outputs.MoveForward := FALSE;
-	END_IF
 		
     FeedbacksUpdateAction;
-    
+	
 END_PROGRAM
 
 PROGRAM _EXIT

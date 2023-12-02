@@ -23,5 +23,6 @@ TYPE
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;
 		Parameters : MpAxisBasicParType;
+		Error : BOOL;
 	END_STRUCT;
 END_TYPE

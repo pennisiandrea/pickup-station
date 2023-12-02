@@ -25,6 +25,6 @@ TYPE
 		CommunicationTimeoutTimer : TON := (PT:=T#3S);
 		MasterCommunicationOk : BOOL;
 		OnPhaseStopRequest : BOOL;
-		ErrorReaction : BOOL;
+		Error : BOOL;
 	END_STRUCT;
 END_TYPE

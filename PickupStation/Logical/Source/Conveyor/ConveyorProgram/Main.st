@@ -20,13 +20,21 @@ PROGRAM _CYCLIC
     IF NOT gConveyor.Commands.Enable THEN
         ResetOutputsAction;
 		ResetFeedbacksAction;
-		ResetAlarmsAction;		
+		ResetAlarmsAction;	
+		ResetMotionCommands;
         RETURN;
-    END_IF
-    
-	IF EDGENEG(gConveyor.Commands.Start) OR EDGEPOS(gConveyor.Commands.Init) THEN
-		Internal.Axis.ErrorReset := TRUE;
-		MachineState.NextState := WAITING_INIT;	
+    END_IF    
+	
+	IF EDGENEG(gConveyor.Commands.Start) THEN
+		IF MachineState.NextState <> ERROR THEN
+			MachineState.NextState := WAITING_START;
+		END_IF
+	END_IF
+	
+	IF EDGEPOS(gConveyor.Commands.Init) THEN
+		IF MachineState.NextState <> ERROR THEN
+			MachineState.NextState := WAITING_INIT;
+		END_IF
 	END_IF
 	
 	// Alarms
@@ -38,22 +46,26 @@ PROGRAM _CYCLIC
         
 		WAITING_INIT:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			gConveyor.Feedbacks.InitDone := FALSE;
-			IF gConveyor.Commands.Init AND Internal.Axis.Active THEN
+			IF MachineState.NewTriggerState THEN
+				ResetOutputsAction;
+				ResetMotionCommands;
+			END_IF
+			
+			IF gConveyor.Commands.Init THEN
 				MachineState.NextState := HOMING;
 				
-			ELSIF gConveyor.Commands.ManualMode AND Internal.Axis.Active THEN
+			ELSIF gConveyor.Commands.ManualMode THEN
 				MachineState.NextState := MANUALS;
 				
 			END_IF
 		     
 		MANUALS:			
 			// Manual commands
-			Internal.Axis.Home := gConveyor.Commands.HomeManualCommand;
+			Internal.Axis.Home := gConveyor.Commands.HomeManualCommand AND Internal.Axis.Active;
 			IF Internal.Axis.IsHomed THEN			
-				Internal.Axis.Power := gConveyor.Commands.PowerOnManualCommand;
+				Internal.Axis.Power := gConveyor.Commands.PowerOnManualCommand AND Internal.Axis.Active;
 				IF Internal.Axis.PowerOn THEN		
-					Internal.Axis.MoveVelocity := gConveyor.Commands.JogManualCommand;
+					Internal.Axis.MoveVelocity := gConveyor.Commands.JogManualCommand AND Internal.Axis.Active;
 				ELSE
 					Internal.Axis.MoveVelocity := FALSE;
 				END_IF
@@ -69,6 +81,7 @@ PROGRAM _CYCLIC
 		HOMING:
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF Internal.Axis.IsHomed THEN
+				Internal.Axis.Home := FALSE;
 				MachineState.NextState := POWER_ON;
 			ELSE
 				Internal.Axis.Home := Internal.Axis.Active;
@@ -76,7 +89,7 @@ PROGRAM _CYCLIC
 					
 		POWER_ON:
 			MachineState.TimeoutTimer.PT := T#3S;
-			Internal.Axis.Power := TRUE;
+			Internal.Axis.Power := Internal.Axis.Active;
 			IF Internal.Axis.PowerOn THEN
 				IF NOT gConveyor.Feedbacks.InitDone THEN
 					MachineState.NextState := INIT;
@@ -87,9 +100,9 @@ PROGRAM _CYCLIC
 			
 		INIT:
 			MachineState.TimeoutTimer.PT := T#30S;	
-			Internal.Axis.MoveAbsolute := TRUE;
+			Internal.Axis.MoveAbsolute := Internal.Axis.Active;
 			IF Internal.Axis.MoveDone THEN
-				gConveyor.Feedbacks.InitDone := TRUE;
+				Internal.Axis.MoveAbsolute := FALSE;
 				MachineState.NextState := WAITING_START;
 			END_IF	
 			
@@ -115,36 +128,23 @@ PROGRAM _CYCLIC
 			Internal.Axis.MoveVelocity := TRUE;			
 			IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
 				gConveyor.Feedbacks.DeliverCapDone := TRUE;
+				Internal.Axis.MoveVelocity := FALSE;
 				MachineState.NextState := WAITING_CAP;
 			END_IF 			
 			
         ERROR:
             MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			ResetOutputsAction;
-			Internal.Axis.Power := FALSE;
-			gConveyor.Feedbacks.DeliverCapDone := FALSE;
-			gConveyor.Feedbacks.InitDone := FALSE;
+			ResetMotionCommands;
+			IF NOT Internal.Error THEN
+				MachineState.NextState := WAITING_INIT;
+			END_IF
         
         ELSE
             MachineState.NextState := WAITING_START;			
         
     END_CASE
-    
-	IF (MachineState.ActualState <> HOMING) AND (MachineState.ActualState <> MANUALS) THEN
-		Internal.Axis.Home := FALSE;
-	END_IF
-	IF (MachineState.ActualState <> MOTION) AND (MachineState.ActualState <> MANUALS) THEN
-		Internal.Axis.MoveVelocity := FALSE;
-	END_IF
-	IF (MachineState.ActualState <> INIT) AND (MachineState.ActualState <> MANUALS) THEN
-		Internal.Axis.MoveAbsolute := FALSE;
-	END_IF
-	Internal.Axis.Stop := (MachineState.ActualState = ERROR);
-				
-	IF NOT Internal.Axis.Error THEN		
-		Internal.Axis.ErrorReset := FALSE;	
-	END_IF
-	
+    				
     FeedbacksUpdateAction;
     
 END_PROGRAM

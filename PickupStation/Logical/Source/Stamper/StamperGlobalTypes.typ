@@ -8,6 +8,7 @@ TYPE
 	END_STRUCT;
 	StamperCommadsType : 	STRUCT  (*Stamper Commands type*)
 		Enable : BOOL;
+		Reset : BOOL;
 		Start : BOOL;
 		Init : BOOL;
 		StampCap : BOOL;
@@ -20,6 +21,7 @@ TYPE
 		WaitingCap : BOOL;
 		StampCapDone : BOOL;
 		InitDone : BOOL;
+		InitPosition : BOOL;
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
 		Offset : LREAL;

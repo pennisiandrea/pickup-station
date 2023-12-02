@@ -18,4 +18,7 @@ TYPE
 		ERROR,
 		MANUALS
 		);
+	InternalType : 	STRUCT 
+		Error : BOOL;
+	END_STRUCT;
 END_TYPE

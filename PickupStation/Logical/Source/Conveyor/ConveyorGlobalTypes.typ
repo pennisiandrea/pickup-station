@@ -8,6 +8,7 @@ TYPE
 	END_STRUCT;
 	ConveyorCommadsType : 	STRUCT  (*Conveyor Commands type*)
 		Enable : BOOL;
+		Reset : BOOL;
 		Start : BOOL;
 		Init : BOOL;
 		DeliverCap : BOOL;
@@ -25,6 +26,7 @@ TYPE
 		InitDone : BOOL;
 		AxisHomed : BOOL;
 		AxisPowered : BOOL;
+		InitPosition : BOOL;
 	END_STRUCT;
 	ConveyorParametersType : 	STRUCT  (*Conveyor Parameters type*)
 		TargetSpeed : REAL := 50;

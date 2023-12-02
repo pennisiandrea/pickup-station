@@ -28,11 +28,19 @@ PROGRAM _CYCLIC
         RETURN;
     END_IF
     
-	// Init command management
-	IF EDGENEG(gPicker.Commands.Start) OR EDGEPOS(gPicker.Commands.Init) THEN
-		MachineState.NextState := WAITING_INIT;
+	IF EDGENEG(gPicker.Commands.Start) THEN
+		IF MachineState.NextState <> ERROR THEN
+			MachineState.NextState := WAITING_START;
+		END_IF
 	END_IF
 	
+	IF EDGEPOS(gPicker.Commands.Init) THEN
+		IF MachineState.NextState <> ERROR THEN
+			MachineState.NextState := WAITING_INIT;
+		END_IF
+	END_IF
+	
+	// Alarms
 	SetAlarmsAction;
 	
     // Machine state
@@ -40,7 +48,12 @@ PROGRAM _CYCLIC
     CASE MachineState.ActualState OF
         
 		WAITING_INIT:
-			gPicker.Feedbacks.InitDone := FALSE;
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			IF MachineState.NewTriggerState THEN
+				ResetOutputsAction;
+				gPicker.Feedbacks.PickACapDone := FALSE;
+			END_IF
+			
 			IF gPicker.Commands.Init THEN
 				MachineState.NextState := MOVE_BACKWARD;
 				
@@ -50,6 +63,7 @@ PROGRAM _CYCLIC
 			END_IF
         
 		MANUALS:
+			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			// Manual commands
 			gPicker.Interface.Outputs.ArmForward := gPicker.Commands.ForwardManualCommand;
 			gPicker.Interface.Outputs.ArmBackward := gPicker.Commands.BackwardManualCommand;
@@ -63,6 +77,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			gPicker.Interface.Outputs.ArmBackward := TRUE;
 			IF gPicker.Interface.Inputs.ArmBackward THEN
+				gPicker.Interface.Outputs.ArmBackward := FALSE;
 				MachineState.NextState := PLACE_CAP;
 			END_IF
 			 
@@ -73,7 +88,6 @@ PROGRAM _CYCLIC
 				gPicker.Feedbacks.PickACapDone := Internal.CapPicked;
 				Internal.CapPicked := FALSE;
 				MachineState.NextState := WAITING_START;
-				gPicker.Feedbacks.InitDone := TRUE;
 			END_IF			
 								
 		WAITING_START:
@@ -96,6 +110,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#3S;
 			gPicker.Interface.Outputs.ArmForward := TRUE;
 			IF gPicker.Interface.Inputs.ArmForward THEN
+				gPicker.Interface.Outputs.ArmForward := FALSE;
 				MachineState.NextState := PICK_CAP;
 			END_IF
 						 
@@ -110,24 +125,15 @@ PROGRAM _CYCLIC
         ERROR:
             MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			ResetOutputsAction;
-			gPicker.Feedbacks.InitDone := FALSE;
-			gPicker.Feedbacks.PickACapDone := FALSE;
+			IF NOT Internal.Error THEN
+				MachineState.NextState := WAITING_INIT;
+			END_IF
         
         ELSE
             MachineState.NextState := WAITING_INIT;			
         
     END_CASE
-    
-	IF MachineState.ActualState <> MOVE_BACKWARD AND MachineState.ActualState <> MANUALS THEN
-		gPicker.Interface.Outputs.ArmBackward := FALSE;
-	END_IF
-	IF MachineState.ActualState <> MOVE_FORWARD AND MachineState.ActualState <> MANUALS THEN
-		gPicker.Interface.Outputs.ArmForward := FALSE;
-	END_IF
-	IF MachineState.ActualState <> PICK_CAP AND NOT Internal.CapPicked AND MachineState.ActualState <> MANUALS THEN
-		gPicker.Interface.Outputs.GripperPick := FALSE;
-	END_IF
-		
+    		
     FeedbacksUpdateAction;
     
 END_PROGRAM

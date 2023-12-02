@@ -4,7 +4,9 @@ ACTION FeedbacksUpdateAction:
     gStamper.Feedbacks.WaitingStart := (MachineState.ActualState = WAITING_START); 
 	gStamper.Feedbacks.Error := (MachineState.ActualState = ERROR);
 	gStamper.Feedbacks.OnSyncMotion := Internal.Cam.InCam;
-	gStamper.Feedbacks.WaitingCap := (Internal.Cam.ActualStateIndex = 0) AND (MachineState.ActualState = WAITING_CAP);
+	gStamper.Feedbacks.WaitingCap := (Internal.Cam.ActualStateIndex = 0) AND (MachineState.ActualState = WAITING_CAP);	
+	gStamper.Feedbacks.InitPosition := ABS(Internal.Axis.Position - Internal.Parameters.Position)<0.1;
+	gStamper.Feedbacks.InitDone := gStamper.Feedbacks.InitPosition AND gStamper.Commands.Init;
 	
 END_ACTION
 
@@ -18,6 +20,19 @@ ACTION ResetFeedbacksAction:
 
     memset(ADR(gStamper.Feedbacks),0,SIZEOF(gStamper.Feedbacks));
 
+END_ACTION
+
+ACTION ResetMotionCommands:
+	Internal.Axis.Power := FALSE;
+	Internal.Axis.Home := FALSE;
+	Internal.Axis.MoveVelocity := FALSE;
+	Internal.Axis.MoveAbsolute := FALSE;
+	
+	Internal.Cam.Enable := FALSE;
+	Internal.Cam.Start := FALSE;
+	
+	Internal.Offset.Enable := FALSE;
+	Internal.Offset.StartShift := FALSE;
 END_ACTION
 
 ACTION MachineStateManagementAction: 
@@ -36,6 +51,10 @@ END_ACTION
 
 ACTION SetAlarmsAction:             
 	
+	IF gStamper.Commands.Reset THEN
+		Internal.Error := FALSE;
+	END_IF
+	
 	IF MachineState.TimeoutTimer.Q THEN
         
 		CASE MachineState.ActualState OF
@@ -46,20 +65,24 @@ ACTION SetAlarmsAction:
 			ACTIVATE_CAM: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
 			SET_SHIFT: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
 			RESET_SHIFT: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
+			STAMPING: MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisTimeout'); // Edge alarm!
 		END_CASE
 
+		Internal.Error := TRUE;
 		MachineState.NextState := ERROR;		
 	END_IF 
 	
-	IF MachineState.ActualState <> ERROR THEN
-		IF Internal.Axis.Error OR Internal.Cam.Error OR Internal.Offset.Error THEN
-			MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisFault');
-			MachineState.NextState := ERROR;
-		END_IF
+	IF Internal.Axis.Error OR Internal.Cam.Error OR Internal.Offset.Error THEN
+		MpAlarmXSet(gAlarmXCoreMpLink,'StamperAxisError');
+		Internal.Error := TRUE;
+		MachineState.NextState := ERROR;
+	ELSE
+		MpAlarmXReset(gAlarmXCoreMpLink,'StamperAxisError');
 	END_IF
 	
 	IF gStamper.Interface.Inputs.StampIsForward AND gStamper.Interface.Inputs.StampIsBackward THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');
+		Internal.Error := TRUE;
 		MachineState.NextState := ERROR;
 	ELSE
 		MpAlarmXReset(gAlarmXCoreMpLink,'StamperInvalidSensorsCombination');

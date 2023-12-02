@@ -2,14 +2,16 @@ ACTION FeedbacksUpdateAction:
 
 	gPicker.Feedbacks.Enabled := TRUE;
     gPicker.Feedbacks.WaitingPickCommand := MachineState.ActualState = WAITING_PICK_COMMAND; 
-    gPicker.Feedbacks.Error := MachineState.ActualState = ERROR;
+    gPicker.Feedbacks.Error := MachineState.ActualState = ERROR;		
+	gPicker.Feedbacks.InitPosition := gPicker.Interface.Inputs.ArmBackward AND NOT gPicker.Interface.Inputs.GripperVacuum;
+	gPicker.Feedbacks.InitDone := gPicker.Feedbacks.InitPosition AND gPicker.Commands.Init;
 	
 END_ACTION
 
 ACTION ResetOutputsAction: 
 
     memset(ADR(gPicker.Interface.Outputs),0,SIZEOF(gPicker.Interface.Outputs));
-
+		
 END_ACTION
 
 ACTION ResetFeedbacksAction: 
@@ -33,6 +35,10 @@ ACTION MachineStateManagementAction:
 END_ACTION
 
 ACTION SetAlarmsAction: 
+	 
+	IF gPicker.Commands.Reset THEN
+		Internal.Error := FALSE;
+	END_IF
 	
 	// Timeouts alarms
 	IF MachineState.TimeoutTimer.Q THEN  
@@ -42,12 +48,14 @@ ACTION SetAlarmsAction:
 			PLACE_CAP: MpAlarmXSet(gAlarmXCoreMpLink,'PickerTimeoutVacuumPlace'); // Edge alarm!
 			PICK_CAP: MpAlarmXSet(gAlarmXCoreMpLink,'PickerTimeoutVacuumPick'); // Edge alarm!
 		END_CASE
+		Internal.Error := TRUE;		
 		MachineState.NextState := ERROR;		
 	END_IF
 	
 	// PickupArmInvalidSensorsCombination
 	IF gPicker.Interface.Inputs.ArmBackward AND gPicker.Interface.Inputs.ArmForward THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'PickerInvalidSensorsCombination'); // Periodic alarm!
+		Internal.Error := TRUE;
 		MachineState.NextState := ERROR;
 	ELSE
 		MpAlarmXReset(gAlarmXCoreMpLink,'PickerInvalidSensorsCombination');

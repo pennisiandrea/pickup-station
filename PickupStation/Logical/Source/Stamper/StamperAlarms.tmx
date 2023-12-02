@@ -5,7 +5,7 @@
     <prop type="x-BR-TS:Namespace">Source/Stamper/Alarms</prop>
   </header>
   <body>
-    <tu tuid="StamperAxisFault">
+    <tu tuid="StamperAxisError">
       <tuv xml:lang="en">
         <seg>Stamper axis is in error</seg>
       </tuv>
