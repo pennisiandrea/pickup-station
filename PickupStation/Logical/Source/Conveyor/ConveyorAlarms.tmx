@@ -6,26 +6,41 @@
   </header>
   <body>
     <tu tuid="ConveyorTimeoutHoming">
+      <tuv xml:lang="it">
+        <seg>Conveyor ha fallito l'homing</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Conveyor was not able to homing</seg>
       </tuv>
     </tu>
     <tu tuid="ConveyorTimeoutPowerOn">
+      <tuv xml:lang="it">
+        <seg>Conveyor ha fallito il power on</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Conveyor was not able to power on</seg>
       </tuv>
     </tu>
     <tu tuid="ConveyorMissedCap">
+      <tuv xml:lang="it">
+        <seg>Conveyor ha rilevato la perdita di una cap</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Missing cap detected</seg>
       </tuv>
     </tu>
     <tu tuid="ConveyorAxisError">
+      <tuv xml:lang="it">
+        <seg>Conveyor ha rilevato una malfunzionamento dell'asse</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Conveyor axis is in error</seg>
       </tuv>
     </tu>
     <tu tuid="ConveyorInitFail">
+      <tuv xml:lang="it">
+        <seg>Conveyor non è riuscito ad eseguire l'inizializzazione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Conveyor cannot be initialized</seg>
       </tuv>

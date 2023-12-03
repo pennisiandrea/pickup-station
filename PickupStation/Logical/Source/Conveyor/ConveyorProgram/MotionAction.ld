@@ -10,9 +10,21 @@ ACTION MotionAction:
 			<empty/>
 		</row>
 		<row>
-			<analog type="input" name="gConveyor.Parameters.TargetSpeed"/>
+			<analog type="input" name="gConveyor.Parameters.Acceleration"/>
 			<function position="bottom" type="MOVE"><input name="" extensible="true"/><output name="40"/></function>
-			<analog type="output" name="Internal.Parameters.Velocity"/>
+			<analog type="output" name="Internal.Parameters.Deceleration"/>
+		</row>
+	</network>
+	<network label="" comment="" row="2" column="0" commented="0">
+		<row>
+			<line/>
+			<function position="top" type="MOVE"><input name="EN" extensible="true" ENO="true"/><output name="ENO" ENO="true"/></function>
+			<empty/>
+		</row>
+		<row>
+			<analog type="input" name="gConveyor.Parameters.Acceleration"/>
+			<function position="bottom" type="MOVE"><input name="" extensible="true"/><output name="40"/></function>
+			<analog type="output" name="Internal.Parameters.Acceleration"/>
 		</row>
 	</network>
 	<network label="" comment="" row="20" column="0" commented="0">
@@ -139,6 +151,7 @@ ACTION MotionAction:
 	</network>
 </networks>
 END_ACTION
+
 
 
 

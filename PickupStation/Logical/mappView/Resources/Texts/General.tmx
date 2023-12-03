@@ -6,23 +6,43 @@
   </header>
   <body>
     <tu tuid="Comm">
+      <tuv xml:lang="it">
+        <seg>Comunicazione con stazione di smistaggio:</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Communication with sorting station:</seg>
       </tuv>
     </tu>
     <tu tuid="RemoveCaps">
+      <tuv xml:lang="it">
+        <seg>Rimuovere tutte le cap presenti in macchina</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Please remove all caps from the machine and press confirm</seg>
       </tuv>
     </tu>
     <tu tuid="Confirm">
+      <tuv xml:lang="it">
+        <seg>Conferma</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Confirm</seg>
       </tuv>
     </tu>
     <tu tuid="Close">
+      <tuv xml:lang="it">
+        <seg>Chiudi</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Close</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Login">
+      <tuv xml:lang="it">
+        <seg>Login</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Login</seg>
       </tuv>
     </tu>
   </body>

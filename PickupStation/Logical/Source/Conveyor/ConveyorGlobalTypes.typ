@@ -53,6 +53,5 @@ TYPE
 		Move : BOOL;
 		Home : BOOL;
 		Speed : REAL := 50;
-		Acceleration : REAL := 5000;
 	END_STRUCT;
 END_TYPE

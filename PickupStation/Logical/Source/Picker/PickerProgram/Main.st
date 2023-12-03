@@ -95,7 +95,10 @@ PROGRAM _CYCLIC
 			gPicker.Feedbacks.PickACapDone := FALSE;
 			
 			IF gPicker.Commands.Automatic.Start THEN
-				MachineState.NextState := WAITING_PICK_COMMAND;
+				MachineState.NextState := WAITING_PICK_COMMAND;				
+				
+			ELSIF gPicker.Commands.Manual.Enable THEN
+				MachineState.NextState := MANUALS;	
 			END_IF  
 			
         WAITING_PICK_COMMAND:

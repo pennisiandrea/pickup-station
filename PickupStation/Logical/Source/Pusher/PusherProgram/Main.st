@@ -61,13 +61,16 @@ PROGRAM _CYCLIC
 		MOVE_BACKWARD:
 			MachineState.TimeoutTimer.PT := T#3S;
 			IF gPusher.Interface.Inputs.PusherInBackwardPosition THEN
-				MachineState.NextState := WAITING_START;				
+				MachineState.NextState := WAITING_START;			
 			END_IF 			
 		
 		WAITING_START:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF gPusher.Commands.Automatic.Start THEN
 				MachineState.NextState := WAITING_MAGAZINE;
+				
+			ELSIF gPusher.Commands.Manual.Enable THEN
+				MachineState.NextState := MANUALS;	
 			END_IF 
 			
 		WAITING_MAGAZINE:

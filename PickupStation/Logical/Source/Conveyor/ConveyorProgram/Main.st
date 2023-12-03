@@ -4,7 +4,6 @@ PROGRAM _INIT
     ResetFeedbacksAction;
     
 	Internal.Parameters.Homing.Mode := mcHOMING_ABSOLUTE;
-	Internal.Parameters.Homing.Position := 0;	
 	 
     MachineState.NextState := WAITING_INIT;
     
@@ -60,14 +59,13 @@ PROGRAM _CYCLIC
 		MANUALS:	
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
-			Internal.Parameters.Acceleration := gConveyor.Commands.Manual.Acceleration;
-			Internal.Parameters.Deceleration := gConveyor.Commands.Manual.Acceleration;
 			Internal.Parameters.Velocity := gConveyor.Commands.Manual.Speed;
 			IF Internal.Parameters.Velocity>0 THEN
 				Internal.Parameters.Direction := mcDIR_POSITIVE;
 			ELSE
 				Internal.Parameters.Direction := mcDIR_NEGATIVE;
 			END_IF
+			
 			Internal.Axis.Home := gConveyor.Commands.Manual.Home AND Internal.Axis.Active;
 			IF Internal.Axis.IsHomed THEN			
 				Internal.Axis.Power := gConveyor.Commands.Manual.PowerOn AND Internal.Axis.Active;
@@ -108,8 +106,6 @@ PROGRAM _CYCLIC
 		INIT:
 			MachineState.TimeoutTimer.PT := T#30S;
 			IF MachineState.NewTriggerState THEN				
-				Internal.Parameters.Acceleration := gConveyor.Parameters.Acceleration;
-				Internal.Parameters.Deceleration := gConveyor.Parameters.Acceleration;
 				Internal.Parameters.Velocity := gConveyor.Parameters.TargetSpeed;
 				Internal.Parameters.Direction := mcDIR_POSITIVE;
 			END_IF
@@ -126,7 +122,10 @@ PROGRAM _CYCLIC
 			END_IF
 			gConveyor.Feedbacks.DeliverCapDone := FALSE;
             IF gConveyor.Commands.Automatic.Start THEN
-                MachineState.NextState := POWER_ON;
+				MachineState.NextState := POWER_ON;				
+				
+			ELSIF gConveyor.Commands.Manual.Enable THEN
+				MachineState.NextState := MANUALS;	
             END_IF   		
 		
 		WAITING_CAP:
@@ -139,8 +138,6 @@ PROGRAM _CYCLIC
 		MOTION:
 			MachineState.TimeoutTimer.PT := T#30S;
 			IF MachineState.NewTriggerState THEN				
-				Internal.Parameters.Acceleration := gConveyor.Parameters.Acceleration;
-				Internal.Parameters.Deceleration := gConveyor.Parameters.Acceleration;
 				Internal.Parameters.Velocity := gConveyor.Parameters.TargetSpeed;
 				Internal.Parameters.Direction := mcDIR_POSITIVE;
 			END_IF

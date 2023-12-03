@@ -6,6 +6,9 @@
   </header>
   <body>
     <tu tuid="Automatic">
+      <tuv xml:lang="it">
+        <seg>Automatico</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Automatic</seg>
       </tuv>
@@ -17,78 +20,139 @@
       </tuv>
     </tu>
     <tu tuid="Start">
+      <tuv xml:lang="it">
+        <seg>Start</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Start</seg>
       </tuv>
     </tu>
     <tu tuid="Stop">
+      <tuv xml:lang="it">
+        <seg>Stop</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Stop</seg>
       </tuv>
     </tu>
     <tu tuid="Init">
+      <tuv xml:lang="it">
+        <seg>Inizializzazione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Initialize</seg>
       </tuv>
     </tu>
     <tu tuid="Link">
+      <tuv xml:lang="it">
+        <seg>Collega</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Link</seg>
       </tuv>
     </tu>
     <tu tuid="Speed">
+      <tuv xml:lang="it">
+        <seg>Velocità</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Conveyor speed</seg>
       </tuv>
     </tu>
     <tu tuid="ReadyToStart">
+      <tuv xml:lang="it">
+        <seg>Macchina pronta</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Machine ready to start</seg>
       </tuv>
     </tu>
     <tu tuid="Stats">
+      <tuv xml:lang="it">
+        <seg>Statistiche</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Statistics</seg>
       </tuv>
     </tu>
     <tu tuid="Tot">
+      <tuv xml:lang="it">
+        <seg>Tappi totali</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Total caps</seg>
       </tuv>
     </tu>
     <tu tuid="ActCapTime">
+      <tuv xml:lang="it">
+        <seg>Tempo di lavorazione attuale</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Current cap working time</seg>
       </tuv>
     </tu>
     <tu tuid="PrevCapTime">
+      <tuv xml:lang="it">
+        <seg>Ultimo tempo di lavorazione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Last cap worked time</seg>
       </tuv>
     </tu>
     <tu tuid="AvgCapTime">
+      <tuv xml:lang="it">
+        <seg>Media tempo di lavorazione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Average work time (last 10 caps)</seg>
       </tuv>
     </tu>
     <tu tuid="ClearStats">
+      <tuv xml:lang="it">
+        <seg>Reset statistiche</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Clear statistics</seg>
       </tuv>
     </tu>
     <tu tuid="StamperInc">
+      <tuv xml:lang="it">
+        <seg>Inclusione stampatore</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Stamper inclusion</seg>
       </tuv>
     </tu>
     <tu tuid="StamperOffset">
+      <tuv xml:lang="it">
+        <seg>Offset stampatore</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Stamper offset</seg>
       </tuv>
     </tu>
     <tu tuid="TotCaps">
+      <tuv xml:lang="it">
+        <seg>Numero totale tappi</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Total number of caps</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Par">
+      <tuv xml:lang="it">
+        <seg>Parametri</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Parameters</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AutoMode">
+      <tuv xml:lang="it">
+        <seg>Modo automatico</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Automatic mode</seg>
       </tuv>
     </tu>
   </body>

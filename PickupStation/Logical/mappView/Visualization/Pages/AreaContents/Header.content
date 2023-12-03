@@ -50,5 +50,6 @@
     <Widget xsi:type="widgets.brease.Label" id="Label9" top="25" left="205" width="550" zIndex="15" text="$IAT/States/WaitingMode" textAlign="center" fontSize="20px" />
     <Widget xsi:type="widgets.brease.Label" id="Label10" top="25" left="205" width="550" zIndex="16" text="$IAT/States/WaitingModules" textAlign="center" fontSize="20px" />
     <Widget xsi:type="widgets.brease.Label" id="Label11" top="25" left="205" width="550" zIndex="17" text="$IAT/States/WaitingStart" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Line" id="Line1" zIndex="18" x1="0" x2="1280" y1="77" y2="77" lineColor="rgba(255, 133, 0, 1)" lineWidth="8px" />
   </Widgets>
 </Content>

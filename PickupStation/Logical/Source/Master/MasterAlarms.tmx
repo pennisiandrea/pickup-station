@@ -6,6 +6,9 @@
   </header>
   <body>
     <tu tuid="MasterInError">
+      <tuv xml:lang="it">
+        <seg>Stazione di smistaggio in errore</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Sorting station in error</seg>
       </tuv>

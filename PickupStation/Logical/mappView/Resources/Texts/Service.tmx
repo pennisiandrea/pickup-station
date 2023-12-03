@@ -6,6 +6,9 @@
   </header>
   <body>
     <tu tuid="Service">
+      <tuv xml:lang="it">
+        <seg>Manutenzione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Service</seg>
       </tuv>

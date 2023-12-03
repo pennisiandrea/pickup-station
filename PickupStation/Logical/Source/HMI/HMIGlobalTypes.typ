@@ -71,6 +71,10 @@ TYPE
 		ConveyorActPosition : LREAL;
 		StamperActSpeed : REAL;
 		StamperActPosition : LREAL;
+		ConveyorAcceleration : REAL;
+		ConveyorAccelerationEnable : BOOL;
+		StamperAcceleration : REAL;
+		StamperAccelerationEnable : BOOL;
 	END_STRUCT;
 	HMIHeaderContentType : 	STRUCT  (*HMI Interface Output type*)
 		MasterConnectionOk : BOOL;

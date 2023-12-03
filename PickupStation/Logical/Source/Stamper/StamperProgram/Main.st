@@ -3,12 +3,8 @@ PROGRAM _INIT
     ResetOutputsAction;
     ResetFeedbacksAction;
     
-	Internal.Parameters.Position := 0;
-	Internal.Parameters.Acceleration := 20000;
-	Internal.Parameters.Deceleration := 20000;
-	Internal.Parameters.Velocity := 10000;
 	Internal.Parameters.Homing.Mode := mcHOMING_DIRECT;
-	gStamper.Parameters.Offset := 65;
+	
 	Internal.Offset.AdvancedParameters.ShiftMode := mcSHIFT_ABSOLUTE;
 	Internal.Offset.Enable := TRUE;
 	
@@ -53,11 +49,7 @@ PROGRAM _CYCLIC
 			IF MachineState.NewTriggerState THEN
 				ResetOutputsAction;
 				ResetMotionCommands;
-				Internal.CamStartTrigger := FALSE;
-				
-				Internal.Parameters.Velocity := gStamper.Parameters.Speed;
-				Internal.Parameters.Acceleration := gStamper.Parameters.Acceleration;
-				Internal.Parameters.Deceleration := gStamper.Parameters.Acceleration;
+				Internal.CamStartTrigger := FALSE;				
 			END_IF
 			
 			IF gStamper.Commands.Automatic.Init THEN
@@ -71,8 +63,6 @@ PROGRAM _CYCLIC
 		MANUAL:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			
-			Internal.Parameters.Acceleration := gStamper.Commands.Manual.Acceleration;
-			Internal.Parameters.Deceleration := gStamper.Commands.Manual.Acceleration;
 			Internal.Parameters.Velocity := gStamper.Commands.Manual.Speed;
 			Internal.Parameters.Position := gStamper.Commands.Manual.Position;
 			
@@ -134,7 +124,10 @@ PROGRAM _CYCLIC
 			
 			IF gStamper.Commands.Automatic.Start THEN
 				gStamper.Feedbacks.StampCapDone := FALSE;
-			    MachineState.NextState := POWER_ON;
+				MachineState.NextState := POWER_ON;				
+				
+			ELSIF gStamper.Commands.Manual.Enable THEN
+				MachineState.NextState := MANUAL;	
             END_IF
 			
 		ACTIVATE_CAM:
@@ -150,6 +143,7 @@ PROGRAM _CYCLIC
 			IF gStamper.Commands.Automatic.StampCap THEN
 				gStamper.Feedbacks.StampCapDone := FALSE;
 				Internal.CamStartTrigger := TRUE;
+				Internal.Parameters.Velocity := gStamper.Parameters.Speed;
 			END_IF
 			
 			IF Internal.Cam.InCam AND Internal.Cam.ActualStateIndex = 1 THEN // Syncronized motion

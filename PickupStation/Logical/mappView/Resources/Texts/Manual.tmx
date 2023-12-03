@@ -6,123 +6,211 @@
   </header>
   <body>
     <tu tuid="Manual">
+      <tuv xml:lang="it">
+        <seg>Manuale</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Manual</seg>
       </tuv>
     </tu>
     <tu tuid="Push">
+      <tuv xml:lang="it">
+        <seg>Spingi tappo</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Push cap</seg>
       </tuv>
     </tu>
     <tu tuid="Arm">
+      <tuv xml:lang="it">
+        <seg>Braccio</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Arm</seg>
       </tuv>
     </tu>
     <tu tuid="Grip">
+      <tuv xml:lang="it">
+        <seg>Prendi tappo</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Grip cap</seg>
       </tuv>
     </tu>
     <tu tuid="Home">
+      <tuv xml:lang="it">
+        <seg>Riferimento</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Home</seg>
       </tuv>
     </tu>
     <tu tuid="Power">
+      <tuv xml:lang="it">
+        <seg>Potenza</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Power On</seg>
       </tuv>
     </tu>
     <tu tuid="Jog">
+      <tuv xml:lang="it">
+        <seg>Muovi</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Move</seg>
       </tuv>
     </tu>
     <tu tuid="Forward">
+      <tuv xml:lang="it">
+        <seg>Avanti</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Forward</seg>
       </tuv>
     </tu>
     <tu tuid="Backward">
+      <tuv xml:lang="it">
+        <seg>Indietro</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Backward</seg>
       </tuv>
     </tu>
     <tu tuid="Magazine">
+      <tuv xml:lang="it">
+        <seg>Magazzino</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Magazine</seg>
       </tuv>
     </tu>
     <tu tuid="CapInPosition">
+      <tuv xml:lang="it">
+        <seg>Tappo in posizione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Cap in position</seg>
       </tuv>
     </tu>
     <tu tuid="Pusher">
+      <tuv xml:lang="it">
+        <seg>Spingitore</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Pusher</seg>
       </tuv>
     </tu>
     <tu tuid="Picker">
+      <tuv xml:lang="it">
+        <seg>Prenditore</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Picker</seg>
       </tuv>
     </tu>
     <tu tuid="Conveyor">
+      <tuv xml:lang="it">
+        <seg>Tappeto</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Conveyor</seg>
       </tuv>
     </tu>
     <tu tuid="Stamper">
+      <tuv xml:lang="it">
+        <seg>Stampatore</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Stamper</seg>
       </tuv>
     </tu>
     <tu tuid="Vacuum">
+      <tuv xml:lang="it">
+        <seg>Vuoto</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Vacuum</seg>
       </tuv>
     </tu>
     <tu tuid="Cmd">
+      <tuv xml:lang="it">
+        <seg>Comandi</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Commands</seg>
       </tuv>
     </tu>
     <tu tuid="Fbk">
+      <tuv xml:lang="it">
+        <seg>Risposte</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Feedbacks</seg>
       </tuv>
     </tu>
     <tu tuid="Homed">
+      <tuv xml:lang="it">
+        <seg>Riferimento</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Homed</seg>
       </tuv>
     </tu>
     <tu tuid="Powered">
+      <tuv xml:lang="it">
+        <seg>Potenza</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Powered</seg>
       </tuv>
     </tu>
     <tu tuid="CapAtStart">
+      <tuv xml:lang="it">
+        <seg>Tappo all'inizio</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Cap at start</seg>
       </tuv>
     </tu>
     <tu tuid="CapAtExit">
+      <tuv xml:lang="it">
+        <seg>Tappo alla fine</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Cap at exit</seg>
       </tuv>
     </tu>
     <tu tuid="Speed">
+      <tuv xml:lang="it">
+        <seg>Velocità</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Speed</seg>
       </tuv>
     </tu>
     <tu tuid="Position">
+      <tuv xml:lang="it">
+        <seg>Posizione</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Acc">
+      <tuv xml:lang="it">
+        <seg>Accelerazione</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Acceleration</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ManualMode">
+      <tuv xml:lang="it">
+        <seg>Modo manuale</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Manual mode</seg>
       </tuv>
     </tu>
   </body>

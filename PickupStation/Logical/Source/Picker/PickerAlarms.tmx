@@ -6,26 +6,41 @@
   </header>
   <body>
     <tu tuid="PickerTimeoutForward">
+      <tuv xml:lang="it">
+        <seg>Picker non è stato in grado di raggiungere la posizione avanti</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Picker was not able to reach forward position</seg>
       </tuv>
     </tu>
     <tu tuid="PickerTimeoutBackward">
+      <tuv xml:lang="it">
+        <seg>Picker non è stato in grado di raggiungere la posizione indietro</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Picker was not able to reach backward position</seg>
       </tuv>
     </tu>
     <tu tuid="PickerTimeoutVacuumPick">
+      <tuv xml:lang="it">
+        <seg>Picker non è stato in grado di creare il vuoto</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Picker was not able to pick the cap</seg>
       </tuv>
     </tu>
     <tu tuid="PickerTimeoutVacuumPlace">
+      <tuv xml:lang="it">
+        <seg>Picker non è stato in grado di rimuovere il vuoto</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Picker was not able to place the cap</seg>
       </tuv>
     </tu>
     <tu tuid="PickerInvalidSensorsCombination">
+      <tuv xml:lang="it">
+        <seg>Picker ha rilevato una combinazione anomala dei sonsori avanti/indietro</seg>
+      </tuv>
       <tuv xml:lang="en">
         <seg>Picker forward/backward sensors simultaneously active </seg>
       </tuv>

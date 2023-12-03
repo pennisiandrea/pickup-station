@@ -1,7 +1,12 @@
 ACTION AutomaticPageAction: 
 			
 	// Link button
-	IF gMainMachine.Feedbacks.WaitModeSelection OR gMainMachine.Feedbacks.Error OR gMainMachine.Feedbacks.WaitingInit OR gMainMachine.Feedbacks.WaitingStart THEN
+	IF gMainMachine.Feedbacks.WaitModeSelection 
+		OR gMainMachine.Feedbacks.Error 
+		OR gMainMachine.Feedbacks.WaitingInit 
+		OR gMainMachine.Feedbacks.WaitingStart 
+		OR gMainMachine.Feedbacks.ManualMode THEN
+		
 		gHMI.AutomaticPage.LinkButtonEnable := TRUE;
 		gMainMachine.Commands.LinkMode := gHMI.AutomaticPage.LinkButton;
 	ELSE
@@ -242,7 +247,7 @@ ACTION ManualPageAction:
 		gHMI.ManualPage.ConveyorMoveButton := FALSE;
 	END_IF
 		
-	// Conveyor speed slider button
+	// Conveyor speed
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
 		gHMI.ManualPage.ConveyorSpeedEnable := NOT gConveyor.Commands.Manual.Move;
@@ -251,6 +256,16 @@ ACTION ManualPageAction:
 	ELSE
 		gHMI.ManualPage.ConveyorSpeedEnable := FALSE;
 		gHMI.ManualPage.ConveyorSpeed := gConveyor.Commands.Manual.Speed;
+	END_IF
+		
+	// Conveyor acceleration
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
+		
+		gHMI.ManualPage.ConveyorAccelerationEnable := NOT gConveyor.Commands.Manual.Move;
+		gConveyor.Parameters.Acceleration := gHMI.ManualPage.ConveyorAcceleration;
+	ELSE
+		gHMI.ManualPage.ConveyorAccelerationEnable := FALSE;
+		gHMI.ManualPage.ConveyorAcceleration := gConveyor.Parameters.Acceleration;
 	END_IF
 	
 	// Stamper home button
@@ -288,7 +303,7 @@ ACTION ManualPageAction:
 		gHMI.ManualPage.StamperMoveButton := FALSE;
 	END_IF
 		
-	// Stamper speed slider button
+	// Stamper speed 
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
 		gHMI.ManualPage.StamperSpeedEnable := NOT gStamper.Commands.Manual.Move;
@@ -298,7 +313,17 @@ ACTION ManualPageAction:
 		gHMI.ManualPage.StamperSpeedEnable := FALSE;
 		gHMI.ManualPage.StamperSpeed := gStamper.Commands.Manual.Speed;
 	END_IF
+				
+	// Stamper acceleration
+	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		
+		gHMI.ManualPage.StamperAccelerationEnable := NOT gConveyor.Commands.Manual.Move;
+		gStamper.Parameters.Acceleration := gHMI.ManualPage.StamperAcceleration;
+	ELSE
+		gHMI.ManualPage.StamperAccelerationEnable := FALSE;
+		gHMI.ManualPage.StamperAcceleration := gStamper.Parameters.Acceleration;
+	END_IF
+	
 	// Stamper position slider button
 	IF NOT gMainMachine.Commands.LinkMode AND gMainMachine.Feedbacks.ManualMode THEN
 		

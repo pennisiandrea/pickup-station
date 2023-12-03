@@ -27,7 +27,7 @@ TYPE
 		AxisPowered : BOOL;
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
-		Offset : LREAL;
+		Offset : LREAL := 65;
 		Speed : REAL := 10000;
 		Acceleration : REAL := 20000;
 	END_STRUCT;
@@ -53,7 +53,6 @@ TYPE
 		Enable : BOOL;
 		StamperForward : BOOL;
 		Position : LREAL;
-		Acceleration : REAL := 500;
 		Speed : REAL := 50;
 		PowerOn : BOOL;
 		Move : BOOL;
