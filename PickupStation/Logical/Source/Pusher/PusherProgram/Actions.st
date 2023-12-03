@@ -1,10 +1,10 @@
 ACTION FeedbacksUpdateAction: 
 
-    gPusher.Feedbacks.Enabled := TRUE;
+	gPusher.Feedbacks.Enabled := TRUE;
     gPusher.Feedbacks.WaitingStart := MachineState.ActualState = WAITING_START; 
-    gPusher.Feedbacks.Error := MachineState.ActualState = ERROR;
-	gPusher.Feedbacks.CapReady := gPusher.Interface.Inputs.CapAtPickPosition;
-	gPusher.Feedbacks.WaitingTakeACapCommand := MachineState.ActualState = WAITING_TAKE_A_CAP_COMMAND;		
+	gPusher.Feedbacks.Error := MachineState.ActualState = ERROR;
+	gPusher.Feedbacks.WaitingTakeACapCommand := MachineState.ActualState = WAITING_TAKE_A_CAP_COMMAND;	
+	gPusher.Feedbacks.CapReady := gPusher.Interface.Inputs.CapAtPickPosition;		
 	gPusher.Feedbacks.InitPosition := gPusher.Interface.Inputs.PusherInBackwardPosition;
 	gPusher.Feedbacks.InitDone := gPusher.Feedbacks.InitPosition AND gPusher.Commands.Automatic.Init;
 	

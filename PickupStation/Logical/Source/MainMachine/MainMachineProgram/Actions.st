@@ -1,14 +1,24 @@
 ACTION FeedbacksUpdateAction: 
-
+	
+	gMainMachine.Feedbacks.WaitingInit := MachineState.ActualState = AUTO_WAITING_INIT; 
+	
+	gMainMachine.Feedbacks.Initializing := MachineState.ActualState = AUTO_INITIALIZING; 
+	
 	gMainMachine.Feedbacks.WaitingStart := MachineState.ActualState = AUTO_WAITING_START; 
+	
+	gMainMachine.Feedbacks.WaitingModulesReady := MachineState.ActualState = AUTO_WAITING_MODULES_READY; 
+	
+	gMainMachine.Feedbacks.PushingCap := MachineState.ActualState = AUTO_PUSH_CAP; 
+	
+	gMainMachine.Feedbacks.PickingCap := MachineState.ActualState = AUTO_PICK_CAP; 
+	
+	gMainMachine.Feedbacks.DeliveringCap := MachineState.ActualState = AUTO_WAITING_CAP_DELIVERY; 
 	
 	gMainMachine.Feedbacks.Error := MachineState.ActualState = ERROR;
 	
 	gMainMachine.Feedbacks.WaitModeSelection := MachineState.ActualState = WAITING_MODE_SELECTION;
 	
 	gMainMachine.Feedbacks.Stopping := gMainMachine.Feedbacks.Started AND Internal.OnPhaseStopRequest;
-	
-	gMainMachine.Feedbacks.WaitingInit := MachineState.ActualState = AUTO_WAITING_INIT;
 	
 	gMainMachine.Feedbacks.ManualMode := (MachineState.ActualState = MANUAL);
 	
@@ -63,7 +73,7 @@ ACTION SetAlarmsAction:
 		MpAlarmXReset(gAlarmXCoreMpLink,'MainMachineEmergencyCircuitInterrupted'); // Persistent alarm
 	END_IF
 	
-	IF NOT Internal.MasterCommunicationOk AND gMainMachine.Commands.LinkMode THEN
+	IF NOT Internal.MasterCommunicationOk AND CommunicationInitialized THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'MainMachineCommunicationLost'); // Persistent alarm
 	ELSE
 		MpAlarmXReset(gAlarmXCoreMpLink,'MainMachineCommunicationLost'); // Persistent alarm
@@ -80,15 +90,25 @@ ACTION MasterCommunication:
 	END_IF
       
 	// Check communication heart beat from the master
-	IF EDGE(gMainMachine.Commands.HeartBeat) THEN
-		Internal.CommunicationTimeoutTimer.IN := FALSE;
-		CommunicationInitialized := TRUE;
+	IF gMainMachine.Commands.LinkMode THEN
+		IF EDGE(gMainMachine.Commands.HeartBeat) THEN
+			Internal.CommunicationTimeoutTimer.IN := FALSE;
+			CommunicationInitialized := TRUE;
+		ELSE
+			Internal.CommunicationTimeoutTimer.IN := TRUE;			
+			IF Internal.CommunicationTimeoutTimer.Q THEN
+				CommunicationInitialized := TRUE;
+			END_IF
+			
+		END_IF		
 	ELSE
-		Internal.CommunicationTimeoutTimer.IN := TRUE;
+		Internal.CommunicationTimeoutTimer.IN := FALSE;
+		CommunicationInitialized := FALSE;
 	END_IF
-	Internal.CommunicationTimeoutTimer();
-	Internal.MasterCommunicationOk := NOT Internal.CommunicationTimeoutTimer.Q AND CommunicationInitialized;
 	
+	Internal.CommunicationTimeoutTimer();
+	
+	Internal.MasterCommunicationOk := NOT Internal.CommunicationTimeoutTimer.Q AND CommunicationInitialized AND gMainMachine.Commands.LinkMode;
 	gMainMachine.Feedbacks.LinkOk := Internal.MasterCommunicationOk;
 	
 END_ACTION

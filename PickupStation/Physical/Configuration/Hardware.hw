@@ -5,6 +5,9 @@
     <Connection Connector="ETH1" TargetModule="X20CP1686X" TargetConnector="IF2">
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>
+    <Connection Connector="ETH2" TargetModule="OpcUa_any" TargetConnector="ETH1">
+      <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
+    </Connection>
     <Parameter ID="Terminal" Value="true" />
     <Parameter ID="Mode" Value="Manual" />
     <Parameter ID="InternetAddress" Value="192.168.0.2" />
@@ -139,6 +142,11 @@
     <Connection Connector="MT" TargetModule="80VD100PD.C000-01" TargetConnector="MT1" />
     <Parameter ID="MOTOR_AMB_TEMP_RATED" Location="M1/MotorParameters" Value="40" />
   </Module>
+  <Module Name="OpcUa_any" Type="OpcUa_any" Version="1.0.0.1">
+    <Connection Connector="ETH1" TargetModule="6PPT80.101E-16B" TargetConnector="ETH2">
+      <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
+    </Connection>
+  </Module>
   <Module Name="X20CP1686X" Type="X20CP1686X" Version="1.8.0.0">
     <Connector Name="IF2">
       <Parameter ID="ActivateDevice" Value="1" />
@@ -148,7 +156,6 @@
       <Parameter ID="ActivateSnmp" Value="2" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="PickupStation_Configuration" />
-    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="X20CP1686X.IF3" />
     <Parameter ID="Cyclic1Tolerance" Value="0" />

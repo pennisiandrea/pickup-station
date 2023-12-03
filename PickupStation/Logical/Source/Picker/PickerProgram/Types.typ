@@ -10,14 +10,14 @@ TYPE
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
 		WAITING_INIT,
+		MANUALS,
 		WAITING_START,
 		MOVE_BACKWARD, (*INIT state*)
 		PLACE_CAP, (*WAITING state*)
 		WAITING_PICK_COMMAND, (*ERROR state*)
 		MOVE_FORWARD,
 		PICK_CAP,
-		ERROR,
-		MANUALS
+		ERROR
 		);
 	InternalType : 	STRUCT 
 		CapPicked : BOOL;

@@ -149,9 +149,14 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				gConveyor.Commands.Automatic.DeliverCap := TRUE;
-				gStamper.Commands.Automatic.StampCap := TRUE;
+				gConveyor.Commands.Automatic.SendTrigger := TRUE;
 			END_IF
 			
+			IF gConveyor.Feedbacks.NewCapTrigger THEN
+				gConveyor.Commands.Automatic.SendTrigger := FALSE;
+				gStamper.Commands.Automatic.StampCap := TRUE;
+			END_IF
+						
 			IF NOT gConveyor.Feedbacks.WaitingCap THEN
 				gConveyor.Commands.Automatic.DeliverCap := FALSE;
 			END_IF
@@ -185,7 +190,12 @@ PROGRAM _CYCLIC
 				ResetModules;
 			END_IF
 			
-			IF NOT MpAlarmXCheckReaction(gAlarmXCoreMpLink,'ERROR') THEN
+			IF NOT MpAlarmXCheckReaction(gAlarmXCoreMpLink,'ERROR') 
+				AND NOT gPusher.Feedbacks.Error 
+				AND NOT gConveyor.Feedbacks.Error  
+				AND NOT gPicker.Feedbacks.Error  
+				AND NOT gStamper.Feedbacks.Error  THEN
+				
 				gMainMachine.Commands.Reset := FALSE;
 				MachineState.NextState := WAITING_MODE_SELECTION;
 			END_IF						 

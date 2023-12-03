@@ -10,13 +10,13 @@ TYPE
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
 		WAITING_INIT, (*WAITING state*)
+		MANUALS,
 		WAITING_START, (*WAITING state*)
 		MOVE_BACKWARD,
 		WAITING_MAGAZINE, (*ERROR state*)
-		MOVE_FORWARD,
 		WAITING_TAKE_A_CAP_COMMAND,
-		ERROR,
-		MANUALS
+		MOVE_FORWARD,
+		ERROR
 		);
 	InternalType : 	STRUCT 
 		Error : BOOL;

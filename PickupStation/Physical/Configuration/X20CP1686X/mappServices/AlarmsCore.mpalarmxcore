@@ -119,6 +119,11 @@
         <Property ID="Name" Value="MainMachineInitializationTimeout" />
         <Property ID="Message" Value="{$Source/MainMachine/Alarms/MainMachineInitializationTimeout}" />
       </Group>
+      <Group ID="[24]">
+        <Property ID="Name" Value="MasterInError" />
+        <Property ID="Message" Value="{$Source/Master/Alarms/MasterInError}" />
+        <Selector ID="Behavior" Value="PersistentAlarm" />
+      </Group>
     </Group>
   </Element>
 </Configuration>

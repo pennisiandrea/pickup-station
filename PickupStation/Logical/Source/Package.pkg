@@ -9,5 +9,6 @@
     <Object Type="Package">Stamper</Object>
     <Object Type="Package">MainMachine</Object>
     <Object Type="Package">HMI</Object>
+    <Object Type="Package">Master</Object>
   </Objects>
 </Package>

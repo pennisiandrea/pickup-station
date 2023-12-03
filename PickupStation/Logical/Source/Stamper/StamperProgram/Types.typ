@@ -10,17 +10,17 @@ TYPE
 	MachineStateEnum : 
 		( (*Machine State enumeration*)
 		WAITING_INIT,
-		INIT,
+		MANUAL,
 		WAITING_START, (*WAITING state*)
-		POWER_ON, (*INIT state*)
 		HOMING,
+		POWER_ON, (*INIT state*)
+		INIT,
 		ACTIVATE_CAM,
 		WAITING_CAP,
 		STAMP_FORWARD,
 		STAMPING,
 		STAMP_BACKWARD,
-		ERROR, (*ERROR state*)
-		MANUAL
+		ERROR (*ERROR state*)
 		);
 	InternalType : 	STRUCT 
 		Axis : MpAxisBasic;

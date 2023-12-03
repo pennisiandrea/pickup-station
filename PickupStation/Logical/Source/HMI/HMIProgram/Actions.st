@@ -1,4 +1,29 @@
 ACTION AutomaticPageAction: 
+			
+	// Link button
+	IF gMainMachine.Feedbacks.WaitModeSelection OR gMainMachine.Feedbacks.Error OR gMainMachine.Feedbacks.WaitingInit OR gMainMachine.Feedbacks.WaitingStart THEN
+		gHMI.AutomaticPage.LinkButtonEnable := TRUE;
+		gMainMachine.Commands.LinkMode := gHMI.AutomaticPage.LinkButton;
+	ELSE
+		gHMI.AutomaticPage.LinkButtonEnable := FALSE;
+	END_IF	
+		
+	// Auto button
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		IF gMainMachine.Feedbacks.WaitModeSelection OR NOT gMainMachine.Feedbacks.Started THEN
+		
+			gHMI.AutomaticPage.AutoButtonEnable := TRUE;
+			gMainMachine.Commands.Automatic.Enable := gHMI.AutomaticPage.AutoButton;
+		ELSE
+			gHMI.AutomaticPage.AutoButtonEnable := FALSE;
+		END_IF
+	ELSE
+		gHMI.AutomaticPage.AutoButtonEnable := FALSE;
+		gHMI.AutomaticPage.AutoButton := FALSE;
+	END_IF
+	IF EDGEPOS(gMainMachine.Commands.Automatic.Enable) THEN
+		gHMI.ManualPage.ManualButton := FALSE;
+	END_IF
 	
 	// Init button
 	IF NOT gMainMachine.Commands.LinkMode THEN
@@ -39,31 +64,6 @@ ACTION AutomaticPageAction:
 		gHMI.AutomaticPage.StartButtonEnable := FALSE;
 		gHMI.AutomaticPage.StopButtonVisibility := FALSE;
 		gHMI.AutomaticPage.StartButton := FALSE;
-	END_IF
-		
-	// Auto button
-	IF NOT gMainMachine.Commands.LinkMode THEN
-		IF gMainMachine.Feedbacks.WaitModeSelection OR NOT gMainMachine.Feedbacks.Started THEN
-		
-			gHMI.AutomaticPage.AutoButtonEnable := TRUE;
-			gMainMachine.Commands.Automatic.Enable := gHMI.AutomaticPage.AutoButton;
-		ELSE
-			gHMI.AutomaticPage.AutoButtonEnable := FALSE;
-		END_IF
-	ELSE
-		gHMI.AutomaticPage.AutoButtonEnable := FALSE;
-		gHMI.AutomaticPage.AutoButton := FALSE;
-	END_IF
-	IF EDGEPOS(gMainMachine.Commands.Automatic.Enable) THEN
-		gHMI.ManualPage.ManualButton := FALSE;
-	END_IF
-		
-	// Link button
-	IF gMainMachine.Feedbacks.WaitModeSelection THEN
-		gHMI.AutomaticPage.LinkButtonEnable := TRUE;
-		gHMI.AutomaticPage.LinkButton := gHMI.AutomaticPage.LinkButton;
-	ELSE
-		gHMI.AutomaticPage.LinkButtonEnable := FALSE;
 	END_IF
 	
 	// Conveyor speed slider button
@@ -112,6 +112,15 @@ ACTION AutomaticPageAction:
 		gHMI.AutomaticPage.StamperOffset := gStamper.Parameters.Offset;
 	END_IF
 	
+	// Stamper inclusion
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		gHMI.AutomaticPage.StamperIncludedCheckboxEnable := TRUE;
+		gMainMachine.Parameters.StamperEnable := gHMI.AutomaticPage.StamperIncludedCheckbox;
+	ELSE
+		gHMI.AutomaticPage.StamperIncludedCheckboxEnable := FALSE;
+		gHMI.AutomaticPage.StamperIncludedCheckbox := gMainMachine.Parameters.StamperEnable;
+	END_IF
+	
 END_ACTION
 
 	
@@ -120,6 +129,18 @@ ACTION HeaderContentAction:
 	gHMI.HeaderContent.PendingAlarms := UDINT_TO_STRING(MIN(999,gAlarms.Feedbacks.Pendings));
 	
 	gHMI.HeaderContent.MasterConnectionOk := gMainMachine.Feedbacks.LinkOk;
+	
+	gHMI.HeaderContent.StateWaitModeSelection := gMainMachine.Feedbacks.WaitModeSelection;
+	gHMI.HeaderContent.StateManual := gMainMachine.Feedbacks.ManualMode;
+	gHMI.HeaderContent.StateDeliveringCap := gMainMachine.Feedbacks.DeliveringCap;
+	gHMI.HeaderContent.StateError := gMainMachine.Feedbacks.Error;
+	gHMI.HeaderContent.StateInitializing := gMainMachine.Feedbacks.Initializing;
+	gHMI.HeaderContent.StatePickingCap := gMainMachine.Feedbacks.PickingCap;
+	gHMI.HeaderContent.StatePushingCap := gMainMachine.Feedbacks.PushingCap;
+	gHMI.HeaderContent.StateDeliveringCap := gMainMachine.Feedbacks.DeliveringCap;
+	gHMI.HeaderContent.StateWaitingModulesReady := gMainMachine.Feedbacks.WaitingModulesReady;
+	gHMI.HeaderContent.StateWaitingStart := gMainMachine.Feedbacks.WaitingStart;
+	gHMI.HeaderContent.StateWaitingInit := gMainMachine.Feedbacks.WaitingInit;
 	
 END_ACTION
 
@@ -302,12 +323,4 @@ ACTION ManualPageAction:
 	gHMI.ManualPage.StamperActPosition := gStamper.Feedbacks.AxisPosition;
 	gHMI.ManualPage.StamperActSpeed := gStamper.Feedbacks.AxisSpeed;
 	
-	// Stamper inclusion
-	IF NOT gMainMachine.Commands.LinkMode THEN
-		gHMI.AutomaticPage.StamperIncludedCheckboxEnable := TRUE;
-		gMainMachine.Parameters.StamperEnable := gHMI.AutomaticPage.StamperIncludedCheckbox;
-	ELSE
-		gHMI.AutomaticPage.StamperIncludedCheckboxEnable := FALSE;
-		gHMI.AutomaticPage.StamperIncludedCheckbox := gMainMachine.Parameters.StamperEnable;
-	END_IF
 END_ACTION

@@ -10,6 +10,8 @@ ACTION FeedbacksUpdateAction:
 	gConveyor.Feedbacks.InitDone := gConveyor.Feedbacks.InitPosition AND gConveyor.Commands.Automatic.Init;
 	gConveyor.Feedbacks.AxisSpeed := Internal.Axis.Velocity;
 	gConveyor.Feedbacks.AxisPosition := Internal.Axis.Position;
+	gConveyor.Feedbacks.NewCapTrigger := MachineState.ActualState = MOTION AND NOT gConveyor.Interface.Inputs.CapInStartPosition AND gConveyor.Commands.Automatic.SendTrigger;
+	
 END_ACTION
 
 ACTION ResetOutputsAction: 

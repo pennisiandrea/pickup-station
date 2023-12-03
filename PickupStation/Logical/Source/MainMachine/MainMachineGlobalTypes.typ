@@ -28,6 +28,11 @@ TYPE
 		WaitingInit : BOOL;
 		NewCapOnWork : BOOL;
 		ClearStatsDone : BOOL;
+		Initializing : BOOL;
+		WaitingModulesReady : BOOL;
+		PushingCap : BOOL;
+		PickingCap : BOOL;
+		DeliveringCap : BOOL;
 	END_STRUCT;
 	MainMachineParametersType : 	STRUCT  (*MainMachine Parameters type*)
 		StamperEnable : BOOL := TRUE;

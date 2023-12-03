@@ -13,8 +13,8 @@ TYPE
 	END_STRUCT;
 	PusherFeedbacksType : 	STRUCT  (*Pusher Feedbacks type*)
 		Enabled : BOOL;
-		WaitingStart : BOOL;
 		Error : BOOL;
+		WaitingStart : BOOL;
 		CapReady : BOOL;
 		WaitingTakeACapCommand : BOOL;
 		InitDone : BOOL;

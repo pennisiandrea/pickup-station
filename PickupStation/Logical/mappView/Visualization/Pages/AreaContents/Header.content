@@ -40,5 +40,15 @@
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse2" top="40" left="1165" width="30" height="30" zIndex="5" backColor="rgba(0, 192, 0, 1)" />
     <Widget xsi:type="widgets.brease.Label" id="Label1" top="35" left="890" width="265" height="40" zIndex="6" text="$IAT/General/Comm" fontSize="16px" padding="0px" />
     <Widget xsi:type="widgets.brease.Image" id="Image2" top="10" left="790" width="70" height="60" zIndex="7" image="Media/SymbolLib/User/Login.svg" />
+    <Widget xsi:type="widgets.brease.Label" id="Label2" top="25" left="205" width="550" zIndex="8" text="$IAT/States/Delivering" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label3" top="25" left="205" width="550" zIndex="9" text="$IAT/States/Error" textColor="rgba(255, 0, 0, 1)" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label4" top="25" left="205" width="550" zIndex="10" text="$IAT/States/Init" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label5" top="25" left="205" width="550" zIndex="11" text="$IAT/States/Manual" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label6" top="25" left="205" width="550" zIndex="12" text="$IAT/States/Picking" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label7" top="25" left="205" width="550" zIndex="13" text="$IAT/States/Pushing" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label8" top="25" left="205" width="550" zIndex="14" text="$IAT/States/WaitingInit" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label9" top="25" left="205" width="550" zIndex="15" text="$IAT/States/WaitingMode" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label10" top="25" left="205" width="550" zIndex="16" text="$IAT/States/WaitingModules" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label11" top="25" left="205" width="550" zIndex="17" text="$IAT/States/WaitingStart" textAlign="center" fontSize="20px" />
   </Widgets>
 </Content>

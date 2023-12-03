@@ -103,5 +103,8 @@ ACTION OffsetManagement:
 	Internal.Offset.Enable := Internal.Axis.Info.PLCopenState = mcAXIS_SYNCHRONIZED_MOTION;
 	Internal.Offset.StartShift := (Internal.OffsetToDo OR Internal.LastOffset <> gStamper.Parameters.Offset) AND Internal.Offset.Valid;
 	Internal.LastOffset := gStamper.Parameters.Offset;
+	IF Internal.OffsetToDo AND Internal.Offset.StartShift THEN
+		Internal.OffsetToDo := FALSE;
+	END_IF
 	
 END_ACTION  

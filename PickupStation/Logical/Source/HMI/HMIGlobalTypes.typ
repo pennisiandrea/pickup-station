@@ -75,5 +75,15 @@ TYPE
 	HMIHeaderContentType : 	STRUCT  (*HMI Interface Output type*)
 		MasterConnectionOk : BOOL;
 		PendingAlarms : STRING[3];
+		StateManual : BOOL;
+		StateWaitingInit : BOOL;
+		StateInitializing : BOOL;
+		StateWaitingStart : BOOL;
+		StateWaitingModulesReady : BOOL;
+		StatePushingCap : BOOL;
+		StatePickingCap : BOOL;
+		StateDeliveringCap : BOOL;
+		StateError : BOOL;
+		StateWaitModeSelection : BOOL;
 	END_STRUCT;
 END_TYPE

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<Package xmlns="http://br-automation.co.at/AS/Package">
+<Objects>
+    <Object Type="File">MasterGlobalTypes.typ</Object>
+    <Object Type="File">MasterGlobalVariables.var</Object>
+    <Object Type="Program" Language="IEC">MasterProgram</Object>
+    <Object Type="File">MasterAlarms.tmx</Object>
+</Objects>
+<Dependencies>
+    <Dependency ObjectName="standard" />
+    <Dependency ObjectName="asstring" />
+</Dependencies>
+</Package>

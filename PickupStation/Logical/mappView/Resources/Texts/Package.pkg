@@ -7,5 +7,6 @@
     <Object Type="File">Service.tmx</Object>
     <Object Type="File">Manual.tmx</Object>
     <Object Type="File">Alarms.tmx</Object>
+    <Object Type="File">States.tmx</Object>
   </Objects>
 </Package>

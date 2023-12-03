@@ -26,5 +26,45 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gAlarms.Commands.Acknowledge" attribute="value" />
 <Target xsi:type="brease" contentRefId="header_content" widgetRefId="AckButton" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateDeliveringCap" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label2" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateError" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label3" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateInitializing" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label4" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateManual" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label5" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StatePickingCap" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label6" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StatePushingCap" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label7" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateWaitingInit" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label8" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateWaitModeSelection" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label9" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateWaitingModulesReady" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label10" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateWaitingStart" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label11" attribute="visible" />
+</Binding>
 </Bindings>
 </BindingsSet>

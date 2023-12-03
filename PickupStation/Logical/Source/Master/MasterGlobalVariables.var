@@ -1,0 +1,3 @@
+VAR
+    gMaster : MasterType;
+END_VAR

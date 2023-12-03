@@ -3,11 +3,12 @@
 <SwConfiguration CpuAddress="SL1" xmlns="http://br-automation.co.at/AS/SwConfiguration">
   <TaskClass Name="Cyclic#1">
     <Task Name="RSModelPic" Source="RSModelPick.prg" Memory="UserROM" Language="IEC" Debugging="true" />
-    <Task Name="MainMachin" Source="Source.MainMachine.MainMachineProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="ConveyorPr" Source="Source.Conveyor.ConveyorProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="StamperPro" Source="Source.Stamper.StamperProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#2">
+    <Task Name="MasterProg" Source="Source.Master.MasterProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="MainMachin" Source="Source.MainMachine.MainMachineProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PusherProg" Source="Source.Pusher.PusherProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="PickerProg" Source="Source.Picker.PickerProgram.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
@@ -53,6 +54,7 @@
     <BinaryObject Name="ashwd" Source="" Memory="SystemROM" Language="Binary" />
     <BinaryObject Name="User" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="Cam" Source="" Memory="UserROM" Language="Binary" />
+    <BinaryObject Name="Users" Source="" Memory="UserROM" Language="Binary" />
   </Binaries>
   <Libraries>
     <LibraryObject Name="McBase" Source="Libraries.McBase.lby" Memory="UserROM" Language="binary" Debugging="true" />
@@ -70,6 +72,7 @@
     <LibraryObject Name="asstring" Source="Libraries.asstring.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="MpServer" Source="Libraries.MpServer.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="MpFile" Source="Libraries.MpFile.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="MpUserX" Source="Libraries.MpUserX.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="asieccon" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="asbrstr" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="dataobj" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
@@ -79,6 +82,8 @@
     <LibraryObject Name="arssl" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="sys_lib" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="powerlnk" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
-    <LibraryObject Name="MpUserX" Source="Libraries.MpUserX.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="arcert" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="ashw" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="aseth" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
   </Libraries>
 </SwConfiguration>
