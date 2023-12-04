@@ -213,5 +213,29 @@
         <seg>Manual mode</seg>
       </tuv>
     </tu>
+    <tu tuid="Stamp">
+      <tuv xml:lang="it">
+        <seg>Stampa</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Stamp</seg>
+      </tuv>
+    </tu>
+    <tu tuid="StampFwd">
+      <tuv xml:lang="it">
+        <seg>Stampa avanti</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Stamp forward</seg>
+      </tuv>
+    </tu>
+    <tu tuid="StampBkw">
+      <tuv xml:lang="it">
+        <seg>Stampa indietro</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Stamp backward</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

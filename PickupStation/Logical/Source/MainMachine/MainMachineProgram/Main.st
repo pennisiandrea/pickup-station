@@ -27,8 +27,6 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				StopModules;
-				gMainMachine.Feedbacks.AutomaticMode := FALSE;
-				gMainMachine.Feedbacks.ManualMode := FALSE;
 			END_IF
 			
 			IF gMainMachine.Commands.Automatic.Enable THEN				
@@ -40,8 +38,6 @@ PROGRAM _CYCLIC
 		
 		MANUAL:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			IF MachineState.NewTriggerState THEN
-			END_IF
 			
 			gPusher.Commands.Manual.Enable := TRUE;
 			gPicker.Commands.Manual.Enable := TRUE;
@@ -55,8 +51,6 @@ PROGRAM _CYCLIC
 		AUTO_WAITING_INIT:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state			
 			IF MachineState.NewTriggerState THEN
-				gMainMachine.Feedbacks.AutomaticMode := TRUE;
-				gMainMachine.Feedbacks.ManualMode := FALSE;
 				gMainMachine.Feedbacks.InitDone := FALSE;
 			END_IF
 						

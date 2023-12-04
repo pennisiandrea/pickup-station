@@ -9,10 +9,13 @@
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>
     <Parameter ID="Terminal" Value="true" />
+    <Parameter ID="Startmode" Value="2" />
     <Parameter ID="Mode" Value="Manual" />
     <Parameter ID="InternetAddress" Value="192.168.0.2" />
     <Parameter ID="Subnetmask" Value="255.255.255.0" />
+    <Parameter ID="ScreenRotation" Value="180" />
     <Parameter ID="PasswordVNC" Value="" />
+    <Parameter ID="SelectedFavoriteWeb" Value="192.168.0.1:81" />
     <Parameter ID="BrowserVKeyboard" Value="0" />
     <Parameter ID="PasswordCIFS" Value="" />
     <Parameter ID="PasswordService" Value="" />
@@ -146,6 +149,7 @@
     <Connection Connector="ETH1" TargetModule="6PPT80.101E-16B" TargetConnector="ETH2">
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>
+    <Parameter ID="ServerEndpointUrl" Value="opc.tcp://192.168.0.3" />
   </Module>
   <Module Name="X20CP1686X" Type="X20CP1686X" Version="1.8.0.0">
     <Connector Name="IF2">
@@ -156,7 +160,6 @@
       <Parameter ID="ActivateSnmp" Value="2" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="PickupStation_Configuration" />
-    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="X20CP1686X.IF3" />
     <Parameter ID="Cyclic1Tolerance" Value="0" />

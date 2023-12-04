@@ -1,3 +1,0 @@
-VAR_CONFIG
-	Cyclic#1.::gConveyor.Feedbacks.NewCapTrigger AT %Q.Cyclic#1.::gStamper.Commands.Automatic.StampCap; (*Trigger to start cam automat*)
-END_VAR

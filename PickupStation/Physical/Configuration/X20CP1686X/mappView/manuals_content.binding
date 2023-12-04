@@ -209,5 +209,21 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.ConveyorAcceleration" attribute="node" />
 <Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="NumericInput4" attribute="node" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperForwardButtonEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton16" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperForwardButton" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="ToggleButton16" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperInterface.Inputs.StampIsBackward" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="Ellipse43" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperInterface.Inputs.StampIsForward" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="Ellipse41" attribute="visible" />
+</Binding>
 </Bindings>
 </BindingsSet>
