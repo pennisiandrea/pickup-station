@@ -13,6 +13,7 @@ TYPE
 		ClearStats : BOOL;
 		Automatic : MainMachineAutomaticCommadsType;
 		Manual : MainMachineManualCommadsType;
+		OpcuaClientOk : BOOL;
 	END_STRUCT;
 	MainMachineFeedbacksType : 	STRUCT  (*MainMachine Feedbacks type*)
 		WaitingStart : BOOL;

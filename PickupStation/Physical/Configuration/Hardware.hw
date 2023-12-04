@@ -149,7 +149,89 @@
     <Connection Connector="ETH1" TargetModule="6PPT80.101E-16B" TargetConnector="ETH2">
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>
-    <Parameter ID="ServerEndpointUrl" Value="opc.tcp://192.168.0.3" />
+    <Parameter ID="ServerEndpointUrl" Value="opc.tcp://192.168.0.3:4840" />
+    <Group ID="Channel1" />
+    <Parameter ID="ChannelID1" Value="OUT_HeartBeat" />
+    <Parameter ID="ChannelBrowsePath1" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:HeartBeat" />
+    <Parameter ID="ChannelDirection1" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval1" Value="50" />
+    <Group ID="Channel2" />
+    <Parameter ID="ChannelID2" Value="OUT_Error" />
+    <Parameter ID="ChannelBrowsePath2" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:Error" />
+    <Parameter ID="ChannelDirection2" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval2" Value="50" />
+    <Group ID="Channel3" />
+    <Parameter ID="ChannelID3" Value="OUT_WaitingStart" />
+    <Parameter ID="ChannelBrowsePath3" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:WaitingStart" />
+    <Parameter ID="ChannelDirection3" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval3" Value="50" />
+    <Group ID="Channel4" />
+    <Parameter ID="ChannelID4" Value="OUT_WaitingModeSelection" />
+    <Parameter ID="ChannelBrowsePath4" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:WaitingModeSelection" />
+    <Parameter ID="ChannelDirection4" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval4" Value="50" />
+    <Group ID="Channel5" />
+    <Parameter ID="ChannelID5" Value="OUT_WaitingInit" />
+    <Parameter ID="ChannelBrowsePath5" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:WaitingInit" />
+    <Parameter ID="ChannelDirection5" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval5" Value="50" />
+    <Group ID="Channel6" />
+    <Parameter ID="ChannelID6" Value="OUT_InitDone" />
+    <Parameter ID="ChannelBrowsePath6" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:InitDone" />
+    <Parameter ID="ChannelDirection6" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval6" Value="50" />
+    <Group ID="Channel7" />
+    <Parameter ID="ChannelID7" Value="OUT_Started" />
+    <Parameter ID="ChannelBrowsePath7" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:Started" />
+    <Parameter ID="ChannelDirection7" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval7" Value="50" />
+    <Group ID="Channel8" />
+    <Parameter ID="ChannelID8" Value="OUT_ClearStatsDone" />
+    <Parameter ID="ChannelBrowsePath8" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Outputs/6:ClearStatsDone" />
+    <Parameter ID="ChannelDirection8" Value="OUT" />
+    <Parameter ID="ChannelSamplingInterval8" Value="50" />
+    <Group ID="Channel9" />
+    <Parameter ID="ChannelID9" Value="IN_HeartBeat" />
+    <Parameter ID="ChannelBrowsePath9" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:HeartBeat" />
+    <Parameter ID="ChannelPublishingInterval9" Value="50" />
+    <Group ID="Channel10" />
+    <Parameter ID="ChannelID10" Value="IN_Reset" />
+    <Parameter ID="ChannelBrowsePath10" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:Reset" />
+    <Parameter ID="ChannelPublishingInterval10" Value="50" />
+    <Group ID="Channel11" />
+    <Parameter ID="ChannelID11" Value="IN_Error" />
+    <Parameter ID="ChannelBrowsePath11" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:Error" />
+    <Parameter ID="ChannelPublishingInterval11" Value="50" />
+    <Group ID="Channel12" />
+    <Parameter ID="ChannelID12" Value="IN_ClearStats" />
+    <Parameter ID="ChannelBrowsePath12" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:ClearStats" />
+    <Parameter ID="ChannelPublishingInterval12" Value="50" />
+    <Group ID="Channel13" />
+    <Parameter ID="ChannelID13" Value="IN_Init" />
+    <Parameter ID="ChannelBrowsePath13" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:Init" />
+    <Parameter ID="ChannelPublishingInterval13" Value="50" />
+    <Group ID="Channel14" />
+    <Parameter ID="ChannelID14" Value="IN_Start" />
+    <Parameter ID="ChannelBrowsePath14" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:Start" />
+    <Parameter ID="ChannelPublishingInterval14" Value="50" />
+    <Group ID="Channel15" />
+    <Parameter ID="ChannelID15" Value="IN_AutomaticMode" />
+    <Parameter ID="ChannelBrowsePath15" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:AutomaticMode" />
+    <Parameter ID="ChannelPublishingInterval15" Value="50" />
+    <Group ID="Channel16" />
+    <Parameter ID="ChannelID16" Value="IN_StampIncluded" />
+    <Parameter ID="ChannelBrowsePath16" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:StampIncluded" />
+    <Parameter ID="ChannelPublishingInterval16" Value="50" />
+    <Group ID="Channel17" />
+    <Parameter ID="ChannelID17" Value="IN_StampOffset" />
+    <Parameter ID="ChannelBrowsePath17" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:StampOffset" />
+    <Parameter ID="ChannelPublishingInterval17" Value="50" />
+    <Parameter ID="ChannelType17" Value="REAL" />
+    <Group ID="Channel18" />
+    <Parameter ID="ChannelID18" Value="IN_ConveyorSpeed" />
+    <Parameter ID="ChannelBrowsePath18" Value="/0:Root/0:Objects/4:PLC/4:Modules/6:&amp;:&amp;:/6:Global PV/6:gPickingStation/6:Inputs/6:ConveyorSpeed" />
+    <Parameter ID="ChannelPublishingInterval18" Value="50" />
+    <Parameter ID="ChannelType18" Value="REAL" />
   </Module>
   <Module Name="X20CP1686X" Type="X20CP1686X" Version="1.8.0.0">
     <Connector Name="IF2">

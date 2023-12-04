@@ -23,7 +23,7 @@ TYPE
 		Start : BOOL;
 		AutomaticMode : BOOL;
 		StampIncluded : BOOL;
-		StampOffset : LREAL;
+		StampOffset : REAL;
 		ConveyorSpeed : REAL;
 	END_STRUCT;
 END_TYPE

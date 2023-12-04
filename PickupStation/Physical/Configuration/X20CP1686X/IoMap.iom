@@ -1,4 +1,21 @@
-
 VAR_CONFIG
-
+	gMaster.Outputs.HeartBeat AT %IX."OpcUa_any".IN_HeartBeat;
+	gMaster.Inputs.HeartBeat AT %QX."OpcUa_any".OUT_HeartBeat;
+	gMaster.Inputs.Error AT %QX."OpcUa_any".OUT_Error;
+	gMaster.Inputs.WaitingStart AT %QX."OpcUa_any".OUT_WaitingStart;
+	gMaster.Inputs.WaitingModeSelection AT %QX."OpcUa_any".OUT_WaitingModeSelection;
+	gMaster.Inputs.WaitingInit AT %QX."OpcUa_any".OUT_WaitingInit;
+	gMaster.Inputs.InitDone AT %QX."OpcUa_any".OUT_InitDone;
+	gMaster.Inputs.Started AT %QX."OpcUa_any".OUT_Started;
+	gMaster.Inputs.ClearStatsDone AT %QX."OpcUa_any".OUT_ClearStatsDone;
+	gMaster.Outputs.Reset AT %IX."OpcUa_any".IN_Reset;
+	gMaster.Outputs.Error AT %IX."OpcUa_any".IN_Error;
+	gMaster.Outputs.ClearStats AT %IX."OpcUa_any".IN_ClearStats;
+	gMaster.Outputs.Init AT %IX."OpcUa_any".IN_Init;
+	gMaster.Outputs.Start AT %IX."OpcUa_any".IN_Start;
+	gMaster.Outputs.AutomaticMode AT %IX."OpcUa_any".IN_AutomaticMode;
+	gMaster.Outputs.StampIncluded AT %IX."OpcUa_any".IN_StampIncluded;
+	gMaster.Outputs.StampOffset AT %ID."OpcUa_any".IN_StampOffset;
+	gMaster.Outputs.ConveyorSpeed AT %ID."OpcUa_any".IN_ConveyorSpeed;
+	::gMainMachine.Commands.OpcuaClientOk AT %IX."OpcUa_any".ModuleOk;
 END_VAR

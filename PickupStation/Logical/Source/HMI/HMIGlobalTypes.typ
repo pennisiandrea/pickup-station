@@ -24,7 +24,7 @@ TYPE
 		ClearStats : BOOL;
 		StamperIncludedCheckbox : BOOL;
 		StamperIncludedCheckboxEnable : BOOL;
-		StamperOffset : LREAL;
+		StamperOffset : REAL;
 		StamperOffsetEnable : BOOL;
 		CapsCounter : UDINT;
 	END_STRUCT;

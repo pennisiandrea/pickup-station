@@ -27,7 +27,7 @@ TYPE
 		AxisPowered : BOOL;
 	END_STRUCT;
 	StamperParametersType : 	STRUCT  (*Stamper Parameters type*)
-		Offset : LREAL := 65;
+		Offset : REAL := 65;
 		Speed : REAL := 10000;
 		Acceleration : REAL := 20000;
 	END_STRUCT;

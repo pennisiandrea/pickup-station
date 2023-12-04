@@ -91,5 +91,9 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StamperOffsetEnable" attribute="value" />
 <Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="NumericInput1" attribute="enable" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.AutomaticPage.StamperIncludedCheckboxEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="automatic_content" widgetRefId="CheckBox1" attribute="enable" />
+</Binding>
 </Bindings>
 </BindingsSet>

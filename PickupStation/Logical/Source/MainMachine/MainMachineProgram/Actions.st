@@ -73,7 +73,7 @@ ACTION SetAlarmsAction:
 		MpAlarmXReset(gAlarmXCoreMpLink,'MainMachineEmergencyCircuitInterrupted'); // Persistent alarm
 	END_IF
 	
-	IF NOT Internal.MasterCommunicationOk AND CommunicationInitialized THEN
+	IF NOT Internal.MasterCommunicationOk AND gMainMachine.Commands.LinkMode THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'MainMachineCommunicationLost'); // Persistent alarm
 	ELSE
 		MpAlarmXReset(gAlarmXCoreMpLink,'MainMachineCommunicationLost'); // Persistent alarm
@@ -90,25 +90,20 @@ ACTION MasterCommunication:
 	END_IF
       
 	// Check communication heart beat from the master
-	IF gMainMachine.Commands.LinkMode THEN
-		IF EDGE(gMainMachine.Commands.HeartBeat) THEN
-			Internal.CommunicationTimeoutTimer.IN := FALSE;
-			CommunicationInitialized := TRUE;
-		ELSE
-			Internal.CommunicationTimeoutTimer.IN := TRUE;			
-			IF Internal.CommunicationTimeoutTimer.Q THEN
-				CommunicationInitialized := TRUE;
-			END_IF
-			
-		END_IF		
-	ELSE
+	IF EDGE(gMainMachine.Commands.HeartBeat) AND gMainMachine.Commands.OpcuaClientOk THEN
 		Internal.CommunicationTimeoutTimer.IN := FALSE;
-		CommunicationInitialized := FALSE;
+		CommunicationInitialized := TRUE;
+	ELSE
+		Internal.CommunicationTimeoutTimer.IN := TRUE;			
+		IF Internal.CommunicationTimeoutTimer.Q THEN
+			CommunicationInitialized := TRUE;
+		END_IF
+		
 	END_IF
 	
 	Internal.CommunicationTimeoutTimer();
 	
-	Internal.MasterCommunicationOk := NOT Internal.CommunicationTimeoutTimer.Q AND CommunicationInitialized AND gMainMachine.Commands.LinkMode;
+	Internal.MasterCommunicationOk := NOT Internal.CommunicationTimeoutTimer.Q AND CommunicationInitialized;
 	gMainMachine.Feedbacks.LinkOk := Internal.MasterCommunicationOk;
 	
 END_ACTION
@@ -127,21 +122,25 @@ END_ACTION
 
 ACTION StopModules:
 	
+	gPusher.Commands.Manual.Enable := FALSE;
 	gPusher.Commands.Automatic.Start := FALSE;
 	gPusher.Commands.Automatic.Init := FALSE;
 	gPusher.Commands.Reset := FALSE;
 	gPusher.Commands.Automatic.TakeACap := FALSE;
 	
+	gPicker.Commands.Manual.Enable := FALSE;
 	gPicker.Commands.Automatic.Start := FALSE;
 	gPicker.Commands.Automatic.Init := FALSE;
 	gPicker.Commands.Reset := FALSE;
 	gPicker.Commands.Automatic.PickACap := FALSE;
 	
+	gConveyor.Commands.Manual.Enable := FALSE;
 	gConveyor.Commands.Automatic.Start := FALSE;
 	gConveyor.Commands.Automatic.Init := FALSE;
 	gConveyor.Commands.Reset := FALSE;
 	gConveyor.Commands.Automatic.DeliverCap := FALSE;
 	
+	gStamper.Commands.Manual.Enable := FALSE;
 	gStamper.Commands.Automatic.Start := FALSE;
 	gStamper.Commands.Automatic.Init := FALSE;
 	gStamper.Commands.Reset := FALSE;
