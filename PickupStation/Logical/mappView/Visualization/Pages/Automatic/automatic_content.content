@@ -26,5 +26,6 @@
     <Widget xsi:type="widgets.brease.Label" id="Label11" top="460" left="15" width="445" zIndex="22" text="$IAT/Automatic/Stats" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
     <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle2" top="460" left="15" width="445" height="205" zIndex="3" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
     <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput1" top="340" left="180" width="115" zIndex="24" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" cornerRadius="10px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label3" top="20" left="570" width="600" height="80" zIndex="25" multiLine="true" text="$IAT/General/LinkModeMsg" wordWrap="true" textColor="rgba(255, 128, 0, 1)" textAlign="center" fontSize="20px" />
   </Widgets>
 </Content>

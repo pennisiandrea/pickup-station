@@ -180,15 +180,15 @@ PROGRAM _CYCLIC
 				gMainMachine.Commands.Reset := FALSE;
 			END_IF
 			
+			IF gMainMachine.Commands.Automatic.Init THEN // User can reset alarms with init command	
+				gMainMachine.Commands.Reset := TRUE;			
+			END_IF
+						
 			IF gMainMachine.Commands.Reset THEN
 				ResetModules;
 			END_IF
 			
-			IF NOT MpAlarmXCheckReaction(gAlarmXCoreMpLink,'ERROR') 
-				AND NOT gPusher.Feedbacks.Error 
-				AND NOT gConveyor.Feedbacks.Error  
-				AND NOT gPicker.Feedbacks.Error  
-				AND NOT gStamper.Feedbacks.Error  THEN
+			IF NOT MpAlarmXCheckReaction(gAlarmXCoreMpLink,'STOP') THEN
 				
 				gMainMachine.Commands.Reset := FALSE;
 				MachineState.NextState := WAITING_MODE_SELECTION;

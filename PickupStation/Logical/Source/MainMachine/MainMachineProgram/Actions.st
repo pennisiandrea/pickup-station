@@ -54,8 +54,7 @@ ACTION MachineStateManagementAction:
 
 END_ACTION
 
-ACTION SetAlarmsAction:      
-	
+ACTION SetAlarmsAction:     
 	
 	IF MachineState.TimeoutTimer.Q THEN
         

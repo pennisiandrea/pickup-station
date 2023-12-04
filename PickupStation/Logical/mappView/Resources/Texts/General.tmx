@@ -45,5 +45,21 @@
         <seg>Login</seg>
       </tuv>
     </tu>
+    <tu tuid="Reset">
+      <tuv xml:lang="it">
+        <seg>Reset</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Reset</seg>
+      </tuv>
+    </tu>
+    <tu tuid="LinkModeMsg">
+      <tuv xml:lang="it">
+        <seg>Modalità collegamento attiva, utilizzare l'interfaccia utente dello smistatore.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Link mode activated. Please use the sorting station user interface.</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

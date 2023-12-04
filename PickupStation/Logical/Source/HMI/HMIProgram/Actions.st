@@ -1,3 +1,15 @@
+ACTION SetInitialValuesAction:
+	
+	gHMI.AutomaticPage.StamperOffset := gStamper.Parameters.Offset;
+	gHMI.AutomaticPage.ConveyorSpeed := gConveyor.Parameters.TargetSpeed;
+	gHMI.AutomaticPage.StamperIncludedCheckbox := gMainMachine.Parameters.StamperEnable;
+	gHMI.ManualPage.ConveyorAcceleration := gConveyor.Parameters.Acceleration;
+	gHMI.ManualPage.ConveyorSpeed := gConveyor.Commands.Manual.Speed;
+	gHMI.ManualPage.StamperPosition := gStamper.Commands.Manual.Position;
+	gHMI.ManualPage.StamperSpeed := gStamper.Commands.Manual.Speed;
+	
+END_ACTION
+
 ACTION AutomaticPageAction: 
 			
 	// Link button
@@ -32,7 +44,7 @@ ACTION AutomaticPageAction:
 	
 	// Init button
 	IF NOT gMainMachine.Commands.LinkMode THEN
-		IF gMainMachine.Feedbacks.WaitingInit THEN
+		IF gMainMachine.Feedbacks.WaitingInit OR (gMainMachine.Feedbacks.Error AND gMainMachine.Feedbacks.AutomaticMode) THEN
 		
 			gHMI.AutomaticPage.InitButtonEnable := TRUE;
 		ELSE
@@ -146,6 +158,14 @@ ACTION HeaderContentAction:
 	gHMI.HeaderContent.StateWaitingModulesReady := gMainMachine.Feedbacks.WaitingModulesReady;
 	gHMI.HeaderContent.StateWaitingStart := gMainMachine.Feedbacks.WaitingStart;
 	gHMI.HeaderContent.StateWaitingInit := gMainMachine.Feedbacks.WaitingInit;
+	
+	IF gMainMachine.Feedbacks.Error AND NOT gMainMachine.Commands.LinkMode THEN
+		IF gHMI.HeaderContent.ResetAlarms THEN
+			gMainMachine.Commands.Reset := TRUE;
+		END_IF 
+	ELSE
+		gHMI.HeaderContent.ResetAlarms := FALSE;
+	END_IF
 	
 END_ACTION
 

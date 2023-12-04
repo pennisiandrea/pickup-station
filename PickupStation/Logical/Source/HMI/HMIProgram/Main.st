@@ -1,5 +1,5 @@
 PROGRAM _INIT
-	
+	SetInitialValuesAction;
 END_PROGRAM
 
 PROGRAM _CYCLIC

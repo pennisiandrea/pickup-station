@@ -6,12 +6,13 @@ END_PROGRAM
 PROGRAM _CYCLIC
 	
 	gMaster.Inputs.HeartBeat := gMainMachine.Feedbacks.HeartBeat;
+	gMaster.Inputs.ActStampIncluded := gMainMachine.Parameters.StamperEnable;
+	gMaster.Inputs.ActStampOffset := gStamper.Parameters.Offset;
 	
 	gMainMachine.Commands.HeartBeat := gMaster.Outputs.HeartBeat;
-    
-	
+    	
 	IF NOT gMainMachine.Commands.LinkMode THEN
-		MpAlarmXReset(gAlarmXCoreMpLink,'MasterInError');
+		MpAlarmXReset(gAlarmXCoreMpLink,'MasterInError');		
 		RETURN;
 	END_IF
 	
@@ -23,6 +24,7 @@ PROGRAM _CYCLIC
 	gMaster.Inputs.WaitingStart := gMainMachine.Feedbacks.WaitingStart;
 	gMaster.Inputs.WaitingInit := gMainMachine.Feedbacks.WaitingInit;
 	gMaster.Inputs.WaitingModeSelection := gMainMachine.Feedbacks.WaitModeSelection;
+	gMaster.Inputs.LinkActive := gMainMachine.Commands.LinkMode;
 	
 	// Master -> MainMachine
 	gMainMachine.Commands.Reset := gMaster.Outputs.Reset;
@@ -36,10 +38,8 @@ PROGRAM _CYCLIC
 	gMainMachine.Parameters.StamperEnable := gMaster.Outputs.StampIncluded;
 	gStamper.Parameters.Offset := gMaster.Outputs.StampOffset;
 	
-	IF gMaster.Outputs.Error THEN
+	IF gMaster.Outputs.Error AND gAlarms.Feedbacks.Pendings = 0 THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'MasterInError');
-	ELSE
-		MpAlarmXReset(gAlarmXCoreMpLink,'MasterInError');
 	END_IF
 	
 END_PROGRAM

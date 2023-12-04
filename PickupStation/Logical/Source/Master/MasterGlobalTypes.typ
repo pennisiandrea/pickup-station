@@ -13,6 +13,9 @@ TYPE
 		InitDone : BOOL;
 		Started : BOOL;
 		ClearStatsDone : BOOL;
+		LinkActive : BOOL;
+		ActStampIncluded : BOOL;
+		ActStampOffset : REAL;
 	END_STRUCT;
 	MasterOutputsType : 	STRUCT  (*Master Feedbacks type*)
 		HeartBeat : BOOL;

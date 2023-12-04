@@ -18,14 +18,8 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.MasterConnectionOk" attribute="value" />
 <Target xsi:type="brease" contentRefId="header_content" widgetRefId="Ellipse2" attribute="visible" />
 </Binding>
-<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:gAlarms.Commands.AcknowledgeAll" attribute="value" />
-<Target xsi:type="brease" contentRefId="header_content" widgetRefId="AckAllButton" attribute="value" />
-</Binding>
-<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:gAlarms.Commands.Acknowledge" attribute="value" />
-<Target xsi:type="brease" contentRefId="header_content" widgetRefId="AckButton" attribute="value" />
-</Binding>
+
+
 <Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateDeliveringCap" attribute="value" />
 <Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label2" attribute="visible" />
@@ -65,6 +59,10 @@
 <Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.StateWaitingStart" attribute="value" />
 <Target xsi:type="brease" contentRefId="header_content" widgetRefId="Label11" attribute="visible" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.ResetAlarms" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="AckAllButton1" attribute="value" />
 </Binding>
 </Bindings>
 </BindingsSet>

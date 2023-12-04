@@ -89,5 +89,6 @@ TYPE
 		StateDeliveringCap : BOOL;
 		StateError : BOOL;
 		StateWaitModeSelection : BOOL;
+		ResetAlarms : BOOL;
 	END_STRUCT;
 END_TYPE
