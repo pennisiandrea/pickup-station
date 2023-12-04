@@ -82,6 +82,9 @@
             <Variable Name="ConveyorAcceleration" EURangesId="8" EngineeringUnitId="5" />
             <Variable Name="StamperAcceleration" EURangesId="9" EngineeringUnitId="5" />
           </Variable>
+          <Variable Name="HeaderContent">
+            <Variable AclId="2" AclInherit="2" Name="ResetAlarms" />
+          </Variable>
         </Variable>
         <Variable Name="gMainMachine" RecursiveEnable="2" />
         <Variable AclId="2" AclInherit="2" Name="gAlarms" RecursiveEnable="2" />

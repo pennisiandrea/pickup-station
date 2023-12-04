@@ -23,8 +23,26 @@ ACTION AutomaticPageAction:
 		gMainMachine.Commands.LinkMode := gHMI.AutomaticPage.LinkButton;
 	ELSE
 		gHMI.AutomaticPage.LinkButtonEnable := FALSE;
-	END_IF	
+	END_IF			
+	
+	// Init button
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		IF gMainMachine.Feedbacks.WaitingInit OR gMainMachine.Feedbacks.Error THEN
 		
+			gHMI.AutomaticPage.InitButtonEnable := TRUE;
+		ELSE
+			gHMI.AutomaticPage.InitButtonEnable := FALSE;
+			gHMI.AutomaticPage.InitButton := FALSE;
+		END_IF
+		gMainMachine.Commands.Automatic.Init := gHMI.AutomaticPage.InitButton;
+	ELSE
+		gHMI.AutomaticPage.InitButtonEnable := FALSE;
+		gHMI.AutomaticPage.InitButton := FALSE;
+	END_IF
+	IF EDGEPOS(gMainMachine.Commands.Automatic.Init) THEN
+		gHMI.AutomaticPage.AutoButton := TRUE;
+	END_IF
+	
 	// Auto button
 	IF NOT gMainMachine.Commands.LinkMode THEN
 		IF gMainMachine.Feedbacks.WaitModeSelection OR NOT gMainMachine.Feedbacks.Started THEN
@@ -40,21 +58,6 @@ ACTION AutomaticPageAction:
 	END_IF
 	IF EDGEPOS(gMainMachine.Commands.Automatic.Enable) THEN
 		gHMI.ManualPage.ManualButton := FALSE;
-	END_IF
-	
-	// Init button
-	IF NOT gMainMachine.Commands.LinkMode THEN
-		IF gMainMachine.Feedbacks.WaitingInit OR (gMainMachine.Feedbacks.Error AND gMainMachine.Feedbacks.AutomaticMode) THEN
-		
-			gHMI.AutomaticPage.InitButtonEnable := TRUE;
-		ELSE
-			gHMI.AutomaticPage.InitButtonEnable := FALSE;
-			gHMI.AutomaticPage.InitButton := FALSE;
-		END_IF
-		gMainMachine.Commands.Automatic.Init := gHMI.AutomaticPage.InitButton;
-	ELSE
-		gHMI.AutomaticPage.InitButtonEnable := FALSE;
-		gHMI.AutomaticPage.InitButton := FALSE;
 	END_IF
 		
 	// Start button
