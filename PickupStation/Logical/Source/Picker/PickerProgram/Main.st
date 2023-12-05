@@ -2,12 +2,11 @@
 // Program: 	PickerProgram
 // Author: 		Andrea Pennisi
 // Rev.: 		1.0.0
-// Date:		28.11.2023
+// Date:		5.12.2023
 //
 // Description:
-// This module uses both cap pusher and pickup arm tools. 
-// At init the module try to reach the initial position.
-// At start the module uses arm and cap pusher in order to deliver a cap in the conveyor.
+// This module is used to pick a cap from the pusher station to the conveyor.
+// Only pneumatic motion in this module 
 //******************************************************************************************************
         
 PROGRAM _INIT

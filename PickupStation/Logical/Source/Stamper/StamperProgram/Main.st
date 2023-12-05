@@ -1,3 +1,13 @@
+//******************************************************************************************************
+// Program: 	StamperProgram
+// Author: 		Andrea Pennisi
+// Rev.: 		1.0.0
+// Date:		5.12.2023
+//
+// Description:
+// This module is used to stamp the logo in the cap. 
+// An axis is controlled by mappMotion tools. The control is made by a cam linked to the Conveyor module axis.
+//******************************************************************************************************
 PROGRAM _INIT
         
     ResetOutputsAction;
@@ -108,6 +118,7 @@ PROGRAM _CYCLIC
 			
 		INIT:
 			MachineState.TimeoutTimer.PT := T#15S;
+			Internal.Parameters.Velocity := gStamper.Parameters.Speed;
 			Internal.Parameters.Position := 0;
 			Internal.Axis.MoveAbsolute := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.MoveDone THEN
@@ -120,6 +131,7 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state			
 			IF MachineState.NewTriggerState THEN
 				ResetMotionCommands;
+				Internal.Parameters.Velocity := gStamper.Parameters.Speed;
 			END_IF
 			
 			IF gStamper.Commands.Automatic.Start THEN
@@ -143,7 +155,6 @@ PROGRAM _CYCLIC
 			IF gStamper.Commands.Automatic.StampCap THEN
 				gStamper.Feedbacks.StampCapDone := FALSE;
 				Internal.CamStartTrigger := TRUE;
-				Internal.Parameters.Velocity := gStamper.Parameters.Speed;
 			END_IF
 			
 			IF Internal.Cam.InCam AND Internal.Cam.ActualStateIndex = 1 THEN // Syncronized motion
@@ -195,8 +206,5 @@ PROGRAM _CYCLIC
 END_PROGRAM
 
 PROGRAM _EXIT
-	Internal.Axis(Enable := FALSE);
-	Internal.Cam(Enable := FALSE);
-	Internal.Offset(Enable := FALSE);
     
 END_PROGRAM

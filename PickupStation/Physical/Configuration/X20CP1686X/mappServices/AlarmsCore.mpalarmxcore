@@ -127,6 +127,9 @@
       <Group ID="[25]">
         <Property ID="Name" Value="MasterInError" />
         <Property ID="Message" Value="{$Source/Master/Alarms/MasterInError}" />
+        <Selector ID="Behavior">
+          <Property ID="MultipleInstances" Value="FALSE" />
+        </Selector>
       </Group>
     </Group>
   </Element>

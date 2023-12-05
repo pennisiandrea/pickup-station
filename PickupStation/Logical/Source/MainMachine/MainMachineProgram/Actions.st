@@ -46,6 +46,10 @@ ACTION FeedbacksUpdateAction:
 	IF NOT gMainMachine.Feedbacks.Started THEN
 		gMainMachine.Feedbacks.NewCapOnWork := FALSE;
 	END_IF
+	
+	IF NOT gMainMachine.Commands.Automatic.Init THEN
+		gMainMachine.Feedbacks.InitDone := FALSE;
+	END_IF
 END_ACTION
 
 ACTION MachineStateManagementAction: 
@@ -165,15 +169,6 @@ ACTION ResetModulesManualCommands:
 	memset(ADR(gConveyor.Commands.Manual),0,SIZEOF(gConveyor.Commands.Manual));
 	memset(ADR(gStamper.Commands.Manual),0,SIZEOF(gStamper.Commands.Manual));
 		
-END_ACTION
-
-ACTION ResetModules:
-	
-	gPusher.Commands.Reset := TRUE;	
-	gPicker.Commands.Reset := TRUE;	
-	gConveyor.Commands.Reset := TRUE;	
-	gStamper.Commands.Reset := TRUE;		
-	
 END_ACTION
 
 ACTION InitModules:

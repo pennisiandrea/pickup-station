@@ -1,3 +1,13 @@
+//******************************************************************************************************
+// Program: 	HMIProgram
+// Author: 		Andrea Pennisi
+// Rev.: 		1.0.0
+// Date:		5.12.2023
+//
+// Description:
+// This module is used to manage the interface between Master and MainMachine
+// Interface comunication protocol is OPCUA. This station is the client.
+//******************************************************************************************************
 PROGRAM _INIT
         
     
@@ -21,8 +31,7 @@ PROGRAM _CYCLIC
 	
 	gMainMachine.Commands.HeartBeat := gMaster.Outputs.HeartBeat;
     	
-	IF NOT gMainMachine.Commands.LinkMode THEN
-		MpAlarmXReset(gAlarmXCoreMpLink,'MasterInError');		
+	IF NOT gMainMachine.Commands.LinkMode THEN	
 		RETURN;
 	END_IF
 	
@@ -34,14 +43,14 @@ PROGRAM _CYCLIC
 	IF gMaster.Outputs.AutomaticMode THEN
 		gMainMachine.Commands.Manual.Enable := FALSE;
 	END_IF
-	gMainMachine.Commands.Automatic.Init := gMaster.Outputs.Init;
+	gMainMachine.Commands.Automatic.Init := gMaster.Outputs.Init;	
 	gMainMachine.Commands.Automatic.Start := gMaster.Outputs.Start;
 	
 	gConveyor.Parameters.TargetSpeed := gMaster.Outputs.ConveyorSpeed;
 	gMainMachine.Parameters.StamperEnable := gMaster.Outputs.StampIncluded;
 	gStamper.Parameters.Offset := gMaster.Outputs.StampOffset;
 	
-	IF EDGEPOS(gMaster.Outputs.Error) AND gAlarms.Feedbacks.Pendings = 0 THEN
+	IF gMaster.Outputs.Error AND NOT gMainMachine.Feedbacks.Error AND NOT gMainMachine.Commands.Reset THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'MasterInError');
 	END_IF
 	

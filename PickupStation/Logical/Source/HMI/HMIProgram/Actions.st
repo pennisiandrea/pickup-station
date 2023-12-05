@@ -28,6 +28,12 @@ ACTION AutomaticPageAction:
 	
 	// Init button
 	IF NOT gMainMachine.Commands.LinkMode THEN
+		
+		IF gMainMachine.Commands.Automatic.Init AND gMainMachine.Feedbacks.InitDone THEN
+			gHMI.AutomaticPage.InitButton := FALSE;
+			gMainMachine.Commands.Automatic.Init := FALSE;
+		END_IF
+		
 		IF gMainMachine.Feedbacks.WaitingInit OR gMainMachine.Feedbacks.Error THEN
 		
 			gHMI.AutomaticPage.InitButtonEnable := TRUE;
@@ -43,12 +49,20 @@ ACTION AutomaticPageAction:
 	IF EDGEPOS(gMainMachine.Commands.Automatic.Init) THEN
 		gHMI.AutomaticPage.AutoButton := TRUE;
 	END_IF
-	gHMI.AutomaticPage.AskRemoveCaps := gMainMachine.Feedbacks.AskRemoveCaps;
-	IF gHMI.AutomaticPage.CapsRemoved THEN
-		gMainMachine.Commands.Automatic.CapsRemoved := TRUE;
-	END_IF
-	IF NOT gMainMachine.Feedbacks.AskRemoveCaps THEN
-		gMainMachine.Commands.Automatic.CapsRemoved := FALSE;
+	
+	// AskRemoveCaps
+	IF NOT gMainMachine.Commands.LinkMode THEN
+		gHMI.AutomaticPage.AskRemoveCaps := gMainMachine.Feedbacks.AskRemoveCaps;
+		IF gHMI.AutomaticPage.CapsRemoved THEN
+			gMainMachine.Commands.Automatic.CapsRemoved := TRUE;
+			gHMI.AutomaticPage.CapsRemoved := FALSE;
+		END_IF
+		IF NOT gMainMachine.Feedbacks.AskRemoveCaps THEN
+			gMainMachine.Commands.Automatic.CapsRemoved := FALSE;
+		END_IF
+	ELSE
+		gHMI.AutomaticPage.CapsRemoved := FALSE;
+		gHMI.AutomaticPage.AskRemoveCaps := FALSE;
 	END_IF
 	
 	// Auto button

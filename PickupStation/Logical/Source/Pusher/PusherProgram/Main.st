@@ -1,3 +1,14 @@
+//******************************************************************************************************
+// Program: 	PusherProgram
+// Author: 		Andrea Pennisi
+// Rev.: 		1.0.0
+// Date:		5.12.2023
+//
+// Description:
+// This module is used to pick a cap from the magazine station to the pick position. 
+// Only pneumatic motion in this module
+//******************************************************************************************************
+     
 PROGRAM _INIT
         
     ResetOutputsAction;

@@ -1,3 +1,12 @@
+//******************************************************************************************************
+// Program: 	MainMachineProgram
+// Author: 		Andrea Pennisi
+// Rev.: 		1.0.0
+// Date:		5.12.2023
+//
+// Description:
+// This module is the main machine. It manage the comunications between the modules and the working flow.
+//******************************************************************************************************
 PROGRAM _INIT
            
 	EnableModules;
@@ -93,6 +102,9 @@ PROGRAM _CYCLIC
 			ELSIF gMainMachine.Commands.Automatic.Start THEN				
 				MachineState.NextState := AUTO_WAITING_MODULES_READY;
 				
+			ELSIF gMainMachine.Commands.Automatic.Init THEN	
+				gMainMachine.Feedbacks.InitDone := TRUE;
+				
 			END_IF 
         
 		AUTO_WAITING_MODULES_READY:
@@ -184,12 +196,17 @@ PROGRAM _CYCLIC
 				gMainMachine.Commands.Reset := FALSE;
 			END_IF
 			
-			IF EDGEPOS(gMainMachine.Commands.Automatic.Init) THEN // User can reset alarms with init command	
-				gMainMachine.Commands.Reset := TRUE;			
+			IF EDGE(gMainMachine.Commands.Automatic.Init) THEN
+				gMainMachine.Commands.Reset := gMainMachine.Commands.Automatic.Init; // User can reset alarms with init command	
 			END_IF
+			
+			gPusher.Commands.Reset := gMainMachine.Commands.Reset;	
+			gPicker.Commands.Reset := gMainMachine.Commands.Reset;	
+			gConveyor.Commands.Reset := gMainMachine.Commands.Reset;	
+			gStamper.Commands.Reset := gMainMachine.Commands.Reset;
 						
 			IF gMainMachine.Commands.Reset THEN
-				ResetModules;
+				gAlarms.MpAlarmXListUIConnect.AcknowledgeAll := TRUE;
 			END_IF
 			
 			IF NOT MpAlarmXCheckReaction(gAlarmXCoreMpLink,'STOP') THEN
