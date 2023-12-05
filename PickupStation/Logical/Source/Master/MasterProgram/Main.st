@@ -17,6 +17,7 @@ PROGRAM _CYCLIC
 	gMaster.Inputs.ActStampIncluded := gMainMachine.Parameters.StamperEnable;
 	gMaster.Inputs.ActStampOffset := gStamper.Parameters.Offset;
 	gMaster.Inputs.LinkActive := gMainMachine.Commands.LinkMode;
+	gMaster.Inputs.CapsOnConveyor := gMainMachine.Feedbacks.CapsOnConveyor;
 	
 	gMainMachine.Commands.HeartBeat := gMaster.Outputs.HeartBeat;
     	
@@ -29,7 +30,10 @@ PROGRAM _CYCLIC
 	gMainMachine.Commands.Reset := gMaster.Outputs.Reset;
 	gMainMachine.Commands.ClearStats := gMaster.Outputs.ClearStats;
 	
-	gMainMachine.Commands.Automatic.Enable := gMaster.Outputs.AutomaticMode;
+	gMainMachine.Commands.Automatic.Enable := gMaster.Outputs.AutomaticMode;	
+	IF gMaster.Outputs.AutomaticMode THEN
+		gMainMachine.Commands.Manual.Enable := FALSE;
+	END_IF
 	gMainMachine.Commands.Automatic.Init := gMaster.Outputs.Init;
 	gMainMachine.Commands.Automatic.Start := gMaster.Outputs.Start;
 	

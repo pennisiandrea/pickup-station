@@ -2,24 +2,24 @@
 <Content id="manuals_content" height="680" width="1280" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Widgets>
     <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton2" top="10" left="15" width="195" zIndex="4" text="$IAT/Manual/ManualMode" cornerRadius="10px" fontSize="20px" style="Command" />
-    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton3" top="125" left="20" width="190" zIndex="5" text="$IAT/Manual/Push" cornerRadius="10px" style="Command" />
-    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton7" top="125" left="695" width="230" zIndex="6" text="$IAT/Manual/Home" cornerRadius="10px" checkedBackColor="rgba(100, 100, 100, 1)" checkedTextColor="rgba(255, 255, 255, 1)" style="Command" />
-    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton8" top="160" left="695" width="230" zIndex="7" text="$IAT/Manual/Power" cornerRadius="10px" style="Command" />
-    <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton9" top="195" left="695" width="230" zIndex="8" text="$IAT/Manual/Jog" cornerRadius="10px" style="Command" />
-    <Widget xsi:type="widgets.brease.Label" id="Label2" top="175" left="20" width="195" zIndex="9" text="$IAT/Manual/CapInPosition" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse5" top="125" left="220" width="30" height="30" zIndex="11" backColor="rgba(255, 0, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse6" top="125" left="220" width="30" height="30" zIndex="10" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse7" top="175" left="220" width="30" height="30" zIndex="13" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse8" top="175" left="220" width="30" height="30" zIndex="12" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label4" top="210" left="20" width="200" zIndex="14" text="$IAT/Manual/Forward" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse9" top="210" left="220" width="30" height="30" zIndex="16" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse10" top="210" left="220" width="30" height="30" zIndex="15" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label5" top="245" left="20" width="210" zIndex="17" text="$IAT/Manual/Backward" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse11" top="245" left="220" width="30" height="30" zIndex="19" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse12" top="245" left="220" width="30" height="30" zIndex="18" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label6" top="280" left="20" width="200" zIndex="20" text="$IAT/Manual/Magazine" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse13" top="280" left="220" width="30" height="30" zIndex="22" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse14" top="280" left="220" width="30" height="30" zIndex="21" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton3" top="125" left="15" width="210" zIndex="5" text="$IAT/Manual/Push" cornerRadius="10px" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton7" top="125" left="685" width="250" zIndex="6" text="$IAT/Manual/Home" cornerRadius="10px" checkedBackColor="rgba(100, 100, 100, 1)" checkedTextColor="rgba(255, 255, 255, 1)" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton8" top="160" left="685" width="250" zIndex="7" text="$IAT/Manual/Power" cornerRadius="10px" style="Command" />
+    <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton9" top="195" left="685" width="250" zIndex="8" text="$IAT/Manual/Jog" cornerRadius="10px" style="Command" />
+    <Widget xsi:type="widgets.brease.Label" id="Label2" top="175" left="15" width="195" zIndex="9" text="$IAT/Manual/CapInPosition" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse5" top="125" left="235" width="30" height="30" zIndex="11" backColor="rgba(255, 0, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse6" top="125" left="235" width="30" height="30" zIndex="10" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse7" top="175" left="235" width="30" height="30" zIndex="13" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse8" top="175" left="235" width="30" height="30" zIndex="12" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label4" top="210" left="15" width="200" zIndex="14" text="$IAT/Manual/Forward" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse9" top="210" left="235" width="30" height="30" zIndex="16" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse10" top="210" left="235" width="30" height="30" zIndex="15" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label5" top="245" left="15" width="210" zIndex="17" text="$IAT/Manual/Backward" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse11" top="245" left="235" width="30" height="30" zIndex="19" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse12" top="245" left="235" width="30" height="30" zIndex="18" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label6" top="280" left="15" width="200" zIndex="20" text="$IAT/Manual/Magazine" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse13" top="280" left="235" width="30" height="30" zIndex="22" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse14" top="280" left="235" width="30" height="30" zIndex="21" backColor="rgba(192, 192, 192, 1)" />
     <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton10" top="125" left="355" width="190" zIndex="23" text="$IAT/Manual/Forward" cornerRadius="10px" style="Command" />
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse15" top="125" left="555" width="30" height="30" zIndex="25" backColor="rgba(255, 0, 0, 1)" />
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse16" top="125" left="555" width="30" height="30" zIndex="24" backColor="rgba(192, 192, 192, 1)" />
@@ -38,64 +38,66 @@
     <Widget xsi:type="widgets.brease.Label" id="Label10" top="315" left="355" width="190" zIndex="38" text="$IAT/Manual/Vacuum" textAlign="left" fontSize="16px" />
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse25" top="315" left="555" width="30" height="30" zIndex="40" backColor="rgba(0, 192, 0, 1)" />
     <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse26" top="315" left="555" width="30" height="30" zIndex="39" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label18" top="315" left="695" width="200" zIndex="41" text="$IAT/Manual/Homed" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse27" top="315" left="895" width="30" height="30" zIndex="43" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse28" top="315" left="895" width="30" height="30" zIndex="42" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label19" top="350" left="695" width="200" zIndex="44" text="$IAT/Manual/Powered" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse29" top="350" left="895" width="30" height="30" zIndex="46" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse30" top="350" left="895" width="30" height="30" zIndex="45" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label20" top="385" left="695" width="200" zIndex="47" text="$IAT/Manual/CapAtStart" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse31" top="385" left="895" width="30" height="30" zIndex="49" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse32" top="385" left="895" width="30" height="30" zIndex="48" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label21" top="420" left="695" width="200" zIndex="50" text="$IAT/Manual/CapAtExit" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse33" top="420" left="895" width="30" height="30" zIndex="52" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse34" top="420" left="895" width="30" height="30" zIndex="51" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput1" top="230" left="810" width="115" zIndex="53" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" cornerRadius="10px" />
-    <Widget xsi:type="widgets.brease.Label" id="Label22" top="230" left="695" width="140" zIndex="54" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton13" top="155" left="1035" width="230" zIndex="55" text="$IAT/Manual/Home" cornerRadius="10px" checkedBackColor="rgba(100, 100, 100, 1)" checkedTextColor="rgba(255, 255, 255, 1)" style="Command" />
-    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton14" top="190" left="1035" width="230" zIndex="56" text="$IAT/Manual/Power" cornerRadius="10px" style="Command" />
-    <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton15" top="225" left="1035" width="230" zIndex="57" text="$IAT/Manual/Jog" cornerRadius="10px" style="Command" />
-    <Widget xsi:type="widgets.brease.Label" id="Label26" top="415" left="1035" width="195" zIndex="58" text="$IAT/Manual/Homed" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse35" top="415" left="1235" width="30" height="30" zIndex="60" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse36" top="415" left="1235" width="30" height="30" zIndex="59" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label27" top="450" left="1035" width="195" zIndex="61" text="$IAT/Manual/Powered" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse37" top="450" left="1235" width="30" height="30" zIndex="63" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse38" top="450" left="1235" width="30" height="30" zIndex="62" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput2" top="260" left="1150" width="115" zIndex="64" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" cornerRadius="10px" />
-    <Widget xsi:type="widgets.brease.Label" id="Label30" top="260" left="1035" width="115" zIndex="65" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput3" top="295" left="1150" width="115" zIndex="66" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" cornerRadius="10px" />
-    <Widget xsi:type="widgets.brease.Label" id="Label31" top="295" left="1035" width="115" zIndex="67" text="$IAT/Manual/Position" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Label" id="Label32" top="460" left="695" width="151" zIndex="68" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput1" top="460" left="790" width="140" zIndex="69" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" />
-    <Widget xsi:type="widgets.brease.Label" id="Label33" top="495" left="695" width="151" zIndex="70" text="$IAT/Manual/Position" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput2" top="495" left="780" width="150" zIndex="71" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" />
-    <Widget xsi:type="widgets.brease.Label" id="Label34" top="485" left="1035" width="151" zIndex="72" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput3" top="490" left="1115" width="150" zIndex="73" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" />
-    <Widget xsi:type="widgets.brease.Label" id="Label35" top="520" left="1035" width="151" zIndex="74" text="$IAT/Manual/Position" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput4" top="525" left="1120" width="145" zIndex="75" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" />
-    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput4" top="265" left="810" width="115" zIndex="76" unit="{'metric':'M41','imperial':'IV','imperial-us':'IV'}" unitAlign="right" cornerRadius="10px" />
-    <Widget xsi:type="widgets.brease.Label" id="Label28" top="265" left="695" width="140" zIndex="77" text="$IAT/Manual/Acc" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Label" id="Label29" top="85" left="15" width="240" zIndex="78" text="$IAT/Manual/Pusher" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
-    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle1" top="85" left="15" width="240" height="235" zIndex="3" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
-    <Widget xsi:type="widgets.brease.Line" id="Line1" zIndex="79" x1="15" x2="255" y1="165" y2="165" />
+    <Widget xsi:type="widgets.brease.Label" id="Label18" top="315" left="685" width="200" zIndex="41" text="$IAT/Manual/Homed" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse27" top="315" left="905" width="30" height="30" zIndex="43" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse28" top="315" left="905" width="30" height="30" zIndex="42" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label19" top="350" left="685" width="200" zIndex="44" text="$IAT/Manual/Powered" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse29" top="350" left="905" width="30" height="30" zIndex="46" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse30" top="350" left="905" width="30" height="30" zIndex="45" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label20" top="385" left="685" width="200" zIndex="47" text="$IAT/Manual/CapAtStart" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse31" top="385" left="905" width="30" height="30" zIndex="49" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse32" top="385" left="905" width="30" height="30" zIndex="48" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label21" top="420" left="685" width="200" zIndex="50" text="$IAT/Manual/CapAtExit" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse33" top="420" left="905" width="30" height="30" zIndex="52" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse34" top="420" left="905" width="30" height="30" zIndex="51" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput1" top="230" left="800" width="135" zIndex="53" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" cornerRadius="10px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label22" top="230" left="685" width="140" zIndex="54" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton13" top="155" left="1020" width="250" zIndex="55" text="$IAT/Manual/Home" cornerRadius="10px" checkedBackColor="rgba(100, 100, 100, 1)" checkedTextColor="rgba(255, 255, 255, 1)" style="Command" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton14" top="190" left="1020" width="250" zIndex="56" text="$IAT/Manual/Power" cornerRadius="10px" style="Command" />
+    <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton15" top="225" left="1020" width="250" zIndex="57" text="$IAT/Manual/Jog" cornerRadius="10px" style="Command" />
+    <Widget xsi:type="widgets.brease.Label" id="Label26" top="455" left="1020" width="195" zIndex="58" text="$IAT/Manual/Homed" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse35" top="455" left="1240" width="30" height="30" zIndex="60" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse36" top="455" left="1240" width="30" height="30" zIndex="59" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label27" top="490" left="1020" width="195" zIndex="61" text="$IAT/Manual/Powered" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse37" top="490" left="1240" width="30" height="30" zIndex="63" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse38" top="490" left="1240" width="30" height="30" zIndex="62" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput2" top="260" left="1135" width="135" zIndex="64" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" cornerRadius="10px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label30" top="260" left="1020" width="115" zIndex="65" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput3" top="335" left="1135" width="135" zIndex="66" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" cornerRadius="10px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label31" top="335" left="1020" width="115" zIndex="67" text="$IAT/Manual/Position" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label32" top="460" left="685" width="151" zIndex="68" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput1" top="460" left="800" width="140" zIndex="69" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" />
+    <Widget xsi:type="widgets.brease.Label" id="Label33" top="495" left="685" width="151" zIndex="70" text="$IAT/Manual/Position" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput2" top="495" left="790" width="150" zIndex="71" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" />
+    <Widget xsi:type="widgets.brease.Label" id="Label34" top="525" left="1020" width="151" zIndex="72" text="$IAT/Manual/Speed" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput3" top="530" left="1120" width="150" zIndex="73" unit="{'metric':'C16','imperial':'IU','imperial-us':'IU'}" unitAlign="right" />
+    <Widget xsi:type="widgets.brease.Label" id="Label35" top="560" left="1020" width="151" zIndex="74" text="$IAT/Manual/Position" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput4" top="565" left="1125" width="145" zIndex="75" unit="{'metric':'MMT','imperial':'INH','imperial-us':'INH'}" unitAlign="right" />
+    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput4" top="265" left="800" width="135" zIndex="76" unit="{'metric':'M41','imperial':'IV','imperial-us':'IV'}" unitAlign="right" cornerRadius="10px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label28" top="265" left="685" width="140" zIndex="77" text="$IAT/Manual/Acc" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label29" top="85" left="10" width="260" zIndex="78" text="$IAT/Manual/Pusher" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle1" top="85" left="10" width="260" height="235" zIndex="3" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
+    <Widget xsi:type="widgets.brease.Line" id="Line1" zIndex="79" x1="10" x2="270" y1="165" y2="165" />
     <Widget xsi:type="widgets.brease.Label" id="Label36" top="85" left="350" width="240" zIndex="80" text="$IAT/Manual/Picker" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
     <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle2" top="85" left="350" width="240" height="270" zIndex="2" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
     <Widget xsi:type="widgets.brease.Line" id="Line2" zIndex="81" x1="-1250" x2="-1010" y1="275" y2="275" />
     <Widget xsi:type="widgets.brease.Line" id="Line3" zIndex="82" x1="350" x2="590" y1="235" y2="235" />
-    <Widget xsi:type="widgets.brease.Label" id="Label37" top="85" left="690" width="240" zIndex="83" text="$IAT/Manual/Conveyor" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
-    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle3" top="85" left="690" width="240" height="445" zIndex="1" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
-    <Widget xsi:type="widgets.brease.Line" id="Line4" zIndex="84" x1="690" x2="930" y1="305" y2="305" />
-    <Widget xsi:type="widgets.brease.Label" id="Label38" top="85" left="1030" width="240" zIndex="85" text="$IAT/Manual/Stamper" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
-    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle4" top="85" left="1030" width="240" height="475" zIndex="0" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
-    <Widget xsi:type="widgets.brease.Line" id="Line5" zIndex="86" x1="1030" x2="1270" y1="335" y2="335" />
-    <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton16" top="120" left="1035" width="190" zIndex="87" text="$IAT/Manual/Stamp" cornerRadius="10px" style="Command" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse39" top="120" left="1235" width="30" height="30" zIndex="89" backColor="rgba(255, 0, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse40" top="120" left="1235" width="30" height="30" zIndex="88" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label11" top="345" left="1035" width="190" zIndex="90" text="$IAT/Manual/StampFwd" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse41" top="345" left="1235" width="30" height="30" zIndex="92" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse42" top="345" left="1235" width="30" height="30" zIndex="91" backColor="rgba(192, 192, 192, 1)" />
-    <Widget xsi:type="widgets.brease.Label" id="Label12" top="380" left="1035" width="190" zIndex="93" text="$IAT/Manual/StampBkw" textAlign="left" fontSize="16px" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse43" top="380" left="1235" width="30" height="30" zIndex="95" backColor="rgba(0, 192, 0, 1)" />
-    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse44" top="380" left="1235" width="30" height="30" zIndex="94" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label37" top="85" left="680" width="260" zIndex="83" text="$IAT/Manual/Conveyor" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle3" top="85" left="680" width="260" height="445" zIndex="1" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
+    <Widget xsi:type="widgets.brease.Line" id="Line4" zIndex="84" x1="680" x2="940" y1="305" y2="305" />
+    <Widget xsi:type="widgets.brease.Label" id="Label38" top="85" left="1015" width="260" zIndex="85" text="$IAT/Manual/Stamper" borderWidth="0px 0px 1px 0px" borderColor="rgba(0, 0, 0, 1)" borderStyle="solid" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="20px" />
+    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle4" top="85" left="1015" width="260" height="510" zIndex="0" cornerRadius="10px" lineColor="rgba(0, 0, 0, 1)" backColor="rgba(255, 255, 255, 1)" />
+    <Widget xsi:type="widgets.brease.Line" id="Line5" zIndex="86" x1="1015" x2="1275" y1="375" y2="375" />
+    <Widget xsi:type="widgets.brease.MomentaryPushButton" id="ToggleButton16" top="120" left="1020" width="215" zIndex="87" text="$IAT/Manual/Stamp" cornerRadius="10px" style="Command" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse39" top="120" left="1240" width="30" height="30" zIndex="89" backColor="rgba(255, 0, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse40" top="120" left="1240" width="30" height="30" zIndex="88" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label11" top="385" left="1020" width="190" zIndex="90" text="$IAT/Manual/StampFwd" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse41" top="385" left="1240" width="30" height="30" zIndex="92" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse42" top="385" left="1240" width="30" height="30" zIndex="91" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label12" top="420" left="1020" width="190" zIndex="93" text="$IAT/Manual/StampBkw" textAlign="left" fontSize="16px" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse43" top="420" left="1240" width="30" height="30" zIndex="95" backColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Ellipse" id="Ellipse44" top="420" left="1240" width="30" height="30" zIndex="94" backColor="rgba(192, 192, 192, 1)" />
+    <Widget xsi:type="widgets.brease.NumericInput" id="NumericInput5" top="295" left="1135" width="135" zIndex="96" unit="{'metric':'M41','imperial':'IV','imperial-us':'IV'}" unitAlign="right" cornerRadius="10px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label39" top="295" left="1020" width="140" zIndex="97" text="$IAT/Manual/Acc" textAlign="left" fontSize="16px" />
   </Widgets>
 </Content>

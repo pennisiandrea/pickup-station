@@ -26,5 +26,6 @@ TYPE
 		MasterCommunicationOk : BOOL;
 		OnPhaseStopRequest : BOOL;
 		Error : BOOL;
+		StamperOneTimeInterlock : BOOL;
 	END_STRUCT;
 END_TYPE

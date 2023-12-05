@@ -21,4 +21,6 @@ VAR_CONFIG
 	Cyclic#2.gMaster.Inputs.LinkActive AT %QX."OpcUa_any".OUT_LinkActive;
 	gMaster.Inputs.ActStampOffset AT %QD."OpcUa_any".OUT_ActStampOffset;
 	gMaster.Inputs.ActStampIncluded AT %QX."OpcUa_any".OUT_ActStampIncluded;
+	::gMaster.Inputs.AskRemoveCaps AT %QX."OpcUa_any".OUT_AskRemoveCaps;
+	::gMainMachine.Feedbacks.CapsOnConveyor AT %QB."OpcUa_any".OUT_CapsOnConveyor;
 END_VAR

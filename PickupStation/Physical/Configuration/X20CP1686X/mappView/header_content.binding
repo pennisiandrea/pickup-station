@@ -64,5 +64,9 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.ResetAlarms" attribute="value" />
 <Target xsi:type="brease" contentRefId="header_content" widgetRefId="AckAllButton1" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.HeaderContent.AlarmBlink" attribute="value" />
+<Target xsi:type="brease" contentRefId="header_content" widgetRefId="Rectangle1" attribute="visible" />
+</Binding>
 </Bindings>
 </BindingsSet>

@@ -49,6 +49,7 @@ PROGRAM _CYCLIC
 			END_IF
 			
 			IF gConveyor.Commands.Automatic.Init THEN
+				gConveyor.Feedbacks.CapsOnConveyor := 0;
 				MachineState.NextState := HOMING;
 				
 			ELSIF gConveyor.Commands.Manual.Enable THEN
@@ -66,11 +67,11 @@ PROGRAM _CYCLIC
 				Internal.Parameters.Direction := mcDIR_NEGATIVE;
 			END_IF
 			
-			Internal.Axis.Home := gConveyor.Commands.Manual.Home AND Internal.Axis.Active;
+			Internal.Axis.Home := gConveyor.Commands.Manual.Home AND Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.IsHomed THEN			
-				Internal.Axis.Power := gConveyor.Commands.Manual.PowerOn AND Internal.Axis.Active;
+				Internal.Axis.Power := gConveyor.Commands.Manual.PowerOn AND Internal.Axis.Active AND NOT Internal.Axis.Error;
 				IF Internal.Axis.PowerOn THEN		
-					Internal.Axis.MoveVelocity := gConveyor.Commands.Manual.Move AND Internal.Axis.Active;
+					Internal.Axis.MoveVelocity := gConveyor.Commands.Manual.Move AND Internal.Axis.Active AND NOT Internal.Axis.Error;
 				ELSE
 					Internal.Axis.MoveVelocity := FALSE;
 				END_IF
@@ -89,12 +90,12 @@ PROGRAM _CYCLIC
 				Internal.Axis.Home := FALSE;
 				MachineState.NextState := POWER_ON;
 			ELSE
-				Internal.Axis.Home := Internal.Axis.Active;
+				Internal.Axis.Home := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			END_IF
 					
 		POWER_ON:
 			MachineState.TimeoutTimer.PT := T#3S;
-			Internal.Axis.Power := Internal.Axis.Active;
+			Internal.Axis.Power := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.PowerOn THEN
 				IF gConveyor.Commands.Automatic.Init THEN
 					MachineState.NextState := INIT;
@@ -109,7 +110,7 @@ PROGRAM _CYCLIC
 				Internal.Parameters.Velocity := gConveyor.Parameters.TargetSpeed;
 				Internal.Parameters.Direction := mcDIR_POSITIVE;
 			END_IF
-			Internal.Axis.MoveAbsolute := Internal.Axis.Active;
+			Internal.Axis.MoveAbsolute := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.MoveDone THEN
 				Internal.Axis.MoveAbsolute := FALSE;
 				MachineState.NextState := WAITING_START;
@@ -138,13 +139,22 @@ PROGRAM _CYCLIC
 		MOTION:
 			MachineState.TimeoutTimer.PT := T#30S;
 			IF MachineState.NewTriggerState THEN				
-				Internal.Parameters.Velocity := gConveyor.Parameters.TargetSpeed;
 				Internal.Parameters.Direction := mcDIR_POSITIVE;
 			END_IF
+			
+			// On-fly velocity change
+			IF Internal.Parameters.Velocity <> gConveyor.Parameters.TargetSpeed THEN
+				Internal.Parameters.Velocity := gConveyor.Parameters.TargetSpeed;
+				Internal.Axis.Update := TRUE;
+			ELSIF Internal.Axis.UpdateDone THEN
+				Internal.Axis.Update := FALSE;
+			END_IF
+			
 			Internal.Axis.MoveVelocity := TRUE;			
 			IF EDGENEG(gConveyor.Interface.Inputs.CapInExitPosition) THEN
 				gConveyor.Feedbacks.DeliverCapDone := TRUE;
 				Internal.Axis.MoveVelocity := FALSE;
+				Internal.Axis.Update := FALSE;
 				MachineState.NextState := WAITING_CAP;
 			END_IF 			
 			

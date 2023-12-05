@@ -81,9 +81,7 @@ PROGRAM _CYCLIC
 			
 		WAITING_TAKE_A_CAP_COMMAND:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
-			IF NOT gPusher.Commands.Automatic.Start THEN
-				MachineState.NextState := WAITING_START;
-			ELSIF NOT gPusher.Interface.Inputs.CapAtPickPosition AND gPusher.Commands.Automatic.TakeACap THEN
+			IF NOT gPusher.Interface.Inputs.CapAtPickPosition AND gPusher.Commands.Automatic.TakeACap THEN
 				gPusher.Feedbacks.TakeACapDone := FALSE;
 				MachineState.NextState := MOVE_FORWARD;
 			END_IF 

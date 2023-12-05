@@ -24,6 +24,14 @@ ACTION FeedbacksUpdateAction:
 	
 	gMainMachine.Feedbacks.AutomaticMode := NOT gMainMachine.Feedbacks.ManualMode AND NOT gMainMachine.Feedbacks.WaitModeSelection AND NOT gMainMachine.Feedbacks.Error;
 		
+	gMainMachine.Feedbacks.CapsOnConveyor := gConveyor.Feedbacks.CapsOnConveyor;
+	
+	IF gMainMachine.Commands.Automatic.Init AND gMainMachine.Feedbacks.CapsOnConveyor > 0 THEN
+		gMainMachine.Feedbacks.AskRemoveCaps := TRUE;
+	ELSIF gMainMachine.Commands.Automatic.CapsRemoved THEN
+		gMainMachine.Feedbacks.AskRemoveCaps := FALSE;
+	END_IF
+	
 	// Started
 	IF (MachineState.ActualState = AUTO_WAITING_MODULES_READY)
 		OR (MachineState.ActualState = AUTO_PUSH_CAP)
@@ -56,6 +64,7 @@ END_ACTION
 
 ACTION SetAlarmsAction:     
 	
+	// Timeouts
 	IF MachineState.TimeoutTimer.Q THEN
         
 		// Throw here timeout alarms
@@ -66,12 +75,14 @@ ACTION SetAlarmsAction:
 		MachineState.NextState := ERROR;		
 	END_IF 
 	
+	// MainMachineEmergencyCircuitInterrupted
 	IF FALSE THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'MainMachineEmergencyCircuitInterrupted'); // Persistent alarm
 	ELSE
 		MpAlarmXReset(gAlarmXCoreMpLink,'MainMachineEmergencyCircuitInterrupted'); // Persistent alarm
 	END_IF
 	
+	// MainMachineCommunicationLost
 	IF NOT Internal.MasterCommunicationOk AND gMainMachine.Commands.LinkMode THEN
 		MpAlarmXSet(gAlarmXCoreMpLink,'MainMachineCommunicationLost'); // Persistent alarm
 	ELSE
@@ -145,6 +156,15 @@ ACTION StopModules:
 	gStamper.Commands.Reset := FALSE;
 	gStamper.Commands.Automatic.StampCap := FALSE;		
 	
+END_ACTION
+
+ACTION ResetModulesManualCommands:
+	
+	memset(ADR(gPusher.Commands.Manual),0,SIZEOF(gPusher.Commands.Manual));
+	memset(ADR(gPicker.Commands.Manual),0,SIZEOF(gPicker.Commands.Manual));
+	memset(ADR(gConveyor.Commands.Manual),0,SIZEOF(gConveyor.Commands.Manual));
+	memset(ADR(gStamper.Commands.Manual),0,SIZEOF(gStamper.Commands.Manual));
+		
 END_ACTION
 
 ACTION ResetModules:

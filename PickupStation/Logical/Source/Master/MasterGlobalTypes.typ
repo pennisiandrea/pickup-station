@@ -16,6 +16,7 @@ TYPE
 		LinkActive : BOOL;
 		ActStampIncluded : BOOL;
 		ActStampOffset : REAL;
+		CapsOnConveyor : USINT;
 	END_STRUCT;
 	MasterOutputsType : 	STRUCT  (*Master Feedbacks type*)
 		HeartBeat : BOOL;

@@ -27,6 +27,8 @@ TYPE
 		StamperOffset : REAL;
 		StamperOffsetEnable : BOOL;
 		CapsCounter : UDINT;
+		AskRemoveCaps : BOOL;
+		CapsRemoved : BOOL;
 	END_STRUCT;
 	HMIManualPageType : 	STRUCT  (*HMI Interface Output type*)
 		ManualButtonEnable : BOOL;
@@ -90,5 +92,6 @@ TYPE
 		StateError : BOOL;
 		StateWaitModeSelection : BOOL;
 		ResetAlarms : BOOL;
+		AlarmBlink : BOOL;
 	END_STRUCT;
 END_TYPE

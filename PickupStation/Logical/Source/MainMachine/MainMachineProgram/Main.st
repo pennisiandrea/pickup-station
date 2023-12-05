@@ -38,6 +38,9 @@ PROGRAM _CYCLIC
 		
 		MANUAL:
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
+			IF MachineState.NewTriggerState THEN
+				ResetModulesManualCommands;
+			END_IF
 			
 			gPusher.Commands.Manual.Enable := TRUE;
 			gPicker.Commands.Manual.Enable := TRUE;
@@ -67,7 +70,7 @@ PROGRAM _CYCLIC
 			IF MachineState.NewTriggerState THEN
 				InitModules;
 			END_IF
-			
+			 
 			IF gPusher.Feedbacks.InitDone 
 				AND gPicker.Feedbacks.InitDone 
 				AND gConveyor.Feedbacks.InitDone 
@@ -143,12 +146,12 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				gConveyor.Commands.Automatic.DeliverCap := TRUE;
-				gConveyor.Commands.Automatic.SendTrigger := TRUE;
+				Internal.StamperOneTimeInterlock := FALSE;
 			END_IF
 			
-			IF gConveyor.Feedbacks.NewCapTrigger THEN
-				gConveyor.Commands.Automatic.SendTrigger := FALSE;
+			IF gConveyor.Feedbacks.CapsOnConveyor = 1 AND NOT Internal.StamperOneTimeInterlock THEN
 				gStamper.Commands.Automatic.StampCap := TRUE;
+				Internal.StamperOneTimeInterlock := TRUE;
 			END_IF
 						
 			IF NOT gConveyor.Feedbacks.WaitingCap THEN
@@ -177,10 +180,11 @@ PROGRAM _CYCLIC
 			MachineState.TimeoutTimer.PT := T#0S; // Timeout disabled in this state
 			IF MachineState.NewTriggerState THEN
 				StopModules;
+				ResetModulesManualCommands;
 				gMainMachine.Commands.Reset := FALSE;
 			END_IF
 			
-			IF gMainMachine.Commands.Automatic.Init THEN // User can reset alarms with init command	
+			IF EDGEPOS(gMainMachine.Commands.Automatic.Init) THEN // User can reset alarms with init command	
 				gMainMachine.Commands.Reset := TRUE;			
 			END_IF
 						

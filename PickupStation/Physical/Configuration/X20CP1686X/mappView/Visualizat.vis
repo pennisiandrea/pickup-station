@@ -32,7 +32,9 @@
     <Content refId="login_content" />
   </Contents>
   <SnippetsSets />
-  <VariablesSets />
+  <VariablesSets>
+    <VariablesSet refId="svar_0" />
+  </VariablesSets>
   <ExpressionsSets />
   <StartTheme themeRefId="BuRThemeFlat1" />
   <Themes>

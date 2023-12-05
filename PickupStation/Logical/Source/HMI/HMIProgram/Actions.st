@@ -7,6 +7,7 @@ ACTION SetInitialValuesAction:
 	gHMI.ManualPage.ConveyorSpeed := gConveyor.Commands.Manual.Speed;
 	gHMI.ManualPage.StamperPosition := gStamper.Commands.Manual.Position;
 	gHMI.ManualPage.StamperSpeed := gStamper.Commands.Manual.Speed;
+	gHMI.ManualPage.StamperAcceleration := gStamper.Parameters.Acceleration;
 	
 END_ACTION
 
@@ -41,6 +42,13 @@ ACTION AutomaticPageAction:
 	END_IF
 	IF EDGEPOS(gMainMachine.Commands.Automatic.Init) THEN
 		gHMI.AutomaticPage.AutoButton := TRUE;
+	END_IF
+	gHMI.AutomaticPage.AskRemoveCaps := gMainMachine.Feedbacks.AskRemoveCaps;
+	IF gHMI.AutomaticPage.CapsRemoved THEN
+		gMainMachine.Commands.Automatic.CapsRemoved := TRUE;
+	END_IF
+	IF NOT gMainMachine.Feedbacks.AskRemoveCaps THEN
+		gMainMachine.Commands.Automatic.CapsRemoved := FALSE;
 	END_IF
 	
 	// Auto button
@@ -87,18 +95,10 @@ ACTION AutomaticPageAction:
 	END_IF
 	
 	// Conveyor speed slider button
-	IF gHMI.AutomaticPage.ConveyorSpeed = 0 THEN
-		gHMI.AutomaticPage.ConveyorSpeed := gConveyor.Parameters.TargetSpeed;
-	END_IF
+	gHMI.AutomaticPage.ConveyorSpeedEnable := NOT gMainMachine.Commands.LinkMode;
 	IF NOT gMainMachine.Commands.LinkMode THEN
-		IF NOT gMainMachine.Feedbacks.Started THEN
-			gHMI.AutomaticPage.ConveyorSpeedEnable := TRUE;
-			gConveyor.Parameters.TargetSpeed := gHMI.AutomaticPage.ConveyorSpeed;
-		ELSE
-			gHMI.AutomaticPage.ConveyorSpeedEnable := FALSE;
-		END_IF
+		gConveyor.Parameters.TargetSpeed := gHMI.AutomaticPage.ConveyorSpeed;
 	ELSE
-		gHMI.AutomaticPage.ConveyorSpeedEnable := FALSE;
 		gHMI.AutomaticPage.ConveyorSpeed := gConveyor.Parameters.TargetSpeed;
 	END_IF
 	
@@ -170,6 +170,14 @@ ACTION HeaderContentAction:
 		gHMI.HeaderContent.ResetAlarms := FALSE;
 	END_IF
 	
+	AlarmBlinkTimer(IN:=NOT AlarmBlinkTimer.Q,PT:=T#500MS);
+	IF gMainMachine.Feedbacks.Error THEN
+		IF AlarmBlinkTimer.Q THEN
+			gHMI.HeaderContent.AlarmBlink := NOT gHMI.HeaderContent.AlarmBlink;
+		END_IF
+	ELSE
+		gHMI.HeaderContent.AlarmBlink := FALSE;
+	END_IF
 END_ACTION
 
 ACTION ManualPageAction: 
@@ -197,7 +205,7 @@ ACTION ManualPageAction:
 		gHMI.ManualPage.PushCapButtonEnable := NOT (gPusher.Interface.Inputs.CapAtPickPosition XOR gPusher.Interface.Inputs.MagazineEmpty);
 		gPusher.Commands.Manual.Push := gHMI.ManualPage.PushCapButton;
 
-	ELSE
+	ELSE		
 		gHMI.ManualPage.PushCapButtonEnable := FALSE;
 		gHMI.ManualPage.PushCapButton := FALSE;
 	END_IF

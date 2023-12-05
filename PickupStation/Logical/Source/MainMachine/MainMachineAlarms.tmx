@@ -29,5 +29,13 @@
         <seg>Machine was not able to initialize a module</seg>
       </tuv>
     </tu>
+    <tu tuid="MainMachineTooManyCapsOnConveyor">
+      <tuv xml:lang="it">
+        <seg>Rilevate troppe caps sul conveyor</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Too many caps on the conveyor</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

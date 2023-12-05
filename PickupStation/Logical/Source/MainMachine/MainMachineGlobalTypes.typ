@@ -34,6 +34,8 @@ TYPE
 		PushingCap : BOOL;
 		PickingCap : BOOL;
 		DeliveringCap : BOOL;
+		CapsOnConveyor : USINT;
+		AskRemoveCaps : BOOL;
 	END_STRUCT;
 	MainMachineParametersType : 	STRUCT  (*MainMachine Parameters type*)
 		StamperEnable : BOOL := TRUE;
@@ -48,6 +50,7 @@ TYPE
 		Enable : BOOL;
 		Init : BOOL;
 		Start : BOOL;
+		CapsRemoved : BOOL;
 	END_STRUCT;
 	MainMachineManualCommadsType : 	STRUCT  (*MainMachine Commands type*)
 		Enable : BOOL;

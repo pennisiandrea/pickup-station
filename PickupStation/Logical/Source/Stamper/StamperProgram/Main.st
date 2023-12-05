@@ -68,11 +68,11 @@ PROGRAM _CYCLIC
 			
 			gStamper.Interface.Outputs.StampForward := gStamper.Commands.Manual.StamperForward;
 			
-			Internal.Axis.Home := gStamper.Commands.Manual.Home AND Internal.Axis.Active;
+			Internal.Axis.Home := gStamper.Commands.Manual.Home AND Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.IsHomed THEN			
-				Internal.Axis.Power := gStamper.Commands.Manual.PowerOn AND Internal.Axis.Active;
+				Internal.Axis.Power := gStamper.Commands.Manual.PowerOn AND Internal.Axis.Active AND NOT Internal.Axis.Error;
 				IF Internal.Axis.PowerOn THEN		
-					Internal.Axis.MoveAbsolute := gStamper.Commands.Manual.Move AND Internal.Axis.Active;
+					Internal.Axis.MoveAbsolute := gStamper.Commands.Manual.Move AND Internal.Axis.Active AND NOT Internal.Axis.Error;
 				ELSE
 					Internal.Axis.MoveAbsolute := FALSE;
 				END_IF
@@ -91,13 +91,13 @@ PROGRAM _CYCLIC
 				Internal.Axis.Home := FALSE;
 				MachineState.NextState := POWER_ON;
 			ELSE
-				Internal.Axis.Home := Internal.Axis.Active;
+				Internal.Axis.Home := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			END_IF
 					
 		POWER_ON:
 			MachineState.TimeoutTimer.PT := T#3S;
 			
-			Internal.Axis.Power := Internal.Axis.Active;
+			Internal.Axis.Power := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.PowerOn THEN
 				IF gStamper.Commands.Automatic.Init THEN
 					MachineState.NextState := INIT;
@@ -109,7 +109,7 @@ PROGRAM _CYCLIC
 		INIT:
 			MachineState.TimeoutTimer.PT := T#15S;
 			Internal.Parameters.Position := 0;
-			Internal.Axis.MoveAbsolute := TRUE;
+			Internal.Axis.MoveAbsolute := Internal.Axis.Active AND NOT Internal.Axis.Error;
 			IF Internal.Axis.MoveDone THEN
 				Internal.OffsetToDo := TRUE;
 				Internal.Axis.MoveAbsolute := FALSE;

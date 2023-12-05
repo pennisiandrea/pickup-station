@@ -225,5 +225,13 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperInterface.Inputs.StampIsForward" attribute="value" />
 <Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="Ellipse41" attribute="visible" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperAcceleration" attribute="node" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="NumericInput5" attribute="node" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ManualPage.StamperAccelerationEnable" attribute="value" />
+<Target xsi:type="brease" contentRefId="manuals_content" widgetRefId="NumericInput5" attribute="enable" />
+</Binding>
 </Bindings>
 </BindingsSet>
